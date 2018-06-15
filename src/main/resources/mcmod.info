@@ -1,15 +1,16 @@
 [
 {
-  "modid": "vehicle-mod",
-  "name": "Vehicle Mod",
-  "description": "An addon for the Vehicle Mod which adds in random vehicles.",
-  "version": "1.0",
+  "modid": "cubga",
+  "name": "CUBG Additions Mod",
+  "description": "A mod that adds in various things to improve CUBG gameplay.",
+  "version": "1.0.0",
   "mcversion": "1.12.2",
   "url": "",
   "updateUrl": "",
   "authorList": ["JacksonPlayz"],
-  "credits": "Thanks to MrCrayfish for creating awesome mods. Especially his Vehicle Mod, which made this mod possible!",
+  "credits": "Thanks to MinecraftDoodler, Mastef_Chief, OstenTV, CoffeeCatRailway, HauntedCorpse, BrentTheGamer, Builderboy426, and MrCrayfish!",
   "logoFile": "",
   "screenshots": [],
-  "dependencies": []}
+  "dependencies": []
+}
 ]
