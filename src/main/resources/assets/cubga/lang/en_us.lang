@@ -3,7 +3,7 @@ itemGroup.tabCUBG=CUBG Additions
 item.show_info=Hold %s for Info
 
 item.medkit.name=Medkit
-item.first_aid_kid.name=First Aid Kit
+item.first_aid_kit.name=First Aid Kit
 item.bandage.name=Bandage
 
 item.medkit.info=Military grade first aid. Restores 100 percent of the player's health (10 hearts).
