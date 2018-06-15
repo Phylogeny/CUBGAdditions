@@ -1,0 +1,208 @@
+{
+	"__comment": "Model generated using MrCrayfish's Model Creator (http://mrcrayfish.com/modelcreator/)",
+	"textures": {
+		"0": "cubga:models/medkit"
+	},
+	"elements": [ 	 
+		{
+			"__comment": "MedkitBottom",
+			"from": [ 3, 0, 5 ],
+			"to": [ 13, 2, 11 ],
+			"faces": {
+				"down": { "uv": [ 0, 8, 10, 14 ], "texture": "#0" },
+				"up": { "uv": [ 0, 8, 10, 14 ], "texture": "#0" },
+				"north": { "uv": [ 0, 2, 10, 4 ], "texture": "#0" },
+				"south": { "uv": [ 0, 2, 10, 4 ], "texture": "#0" },
+				"west": { "uv": [ 0, 6, 6, 8 ], "texture": "#0" },
+				"east": { "uv": [ 0, 6, 6, 8 ], "texture": "#0" }
+			}
+		},
+		{
+			"__comment": "MedkitRightBottom",
+			"from": [ 2, 1, 5 ],
+			"to": [ 4, 4, 11 ],
+			"faces": {
+				"down": { "uv": [ 0, 8, 1, 14 ], "texture": "#0" },
+				"up": { "uv": [ 0, 8, 1, 14 ], "texture": "#0" },
+				"north": { "uv": [ 8, 11, 10, 14 ], "texture": "#0" },
+				"south": { "uv": [ 0, 11, 2, 14 ], "texture": "#0" },
+				"west": { "uv": [ 0, 5, 6, 8 ], "texture": "#0" },
+				"east": { "uv": [ 0, 5, 6, 8 ], "texture": "#0" }
+			}
+		},
+		{
+			"__comment": "MedkitLeftBottom",
+			"from": [ 12, 1, 5 ],
+			"to": [ 14, 4, 11 ],
+			"faces": {
+				"down": { "uv": [ 0, 8, 1, 14 ], "texture": "#0" },
+				"up": { "uv": [ 0, 8, 1, 14 ], "texture": "#0" },
+				"north": { "uv": [ 0, 11, 2, 14 ], "texture": "#0" },
+				"south": { "uv": [ 8, 11, 10, 14 ], "texture": "#0" },
+				"west": { "uv": [ 0, 5, 6, 8 ], "texture": "#0" },
+				"east": { "uv": [ 0, 5, 6, 8 ], "texture": "#0" }
+			}
+		},
+		{
+			"__comment": "MedKitLeftTop",
+			"from": [ 12, 4, 5 ],
+			"to": [ 14, 7, 11 ],
+			"faces": {
+				"down": { "uv": [ 0, 8, 1, 14 ], "texture": "#0" },
+				"up": { "uv": [ 0, 8, 1, 14 ], "texture": "#0" },
+				"north": { "uv": [ 0, 8, 2, 11 ], "texture": "#0" },
+				"south": { "uv": [ 8, 8, 10, 11 ], "texture": "#0" },
+				"west": { "uv": [ 0, 4, 6, 7 ], "texture": "#0" },
+				"east": { "uv": [ 0, 4, 6, 7 ], "texture": "#0" }
+			}
+		},
+		{
+			"__comment": "MedkitRightTop",
+			"from": [ 2, 4, 5 ],
+			"to": [ 4, 7, 11 ],
+			"faces": {
+				"down": { "uv": [ 0, 8, 1, 14 ], "texture": "#0" },
+				"up": { "uv": [ 0, 8, 1, 14 ], "texture": "#0" },
+				"north": { "uv": [ 8, 8, 10, 11 ], "texture": "#0" },
+				"south": { "uv": [ 0, 8, 2, 11 ], "texture": "#0" },
+				"west": { "uv": [ 0, 4, 6, 7 ], "texture": "#0" },
+				"east": { "uv": [ 0, 4, 6, 7 ], "texture": "#0" }
+			}
+		},
+		{
+			"__comment": "MedkitTop",
+			"from": [ 3, 6, 5 ],
+			"to": [ 13, 8, 11 ],
+			"faces": {
+				"down": { "uv": [ 0, 8, 10, 14 ], "texture": "#0" },
+				"up": { "uv": [ 0, 8, 10, 14 ], "texture": "#0" },
+				"north": { "uv": [ 0, 0, 10, 2 ], "texture": "#0" },
+				"south": { "uv": [ 0, 0, 10, 2 ], "texture": "#0" },
+				"west": { "uv": [ 0, 4, 6, 6 ], "texture": "#0" },
+				"east": { "uv": [ 0, 4, 6, 6 ], "texture": "#0" }
+			}
+		},
+		{
+			"__comment": "MedkitCenter",
+			"from": [ 4, 2, 5 ],
+			"to": [ 12, 6, 11 ],
+			"faces": {
+				"down": { "uv": [ 0, 0, 8, 6 ], "texture": "#0" },
+				"up": { "uv": [ 0, 0, 8, 6 ], "texture": "#0" },
+				"north": { "uv": [ 1, 9, 9, 13 ], "texture": "#0" },
+				"south": { "uv": [ 1, 9, 9, 13 ], "texture": "#0" },
+				"west": { "uv": [ 0, 0, 6, 4 ], "texture": "#0" },
+				"east": { "uv": [ 0, 0, 6, 4 ], "texture": "#0" }
+			}
+		},
+		{
+			"__comment": "HealthSignCenter",
+			"from": [ 5, 3, 4.75 ],
+			"to": [ 11, 5, 11.25 ],
+			"faces": {
+				"down": { "uv": [ 10, 5, 10.5, 7 ], "texture": "#0" },
+				"up": { "uv": [ 10, 5, 10.5, 7 ], "texture": "#0" },
+				"north": { "uv": [ 10, 5, 16, 7 ], "texture": "#0" },
+				"south": { "uv": [ 10, 5, 16, 7 ], "texture": "#0" },
+				"west": { "uv": [ 10, 5, 10.5, 7 ], "texture": "#0" },
+				"east": { "uv": [ 10, 5, 10.5, 7 ], "texture": "#0" }
+			}
+		},
+		{
+			"__comment": "MedkitHandleRight",
+			"from": [ 5, 8, 7 ],
+			"to": [ 6, 11, 9 ],
+			"faces": {
+				"down": { "uv": [ 10, 0, 11, 2 ], "texture": "#0" },
+				"up": { "uv": [ 10, 0, 11, 2 ], "texture": "#0" },
+				"north": { "uv": [ 10, 0, 11, 3 ], "texture": "#0" },
+				"south": { "uv": [ 10, 0, 11, 3 ], "texture": "#0" },
+				"west": { "uv": [ 10, 0, 11, 3 ], "texture": "#0" },
+				"east": { "uv": [ 10, 0, 11, 3 ], "texture": "#0" }
+			}
+		},
+		{
+			"__comment": "MedkitHandleLeft",
+			"from": [ 10, 8, 7 ],
+			"to": [ 11, 11, 9 ],
+			"faces": {
+				"down": { "uv": [ 10, 0, 11, 2 ], "texture": "#0" },
+				"up": { "uv": [ 10, 0, 11, 2 ], "texture": "#0" },
+				"north": { "uv": [ 10, 0, 11, 3 ], "texture": "#0" },
+				"south": { "uv": [ 10, 0, 11, 3 ], "texture": "#0" },
+				"west": { "uv": [ 10, 0, 11, 3 ], "texture": "#0" },
+				"east": { "uv": [ 10, 0, 11, 3 ], "texture": "#0" }
+			}
+		},
+		{
+			"__comment": "MedkitHandleTop",
+			"from": [ 6, 10, 7 ],
+			"to": [ 10, 11, 9 ],
+			"faces": {
+				"down": { "uv": [ 10, 0, 11, 2 ], "texture": "#0" },
+				"up": { "uv": [ 15, 0, 16, 2 ], "texture": "#0" },
+				"north": { "uv": [ 11, 0, 15, 1 ], "texture": "#0" },
+				"south": { "uv": [ 11, 0, 15, 1 ], "texture": "#0" },
+				"west": { "uv": [ 10, 0, 11, 3 ], "texture": "#0" },
+				"east": { "uv": [ 10, 0, 11, 3 ], "texture": "#0" }
+			}
+		},
+		{
+			"__comment": "HealthSignBottom",
+			"from": [ 7, 1, 4.75 ],
+			"to": [ 9, 3, 11.25 ],
+			"faces": {
+				"down": { "uv": [ 10, 5, 10.5, 7 ], "texture": "#0" },
+				"up": { "uv": [ 10, 5, 10.5, 7 ], "texture": "#0" },
+				"north": { "uv": [ 12, 7, 14, 9 ], "texture": "#0" },
+				"south": { "uv": [ 12, 7, 14, 9 ], "texture": "#0" },
+				"west": { "uv": [ 10, 5, 10.5, 7 ], "texture": "#0" },
+				"east": { "uv": [ 10, 5, 10.5, 7 ], "texture": "#0" }
+			}
+		},
+		{
+			"__comment": "HealthSignTop",
+			"from": [ 7, 5, 4.75 ],
+			"to": [ 9, 7, 11.25 ],
+			"faces": {
+				"down": { "uv": [ 10, 5, 10.5, 7 ], "texture": "#0" },
+				"up": { "uv": [ 10, 5, 10.5, 7 ], "texture": "#0" },
+				"north": { "uv": [ 12, 3, 14, 5 ], "texture": "#0" },
+				"south": { "uv": [ 12, 3, 14, 5 ], "texture": "#0" },
+				"west": { "uv": [ 10, 5, 10.5, 7 ], "texture": "#0" },
+				"east": { "uv": [ 10, 5, 10.5, 7 ], "texture": "#0" }
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"rotation":  [ 90, 90, 0 ],
+			"translation":  [ 0, -2, -0.9 ],
+			"scale":  [ 0.8, 0.8, 0.8 ]
+		},
+		"thirdperson_lefthand": {
+			"rotation":  [ 90, 90, 0 ],
+			"translation":  [ 0, -2, -0.9 ],
+			"scale":  [ 0.8, 0.8, 0.8 ]
+		},
+		"firstperson_righthand": {
+			"rotation":  [ 0, 90, 3 ],
+			"translation":  [ -0.694, 3.1999, 2.0872 ],
+			"scale":  [ 0.68, 0.68, 0.68 ]
+		},
+		"firstperson_lefthand": {
+			"rotation":  [ 0, 90, 3 ],
+			"translation":  [ -0.694, 3.1999, 2.0872 ],
+			"scale":  [ 0.68, 0.68, 0.68 ]
+		},
+		"gui": {
+			"rotation":  [ 30, 225, 0 ],
+			"translation":  [ 0, 1.5, 0 ],
+			"scale":  [ 0.625, 0.625, 0.625 ]
+		},
+		"ground": {
+			"translation":  [ 0, 2, 0 ],
+			"scale":  [ 0.5, 0.5, 0.5 ]
+		}
+	}
+}
