@@ -18,6 +18,8 @@ public class ModItems {
 
 	public static void register() {
 		register(MEDKIT);
+		register(FIRST_AID);
+		register(BANDAGE);
 	}
 
 	private static void register(Item item) {
