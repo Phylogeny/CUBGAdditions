@@ -20,7 +20,6 @@ public class CreatorCapeHandler {
 
     private static final ImmutableSet<String> UUIDS = ImmutableSet.of(
             "68c08594-e7cd-43fb-bdf9-240147ee26cf",
-            "62d17f0b-5248-41f4-befc-2daa457fb266",
             "b61e1172-e4f0-450a-9f98-58ec91bc41dc");
 
     private static final Set<EntityPlayer> done = Collections.newSetFromMap(new WeakHashMap());

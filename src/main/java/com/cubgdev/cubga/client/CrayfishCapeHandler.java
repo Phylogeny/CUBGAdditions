@@ -16,12 +16,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.WeakHashMap;
 
-public class StaffCapeHandler {
+public class CrayfishCapeHandler {
 
     private static final ImmutableSet<String> UUIDS = ImmutableSet.of(
-            "beb10f7e-f80b-487b-a99e-661d8d798f90",
-            "b0dd4a11-cf95-4ae6-9acd-729ee186e82a",
-            "cf21dfba-9834-42bb-8f16-2f9c7418ac76");
+            "62d17f0b-5248-41f4-befc-2daa457fb266");
 
     private static final Set<EntityPlayer> done = Collections.newSetFromMap(new WeakHashMap());
 
@@ -34,7 +32,7 @@ public class StaffCapeHandler {
             if(clplayer.hasPlayerInfo()) {
                 NetworkPlayerInfo info = ReflectionHelper.getPrivateValue(AbstractClientPlayer.class, clplayer, LibObfuscation.PLAYER_INFO);
                 Map<MinecraftProfileTexture.Type, ResourceLocation> textures = ReflectionHelper.getPrivateValue(NetworkPlayerInfo.class, info, LibObfuscation.PLAYER_TEXTURES);
-                ResourceLocation loc = new ResourceLocation("cubga", "textures/misc/dev_cape.png");
+                ResourceLocation loc = new ResourceLocation("cubga", "textures/misc/crayfish_cape.png");
                 textures.put(MinecraftProfileTexture.Type.CAPE, loc);
                 textures.put(MinecraftProfileTexture.Type.ELYTRA, loc);
                 done.add(player);
