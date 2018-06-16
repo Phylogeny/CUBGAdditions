@@ -2,21 +2,26 @@ itemGroup.tabCUBG=CUBG Additions
 
 item.show_info=Hold %s for Info
 
+#Health Item Names
 item.medkit.name=§a§lMedkit
 item.first_aid_kit.name=§c§lFirst Aid Kit
 item.bandage.name=§lBandage
 item.bandaid.name=§lBand-Aid
 
+#Easter Egg Names
 item.coffee_cup.name=§6§lCoffee Cup
 item.coffee_cup_full.name=§6§lCoffee Cup
 item.canadian_flag.name=§c§lDoodler's Bane
+item.modder_nightmare.name=§d§lModder's §0§lNightmare
 
-
+#Health Items
 item.medkit.info=Military grade first aid. Restores 100 percent of the player's health (10 hearts).
 item.first_aid_kit.info=Civilian grade first aid. Restores 50 percent of the player's health (5 hearts).
 item.bandage.info=A simple piece of cloth that covers wounds. Restores 10 percent of the player's health (2 hearts).
 item.bandaid.info=An adhesive piece of fabric that covers small cuts. Restores 2.5 percent of the player's health (0.5 heart).
 
+#Easter Egg Descriptions
 item.coffee_cup.info=An empty coffee cup. Oh, and you can wear it on your head. -CoffeeCatRailway was here-
 item.coffee_cup_full.info=A hot cup of coffee, pretty nice, right? Oh, and you can wear it on your head and drink it, but be careful, it's hot. -CoffeeCatRailway was here-
 item.canadian_flag.info=The iconic symbol of the superior country, Canada. -MinecraftDoodler was here-
+item.modder_nightmare.info=A modder's worst nightmare, the glitched texture. -Someone was here-
