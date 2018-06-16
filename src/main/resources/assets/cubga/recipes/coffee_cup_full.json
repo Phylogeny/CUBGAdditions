@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "cubga:coffee_cup"
+    }
+  ],
+  "result": {
+    "item": "cubga:coffee_cup_full"
+  }
+}
