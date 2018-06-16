@@ -32,7 +32,7 @@ public class ItemCanadianFlag extends Item
     {
         if(itemstack.isItemEnchanted() == false)
         {
-            itemstack.addEnchantment(Enchantments.KNOCKBACK, 1);
+            itemstack.addEnchantment(Enchantments.KNOCKBACK, 3);
         }
     }
 

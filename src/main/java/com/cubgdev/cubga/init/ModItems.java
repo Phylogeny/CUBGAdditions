@@ -15,7 +15,6 @@ public class ModItems {
 	public static final Item COFFEE_CUP_FULL;
 	public static final Item COFFEE_CUP;
 	public static final Item CANADIAN_FLAG;
-	public static final Item MODDER_NIGHTMARE;
 
 	static {
 		MEDKIT = new ItemHeal("medkit", 64, 20);
@@ -26,7 +25,6 @@ public class ModItems {
 		COFFEE_CUP_FULL = new ItemCoffee("coffee_cup_full", 32);
 		COFFEE_CUP = new ItemCoffeeEmpty();
 		CANADIAN_FLAG = new ItemCanadianFlag();
-		MODDER_NIGHTMARE = new ItemModderNightmare();
 	}
 
 	public static void register() {
@@ -38,7 +36,6 @@ public class ModItems {
 		register(COFFEE_CUP_FULL);
 		register(COFFEE_CUP);
 		register(CANADIAN_FLAG);
-		register(MODDER_NIGHTMARE);
 	}
 
 	private static void register(Item item) {
