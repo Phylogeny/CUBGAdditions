@@ -1,5 +1,6 @@
 package com.cubgdev.cubga.item;
 
+import java.awt.*;
 import java.util.List;
 
 import javax.annotation.Nullable;
@@ -14,15 +15,19 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import vazkii.arl.util.ClientTicker;
 
 /**
  * Author: Ocelot5836
@@ -46,7 +51,7 @@ public class ItemHeal extends Item {
 			String info = I18n.format(this.getUnlocalizedName() + ".info");
 			tooltip.addAll(Minecraft.getMinecraft().fontRenderer.listFormattedStringToWidth(info, 150));
 		} else {
-			tooltip.add(TextFormatting.RED + I18n.format("item.show_info", "SHIFT"));
+			tooltip.add(TextFormatting.YELLOW + I18n.format("item.show_info", "SHIFT"));
 		}
 	}
 
@@ -72,6 +77,11 @@ public class ItemHeal extends Item {
 	@Override
 	public int getMaxItemUseDuration(ItemStack stack) {
 		return this.useTime;
+	}
+
+	@Override
+	public EnumAction getItemUseAction(ItemStack stack) {
+		return EnumAction.BOW;
 	}
 
 	@Override
