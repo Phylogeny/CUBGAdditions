@@ -27,68 +27,75 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * Author: Ocelot5836
+ * Author: Ocelot5836, CoffeeCatRailway
  */
 public class ItemCoffee extends Item {
 
-	private int useTime;
+    private boolean isFull;
 
-	public ItemCoffee(String id, int useTime) {
-		this.useTime = useTime;
-		this.setUnlocalizedName(id);
-		this.setRegistryName(id);
-		this.setCreativeTab(CUBG.TAB);
-	}
+    public ItemCoffee(boolean isFull) {
+        this.isFull = isFull;
 
-	@Override
-	public EntityEquipmentSlot getEquipmentSlot(ItemStack stack)
-	{
-		return EntityEquipmentSlot.HEAD;
-	}
+        String name = "coffee_cup";
+        if (isFull)
+            name += "_full";
+        this.setUnlocalizedName(name);
+        this.setRegistryName(name);
+        this.setCreativeTab(CUBG.TAB);
+    }
 
-	@Override
-	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-		if (GuiScreen.isShiftKeyDown()) {
-			String info = I18n.format(this.getUnlocalizedName() + ".info");
-			tooltip.addAll(Minecraft.getMinecraft().fontRenderer.listFormattedStringToWidth(info, 150));
-		} else {
-			tooltip.add(TextFormatting.YELLOW + I18n.format("item.show_info", "SHIFT"));
-		}
-	}
+    @Override
+    public EntityEquipmentSlot getEquipmentSlot(ItemStack stack) {
+        return EntityEquipmentSlot.HEAD;
+    }
 
-	@Override
-	public ItemStack onItemUseFinish(ItemStack stack, World world, EntityLivingBase entityLiving) {
-		if (entityLiving instanceof EntityPlayer) {
-			EntityPlayer player = (EntityPlayer) entityLiving;
-			this.onUse(stack, world, player);
-			player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 400, 2));
-			player.inventory.addItemStackToInventory(new ItemStack(ModItems.COFFEE_CUP));
-			player.addStat(StatList.getObjectUseStats(this));
-			if (player instanceof EntityPlayerMP) {
-				CriteriaTriggers.CONSUME_ITEM.trigger((EntityPlayerMP) player, stack);
-			}
-		}
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+        if (GuiScreen.isShiftKeyDown()) {
+            String info = I18n.format(this.getUnlocalizedName() + ".info");
+            tooltip.addAll(Minecraft.getMinecraft().fontRenderer.listFormattedStringToWidth(info, 150));
+        } else {
+            tooltip.add(TextFormatting.YELLOW + I18n.format("item.show_info", "SHIFT"));
+        }
+    }
 
-		stack.shrink(1);
-		return stack;
-	}
+    @Override
+    public ItemStack onItemUseFinish(ItemStack stack, World world, EntityLivingBase entityLiving) {
+        if (isFull) {
+            if (entityLiving instanceof EntityPlayer) {
+                EntityPlayer player = (EntityPlayer) entityLiving;
+                this.onUse(stack, world, player);
+                player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 400, 2));
+                player.inventory.addItemStackToInventory(new ItemStack(ModItems.COFFEE_CUP));
+                player.addStat(StatList.getObjectUseStats(this));
+                if (player instanceof EntityPlayerMP) {
+                    CriteriaTriggers.CONSUME_ITEM.trigger((EntityPlayerMP) player, stack);
+                }
+            }
 
-	protected void onUse(ItemStack stack, World world, EntityPlayer player) {
-	}
+            stack.shrink(1);
+        }
+        return stack;
+    }
 
-	@Override
-	public int getMaxItemUseDuration(ItemStack stack) {
-		return this.useTime;
-	}
+    protected void onUse(ItemStack stack, World world, EntityPlayer player) {
+    }
 
-	@Override
-	public EnumAction getItemUseAction(ItemStack stack) {
-		return EnumAction.DRINK;
-	}
+    @Override
+    public int getMaxItemUseDuration(ItemStack stack) {
+        return isFull ? 32 : 0;
+    }
 
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
-	{
-		playerIn.setActiveHand(handIn);
-		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
-	}
+    @Override
+    public EnumAction getItemUseAction(ItemStack stack) {
+        return isFull ? EnumAction.DRINK : EnumAction.NONE;
+    }
+
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+        if (isFull) {
+            playerIn.setActiveHand(handIn);
+            return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
+        }
+        return new ActionResult<ItemStack>(EnumActionResult.PASS, playerIn.getHeldItem(handIn));
+    }
 }
