@@ -2,7 +2,7 @@ itemGroup.tabCUBG=CUBG Additions
 
 item.show_info=Hold %s for Info
 
-item.medkit.name=§2§lMedkit
+item.medkit.name=§a§lMedkit
 item.first_aid_kit.name=§c§lFirst Aid Kit
 item.bandage.name=§lBandage
 item.bandaid.name=§lBand-Aid
