@@ -1,11 +1,9 @@
 package com.cubgdev.cubga.init;
 
-import com.cubgdev.cubga.item.ItemBase;
-import com.cubgdev.cubga.item.ItemCoffee;
-import com.cubgdev.cubga.item.ItemCoffeeEmpty;
-import com.cubgdev.cubga.item.ItemHeal;
+import com.cubgdev.cubga.item.*;
 
 import net.minecraft.item.Item;
+import net.minecraftforge.common.util.EnumHelper;
 
 public class ModItems {
 	
@@ -16,6 +14,7 @@ public class ModItems {
 
 	public static final Item COFFEE_CUP_FULL;
 	public static final Item COFFEE_CUP;
+	public static final Item CANADIAN_FLAG;
 
 	static {
 		MEDKIT = new ItemHeal("medkit", 64, 20);
@@ -25,6 +24,7 @@ public class ModItems {
 
 		COFFEE_CUP_FULL = new ItemCoffee("coffee_cup_full", 32);
 		COFFEE_CUP = new ItemCoffeeEmpty();
+		CANADIAN_FLAG = new ItemCanadianFlag();
 	}
 
 	public static void register() {
@@ -35,6 +35,7 @@ public class ModItems {
 
 		register(COFFEE_CUP_FULL);
 		register(COFFEE_CUP);
+		register(CANADIAN_FLAG);
 	}
 
 	private static void register(Item item) {
