@@ -1,7 +1,7 @@
 {
 	"__comment": "Designed by JacksonPlayzYT with Cubik Studio - https://cubik.studio",
 	"textures": {
-		"sword_glitch_atlas": "intothemineframe:items/sword_glitch_atlas"
+		"sword_glitch_atlas": "cubga:models/thereisnotexturehereonpurpose"
 	},
 	"elements": [ 	 
 		{

@@ -3,7 +3,6 @@ package com.cubgdev.cubga.init;
 import com.cubgdev.cubga.item.*;
 
 import net.minecraft.item.Item;
-import net.minecraftforge.common.util.EnumHelper;
 
 public class ModItems {
 	

@@ -32,7 +32,7 @@ public class ItemCanadianFlag extends Item
     {
         if(itemstack.isItemEnchanted() == false)
         {
-            itemstack.addEnchantment(Enchantments.KNOCKBACK, 1);
+            itemstack.addEnchantment(Enchantments.KNOCKBACK, 3);
         }
     }
 
@@ -40,12 +40,6 @@ public class ItemCanadianFlag extends Item
     public boolean hasEffect(ItemStack par1ItemStack)
     {
         return false;
-    }
-
-    @Override
-    public EntityEquipmentSlot getEquipmentSlot(ItemStack stack)
-    {
-        return EntityEquipmentSlot.HEAD;
     }
 
     @Override
