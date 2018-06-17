@@ -3,6 +3,7 @@ package com.cubgdev.cubga.proxy;
 import com.cubgdev.cubga.CUBG;
 import com.cubgdev.cubga.Reference;
 import com.cubgdev.cubga.client.BuilderCapeHandler;
+import com.cubgdev.cubga.client.CrayfishCapeHandler;
 import com.cubgdev.cubga.client.CreatorCapeHandler;
 import com.cubgdev.cubga.client.StaffCapeHandler;
 import net.minecraft.entity.Entity;
@@ -20,9 +21,6 @@ public class CommonProxy {
 
     public void init(FMLInitializationEvent event)
     {
-        MinecraftForge.EVENT_BUS.register(StaffCapeHandler.class);
-        MinecraftForge.EVENT_BUS.register(BuilderCapeHandler.class);
-        MinecraftForge.EVENT_BUS.register(CreatorCapeHandler.class);
 
     }
 
