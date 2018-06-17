@@ -1,7 +1,9 @@
 package com.cubgdev.cubga.init;
 
-import com.cubgdev.cubga.item.*;
-
+import com.cubgdev.cubga.item.ItemCanadianFlag;
+import com.cubgdev.cubga.item.ItemCoffee;
+import com.cubgdev.cubga.item.ItemHeal;
+import com.cubgdev.cubga.item.ItemModderNightmare;
 import net.minecraft.item.Item;
 
 public class ModItems {
@@ -22,8 +24,8 @@ public class ModItems {
 		BANDAGE = new ItemHeal("bandage", 24, 4);
 		BANDAID = new ItemHeal("bandaid", 1, 1);
 
-		COFFEE_CUP_FULL = new ItemCoffee("coffee_cup_full", 32);
-		COFFEE_CUP = new ItemCoffeeEmpty();
+		COFFEE_CUP_FULL = new ItemCoffee(true);
+		COFFEE_CUP = new ItemCoffee(false);
 		CANADIAN_FLAG = new ItemCanadianFlag();
 		MODDER_NIGHTMARE = new ItemModderNightmare();
 	}
