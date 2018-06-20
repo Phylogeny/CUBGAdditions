@@ -12,7 +12,8 @@ item.bandaid.name=§lBand-Aid
 item.coffee_cup.name=§6§lCoffee Cup
 item.coffee_cup_full.name=§6§lCoffee Cup
 item.canadian_flag.name=§c§lDoodler's Bane
-item.modder_nightmare.name=§d§lModder's §0§lNightmare
+item.modder_nightmare.name=§d§lModder's §8§lNightmare
+item.master_gauntlet.name=§a§lMaster §7§lGauntlet
 
 #Health Items
 item.medkit.info=Military grade first aid. Restores 100 percent of the player's health (10 hearts).
@@ -21,7 +22,8 @@ item.bandage.info=A simple piece of cloth that covers wounds. Restores 10 percen
 item.bandaid.info=An adhesive piece of fabric that covers small cuts. Restores 2.5 percent of the player's health (1/2 heart).
 
 #Easter Egg Descriptions
-item.coffee_cup.info=An empty coffee cup. Oh, and you can wear it on your head. -CoffeeCatRailway was here-
-item.coffee_cup_full.info=A hot cup of coffee, pretty nice, right? Oh, and you can wear it on your head and drink it, but be careful, it's hot. -CoffeeCatRailway was here-
-item.canadian_flag.info=The iconic symbol of the superior country, Canada. -MinecraftDoodler was here-
-item.modder_nightmare.info=A modder's worst nightmare, the glitched texture. -MrCrayfish was here-
+item.coffee_cup.info=An empty coffee cup. Oh, and you can wear it on your head.     -Belongs to CoffeeCatRailway-
+item.coffee_cup_full.info=A hot cup of coffee, pretty nice, right? Oh, and you can wear it on your head and drink it, but be careful, it's hot.     -Belongs to CoffeeCatRailway-
+item.canadian_flag.info=The iconic symbol of the superior country, Canada.     -Belongs to MinecraftDoodler-
+item.modder_nightmare.info=A modder's worst nightmare, the glitched texture.     -Belongs to MrCrayfish-
+item.master_gauntlet.info=A gauntlet made out of the finest material. Made for the Master of Chiefs. Wait, the name on the tag is different, is this misspelled?    -Belongs to Mastef_Chief-

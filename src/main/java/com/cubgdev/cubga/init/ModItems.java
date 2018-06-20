@@ -1,9 +1,6 @@
 package com.cubgdev.cubga.init;
 
-import com.cubgdev.cubga.item.ItemCanadianFlag;
-import com.cubgdev.cubga.item.ItemCoffee;
-import com.cubgdev.cubga.item.ItemHeal;
-import com.cubgdev.cubga.item.ItemModderNightmare;
+import com.cubgdev.cubga.item.*;
 import net.minecraft.item.Item;
 
 public class ModItems {
@@ -17,6 +14,7 @@ public class ModItems {
 	public static final Item COFFEE_CUP;
 	public static final Item CANADIAN_FLAG;
 	public static final Item MODDER_NIGHTMARE;
+	public static final Item MASTER_GAUNTLET;
 
 	static {
 		MEDKIT = new ItemHeal("medkit", 64, 20);
@@ -28,6 +26,7 @@ public class ModItems {
 		COFFEE_CUP = new ItemCoffee(false);
 		CANADIAN_FLAG = new ItemCanadianFlag();
 		MODDER_NIGHTMARE = new ItemModderNightmare();
+		MASTER_GAUNTLET = new ItemMasterGauntlet();
 	}
 
 	public static void register() {
@@ -40,6 +39,7 @@ public class ModItems {
 		register(COFFEE_CUP);
 		register(CANADIAN_FLAG);
 		register(MODDER_NIGHTMARE);
+		register(MASTER_GAUNTLET);
 	}
 
 	private static void register(Item item) {
