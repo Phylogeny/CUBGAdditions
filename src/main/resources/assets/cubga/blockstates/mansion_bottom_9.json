@@ -1,8 +1,0 @@
-{
-    "variants": {
-        "facing=north":  {"model": "cubga:mansion_bottom_9"},
-        "facing=east":  {"model": "cubga:mansion_bottom_9", "y": 90},
-        "facing=south":  {"model": "cubga:mansion_bottom_9", "y": 180},
-        "facing=west":  {"model": "cubga:mansion_bottom_9", "y": 270}
-    }
-}
