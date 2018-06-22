@@ -65,7 +65,8 @@ public class ItemCoffee extends Item {
             if (entityLiving instanceof EntityPlayer) {
                 EntityPlayer player = (EntityPlayer) entityLiving;
                 this.onUse(stack, world, player);
-                player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 400, 2));
+                player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 100, 1));
+                player.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 300, 9));
                 player.inventory.addItemStackToInventory(new ItemStack(ModItems.COFFEE_CUP));
                 player.addStat(StatList.getObjectUseStats(this));
                 if (player instanceof EntityPlayerMP) {

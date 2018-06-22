@@ -42,8 +42,7 @@ public class ItemModderNightmare extends Item {
     @Override
     public void onUpdate(ItemStack itemstack, World par2World, Entity par3Entity, int par4, boolean par5) {
         if (itemstack.isItemEnchanted() == false) {
-            itemstack.addEnchantment(Enchantments.KNOCKBACK, 2);
-            itemstack.addEnchantment(Enchantments.SHARPNESS, 3);
+            itemstack.addEnchantment(Enchantments.SHARPNESS, 2);
         }
     }
 
