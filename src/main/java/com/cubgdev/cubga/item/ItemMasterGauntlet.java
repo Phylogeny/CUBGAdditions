@@ -6,11 +6,14 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityFireworkRocket;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Enchantments;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemArrow;
-import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
@@ -30,7 +33,7 @@ public class ItemMasterGauntlet extends Item
     {
         if(itemstack.isItemEnchanted() == false)
         {
-            itemstack.addEnchantment(Enchantments.KNOCKBACK, 3);
+            itemstack.addEnchantment(Enchantments.KNOCKBACK, 2);
         }
     }
 
@@ -47,6 +50,26 @@ public class ItemMasterGauntlet extends Item
             tooltip.addAll(Minecraft.getMinecraft().fontRenderer.listFormattedStringToWidth(info, 150));
         } else {
             tooltip.add(TextFormatting.YELLOW + I18n.format("item.show_info", "SHIFT"));
+        }
+    }
+
+    @Override
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
+    {
+        if (playerIn.isElytraFlying())
+        {
+            ItemStack itemstack = playerIn.getHeldItem(handIn);
+
+            if (!worldIn.isRemote)
+            {
+                EntityFireworkRocket entityfireworkrocket = new  EntityFireworkRocket(worldIn, itemstack, playerIn);
+                worldIn.spawnEntity(entityfireworkrocket);
+            }
+            return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
+        }
+        else
+        {
+            return new ActionResult<ItemStack>(EnumActionResult.PASS, playerIn.getHeldItem(handIn));
         }
     }
 }
