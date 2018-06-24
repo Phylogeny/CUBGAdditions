@@ -37,6 +37,11 @@ public class ItemCanadianFlag extends Item
     }
 
     @Override
+    public EntityEquipmentSlot getEquipmentSlot(ItemStack stack) {
+        return EntityEquipmentSlot.HEAD;
+    }
+
+    @Override
     public boolean hasEffect(ItemStack par1ItemStack)
     {
         return false;

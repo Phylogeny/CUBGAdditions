@@ -22,8 +22,8 @@ item.bandage.info=A simple piece of cloth that covers wounds. Restores 10 percen
 item.bandaid.info=An adhesive piece of fabric that covers small cuts. Restores 2.5 percent of the player's health (1/2 heart).
 
 #Easter Egg Descriptions
-item.coffee_cup.info=An empty coffee cup. Oh, and you can wear it on your head.     -Belongs to CoffeeCatRailway-
-item.coffee_cup_full.info=A hot cup of coffee, pretty nice, right? Oh, and you can wear it on your head and drink it, but be careful, it's hot.     -Belongs to CoffeeCatRailway-
-item.canadian_flag.info=The iconic symbol of the superior country, Canada.     -Belongs to MinecraftDoodler-
-item.modder_nightmare.info=A modder's worst nightmare, the glitched texture.     -Belongs to MrCrayfish-
-item.master_gauntlet.info=A gauntlet made out of the finest material. Made for the Master of Chiefs. Wait, the name on the tag is different, is this misspelled?    -Belongs to Mastef_Chief-
+item.coffee_cup.info=An empty coffee cup. Oh, and you can wear it on your head.
+item.coffee_cup_full.info=A hot cup of coffee, pretty nice, right? Oh, and you can wear it on your head and drink it, but be careful, it's hot.
+item.canadian_flag.info=The iconic symbol of the superior country, Canada.
+item.modder_nightmare.info=A modder's worst nightmare, the glitched texture.
+item.master_gauntlet.info=A gauntlet made out of the finest material. Made for the Master of Chiefs. Wait, the name on the tag is different, is this misspelled?
