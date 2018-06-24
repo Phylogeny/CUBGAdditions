@@ -1,21 +1,23 @@
 package com.cubgdev.cubga.init;
 
+import com.cubgdev.cubga.blocks.BlockBrittleBrick;
+import com.cubgdev.cubga.item.ItemBrittleBrick;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 
 public class ModBlocks
 {
+    public static final Block BRITTLE_BRICK;
 
+    static
+    {
+        BRITTLE_BRICK = new BlockBrittleBrick("brittle_brick");
+    }
 
-        static
-        {
-
-        }
-
-        public static void register()
-        {
-
-        }
+    public static void register()
+    {
+        registerBlock(BRITTLE_BRICK, new ItemBrittleBrick(BRITTLE_BRICK));
+    }
 
     private static void registerBlock(Block block)
     {

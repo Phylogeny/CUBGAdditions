@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "normal": { "model": "cubga:brittle_brick" },
+    "inventory": { "model": "cubga:brittle_brick" }
+  }
+}

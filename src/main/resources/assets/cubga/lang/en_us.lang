@@ -8,6 +8,9 @@ item.first_aid_kit.name=§c§lFirst Aid Kit
 item.bandage.name=§lBandage
 item.bandaid.name=§lBand-Aid
 
+#Blocks
+tile.brittle_brick.name=Brittle Bricks
+
 #Easter Egg Names
 item.coffee_cup.name=§6§lCoffee Cup
 item.coffee_cup_full.name=§6§lCoffee Cup
@@ -15,7 +18,10 @@ item.canadian_flag.name=§c§lDoodler's Bane
 item.modder_nightmare.name=§d§lModder's §8§lNightmare
 item.master_gauntlet.name=§a§lMaster §7§lGauntlet
 
-#Health Items
+#Block Descriptions
+tile.brittle_brick.info=Very fragile bricks, easily breakable by hand and gun.
+
+#Health Item Descriptions
 item.medkit.info=Military grade first aid. Restores 100 percent of the player's health (10 hearts).
 item.first_aid_kit.info=Civilian grade first aid. Restores 50 percent of the player's health (5 hearts).
 item.bandage.info=A simple piece of cloth that covers wounds. Restores 10 percent of the player's health (2 hearts).
