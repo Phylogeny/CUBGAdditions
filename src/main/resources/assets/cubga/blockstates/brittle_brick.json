@@ -1,15 +1,15 @@
 {
   "variants": {
-    "inventory": { "model": "cubga:brittle_brick" },
-    "health=0":  { "model": "cubga:brittle_brick" },
-    "health=1":  { "model": "cubga:brittle_brick" },
-    "health=2":  { "model": "cubga:brittle_brick" },
-    "health=3":  { "model": "cubga:brittle_brick" },
-    "health=4":  { "model": "cubga:brittle_brick" },
-    "health=5":  { "model": "cubga:brittle_brick" },
-    "health=6":  { "model": "cubga:brittle_brick" },
-    "health=7":  { "model": "cubga:brittle_brick" },
-    "health=8":  { "model": "cubga:brittle_brick" },
-    "health=9": { "model": "cubga:brittle_brick" }
+    "inventory": { "model": "cubga:brittle_brick_9" },
+    "health=0":  { "model": "cubga:brittle_brick_0" },
+    "health=1":  { "model": "cubga:brittle_brick_1" },
+    "health=2":  { "model": "cubga:brittle_brick_2" },
+    "health=3":  { "model": "cubga:brittle_brick_3" },
+    "health=4":  { "model": "cubga:brittle_brick_4" },
+    "health=5":  { "model": "cubga:brittle_brick_5" },
+    "health=6":  { "model": "cubga:brittle_brick_6" },
+    "health=7":  { "model": "cubga:brittle_brick_7" },
+    "health=8":  { "model": "cubga:brittle_brick_8" },
+    "health=9":  { "model": "cubga:brittle_brick_9" }
   }
 }
