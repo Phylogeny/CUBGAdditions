@@ -22,10 +22,10 @@ item.master_gauntlet.name=§a§lMaster §7§lGauntlet
 tile.brittle_brick.info=Very fragile bricks, easily breakable by hand and gun.
 
 #Health Item Descriptions
-item.medkit.info=Military grade first aid. Restores 100 percent of the player's health (10 hearts).
-item.first_aid_kit.info=Civilian grade first aid. Restores 50 percent of the player's health (5 hearts).
-item.bandage.info=A simple piece of cloth that covers wounds. Restores 10 percent of the player's health (2 hearts).
-item.bandaid.info=An adhesive piece of fabric that covers small cuts. Restores 2.5 percent of the player's health (1/2 heart).
+item.medkit.info=Military grade first aid. Restores 100% of the player's health (10 hearts).
+item.first_aid_kit.info=Civilian grade first aid. Restores 50% of the player's health (5 hearts).
+item.bandage.info=A simple piece of cloth that covers wounds. Restores 10% of the player's health (2 hearts).
+item.bandaid.info=An adhesive piece of fabric that covers small cuts. Restores 2.5% of the player's health (1/2 heart).
 
 #Easter Egg Descriptions
 item.coffee_cup.info=An empty coffee cup. Oh, and you can wear it on your head.
