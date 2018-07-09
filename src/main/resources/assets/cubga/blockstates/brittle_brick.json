@@ -1,6 +1,15 @@
 {
   "variants": {
-    "normal": { "model": "cubga:brittle_brick" },
-    "inventory": { "model": "cubga:brittle_brick" }
+    "inventory": { "model": "cubga:brittle_brick" },
+    "health=0":  { "model": "cubga:brittle_brick" },
+    "health=1":  { "model": "cubga:brittle_brick" },
+    "health=2":  { "model": "cubga:brittle_brick" },
+    "health=3":  { "model": "cubga:brittle_brick" },
+    "health=4":  { "model": "cubga:brittle_brick" },
+    "health=5":  { "model": "cubga:brittle_brick" },
+    "health=6":  { "model": "cubga:brittle_brick" },
+    "health=7":  { "model": "cubga:brittle_brick" },
+    "health=8":  { "model": "cubga:brittle_brick" },
+    "health=9": { "model": "cubga:brittle_brick" }
   }
 }
