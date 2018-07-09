@@ -4,6 +4,7 @@ import com.cubgdev.cubga.client.*;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -29,6 +30,7 @@ public class ClientProxy extends CommonProxy
     public void init(FMLInitializationEvent event) {
         super.init(event);
         MinecraftForge.EVENT_BUS.register(CapeHandler.class);
+        MinecraftForge.EVENT_BUS.register(ParticleRenderer.getInstance());
 
         Runnable r = () -> {
             String data = getRemoteString("https://raw.githubusercontent.com/JacksonPlayz/CuBG-Resources/master/capes/capes.json");
@@ -40,8 +42,6 @@ public class ClientProxy extends CommonProxy
                 }
             }
         };
-
-
         Thread thread = new Thread(r);
         thread.start();
     }

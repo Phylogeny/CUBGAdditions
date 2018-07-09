@@ -16,6 +16,8 @@ public class ModItems {
 	public static final Item MODDER_NIGHTMARE;
 	public static final Item MASTER_GAUNTLET;
 
+	public static final Item BRICK;
+
 	static {
 		MEDKIT = new ItemHeal("medkit", 64, 20);
 		FIRST_AID = new ItemHeal("first_aid_kit", 32, 10);
@@ -27,6 +29,8 @@ public class ModItems {
 		CANADIAN_FLAG = new ItemCanadianFlag();
 		MODDER_NIGHTMARE = new ItemModderNightmare();
 		MASTER_GAUNTLET = new ItemMasterGauntlet();
+
+		BRICK = new ItemBase("brick").setCreativeTab(null);
 	}
 
 	public static void register() {
@@ -40,6 +44,8 @@ public class ModItems {
 		register(CANADIAN_FLAG);
 		register(MODDER_NIGHTMARE);
 		register(MASTER_GAUNTLET);
+
+		register(BRICK);
 	}
 
 	private static void register(Item item) {

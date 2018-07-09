@@ -1,6 +1,9 @@
 package com.cubgdev.cubga.blocks;
 
 import com.cubgdev.cubga.CUBG;
+import com.cubgdev.cubga.client.ParticleBrick;
+import com.cubgdev.cubga.client.ParticleRenderer;
+import com.cubgdev.cubga.init.ModItems;
 import com.cubgdev.cubga.tileentity.TileEntityBrittleBrick;
 import com.mrcrayfish.guns.entity.EntityProjectile;
 import com.mrcrayfish.guns.interfaces.IDamageable;
@@ -11,9 +14,12 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -73,11 +79,20 @@ public class BlockBrittleBrick extends Block implements IDamageable {
     }
 
     private boolean damageBlock(World world, BlockPos pos, IBlockState state, int damage) {
-        world.playEvent(2001, pos, Block.getStateId(state));
         if(state.getValue(HEALTH) - damage < 0) {
+            world.playEvent(2001, pos, Block.getStateId(state));
             return replaceGrass(world, pos);
         } else {
             world.setBlockState(pos, state.withProperty(HEALTH, state.getValue(HEALTH) - damage));
+
+            /*EntityItem entityItem = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, new ItemStack(ModItems.BRICK));
+            entityItem.motionX = RANDOM.nextGaussian() * 0.05D;
+            entityItem.motionZ = RANDOM.nextGaussian() * 0.05D;
+            world.spawnEntity(entityItem);*/
+
+            for(int i = 0; i < 4; i++) {
+                ParticleRenderer.getInstance().addParticle(new ParticleBrick(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, RANDOM.nextGaussian(), 0.5, RANDOM.nextGaussian()));
+            }
         }
         return false;
     }
