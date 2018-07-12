@@ -4,13 +4,17 @@ import com.cubgdev.cubga.client.*;
 import com.cubgdev.cubga.client.particle.ParticleBrick;
 import com.cubgdev.cubga.client.particle.ParticleRenderer;
 import com.cubgdev.cubga.common.EnumParticles;
+import com.cubgdev.cubga.entity.EntityThrowableBrick;
+import com.cubgdev.cubga.entity.RenderThrowableBrick;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -34,6 +38,11 @@ public class ClientProxy extends CommonProxy
 
     public void init(FMLInitializationEvent event) {
         super.init(event);
+        // RenderThrowableBrick
+        RenderManager renderManager = Minecraft.getMinecraft().getRenderManager();
+        RenderingRegistry.registerEntityRenderingHandler(EntityThrowableBrick.class, new RenderThrowableBrick(renderManager, Minecraft.getMinecraft().getRenderItem()));
+
+        // Cape, Particles, etc...
         MinecraftForge.EVENT_BUS.register(CapeHandler.class);
         MinecraftForge.EVENT_BUS.register(ParticleRenderer.getInstance());
 

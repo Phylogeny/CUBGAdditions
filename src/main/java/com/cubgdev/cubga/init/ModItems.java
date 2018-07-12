@@ -30,7 +30,7 @@ public class ModItems {
 		MODDER_NIGHTMARE = new ItemModderNightmare();
 		MASTER_GAUNTLET = new ItemMasterGauntlet();
 
-		BRICK = new ItemBase("brick");
+		BRICK = new ItemBrick("brick");
 	}
 
 	public static void register() {
