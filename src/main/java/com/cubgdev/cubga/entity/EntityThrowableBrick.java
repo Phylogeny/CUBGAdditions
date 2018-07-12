@@ -30,18 +30,22 @@ public class EntityThrowableBrick extends EntityThrowable {
     @Override
     protected void onImpact(RayTraceResult result) {
         if (!this.world.isRemote) {
-            this.world.setEntityState(this, (byte) 3);
-            this.setDead();
-
             if (result.typeOfHit == RayTraceResult.Type.BLOCK) {
                 BlockPos pos = result.getBlockPos();
                 IBlockState state = this.world.getBlockState(pos);
+
+                if(state.getBlock().isReplaceable(world, pos)) {
+                    return;
+                }
+
                 if (state.getBlock() instanceof IDamageable) {
                     IDamageable damageable = (IDamageable) state.getBlock();
                     damageable.onBlockDamaged(this.world, state, pos, 2);
                 } else {
                     dropItem();
                 }
+                this.world.setEntityState(this, (byte) 3);
+                this.setDead();
             } else if (result.entityHit instanceof EntityLivingBase) {
                 result.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), (float) 2);
             } else {
