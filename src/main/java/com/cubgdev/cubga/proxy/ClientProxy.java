@@ -1,10 +1,15 @@
 package com.cubgdev.cubga.proxy;
 
 import com.cubgdev.cubga.client.*;
+import com.cubgdev.cubga.client.particle.ParticleBrick;
+import com.cubgdev.cubga.client.particle.ParticleRenderer;
+import com.cubgdev.cubga.common.EnumParticles;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -78,4 +83,16 @@ public class ClientProxy extends CommonProxy
         return text;
     }
 
+    @Override
+    public void spawnParticle(EnumParticles particleType, double xCoordIn, double yCoordIn, double zCoordIn, double xSpeedIn, double ySpeedIn, double zSpeedIn)
+    {
+        World world = Minecraft.getMinecraft().world;
+        Particle particle = null;
+        switch(particleType) {
+            case BRICK:
+                particle = new ParticleBrick(world, xCoordIn, yCoordIn, zCoordIn, xSpeedIn, ySpeedIn, zSpeedIn);
+                break;
+        }
+        ParticleRenderer.getInstance().addParticle(particle);
+    }
 }

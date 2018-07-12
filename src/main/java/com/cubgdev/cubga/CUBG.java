@@ -4,6 +4,7 @@ import com.cubgdev.cubga.common.CommandResetBrittleBricks;
 import com.cubgdev.cubga.common.CommonEvents;
 import com.cubgdev.cubga.init.ModItems;
 import com.cubgdev.cubga.init.RegistrationHandler;
+import com.cubgdev.cubga.network.PacketHandler;
 import com.cubgdev.cubga.proxy.CommonProxy;
 import com.cubgdev.cubga.tileentity.TileEntityBrittleBrick;
 import net.minecraft.creativetab.CreativeTabs;
@@ -31,19 +32,20 @@ public class CUBG
     public static CUBG instance;
 
     @SidedProxy(clientSide = Reference.PROXY_CLIENT, serverSide = Reference.PROXY_SERVER)
-    private static CommonProxy proxy;
+    public static CommonProxy proxy;
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         proxy.preInit(event);
         RegistrationHandler.init();
-        GameRegistry.registerTileEntity(TileEntityBrittleBrick.class, new ResourceLocation(Reference.MOD_ID, "BrittleBrick"));
         MinecraftForge.EVENT_BUS.register(new CommonEvents());
+        PacketHandler.init();
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         proxy.init(event);
+        GameRegistry.registerTileEntity(TileEntityBrittleBrick.class, Reference.MOD_ID + "BrittleBrick");
     }
 
     @Mod.EventHandler

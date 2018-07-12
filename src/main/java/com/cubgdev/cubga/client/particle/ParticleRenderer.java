@@ -1,4 +1,4 @@
-package com.cubgdev.cubga.client;
+package com.cubgdev.cubga.client.particle;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
@@ -8,7 +8,6 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -39,9 +38,12 @@ public class ParticleRenderer {
 
     public void updateParticle() {
         for(int i = 0; i < particles.size(); i++) {
-            particles.get(i).onUpdate();
+            Particle particle = particles.get(i);
+            particle.onUpdate();
+            if(!particle.isAlive()) {
+                particles.remove(i);
+            }
         }
-        particles.removeIf(particle -> !particle.isAlive());
     }
 
     public void renderParticle(float partialTicks) {

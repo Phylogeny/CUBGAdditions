@@ -1,4 +1,4 @@
-package com.cubgdev.cubga.client;
+package com.cubgdev.cubga.client.particle;
 
 import com.cubgdev.cubga.init.ModItems;
 import net.minecraft.client.Minecraft;
@@ -21,12 +21,14 @@ import javax.annotation.Nullable;
 public class ParticleBrick extends Particle {
 
     private BlockPos source;
+    private float rotation;
 
     public ParticleBrick(World worldIn, double xCoordIn, double yCoordIn, double zCoordIn, double xSpeedIn, double ySpeedIn, double zSpeedIn) {
         super(worldIn, xCoordIn, yCoordIn, zCoordIn, xSpeedIn, ySpeedIn, zSpeedIn);
         this.source = new BlockPos(xCoordIn, yCoordIn, zCoordIn);
         this.particleGravity = 1F;
         this.particleMaxAge = 30 + rand.nextInt(10);
+        this.rotation = (float) (rand.nextGaussian() * 360F);
     }
 
     @Override
@@ -43,6 +45,7 @@ public class ParticleBrick extends Particle {
         GlStateManager.pushMatrix();
         {
             GlStateManager.translate(posX, posY + 1.5 * 0.0625, posZ);
+            GlStateManager.rotate(rotation, 0, 1, 0);
             RenderHelper.enableStandardItemLighting();
             Minecraft.getMinecraft().getRenderItem().renderItem(new ItemStack(ModItems.BRICK), ItemCameraTransforms.TransformType.NONE);
         }

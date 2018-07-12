@@ -1,9 +1,9 @@
 package com.cubgdev.cubga.blocks;
 
 import com.cubgdev.cubga.CUBG;
-import com.cubgdev.cubga.client.ParticleBrick;
-import com.cubgdev.cubga.client.ParticleRenderer;
-import com.cubgdev.cubga.init.ModItems;
+import com.cubgdev.cubga.common.EnumParticles;
+import com.cubgdev.cubga.network.PacketHandler;
+import com.cubgdev.cubga.network.message.MessageParticle;
 import com.cubgdev.cubga.tileentity.TileEntityBrittleBrick;
 import com.mrcrayfish.guns.entity.EntityProjectile;
 import com.mrcrayfish.guns.interfaces.IDamageable;
@@ -14,18 +14,16 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 import javax.annotation.Nullable;
 
@@ -63,7 +61,7 @@ public class BlockBrittleBrick extends Block implements IDamageable {
         if(player.capabilities.isCreativeMode) {
             return replaceGrass(world, pos);
         }
-        return damageBlock(world, pos, state, 1);
+        return damageBlock(world, pos, state, 1, player.dimension);
     }
 
     @Override
@@ -75,26 +73,28 @@ public class BlockBrittleBrick extends Block implements IDamageable {
     @Override
     public void onProjectileDamaged(World world, IBlockState state, BlockPos pos, EntityProjectile projectile) {
         int damage = (int) Math.ceil(projectile.getDamage() / 2.0) + 1;
-        damageBlock(world, pos, state, damage);
+        damageBlock(world, pos, state, damage, projectile.dimension);
     }
 
-    private boolean damageBlock(World world, BlockPos pos, IBlockState state, int damage) {
-        if(state.getValue(HEALTH) - damage < 0) {
+    private boolean damageBlock(World world, BlockPos pos, IBlockState state, int damage, int dimension) {
+        int healthLeft = state.getValue(HEALTH);
+        spawnBrickParticles(world, pos, healthLeft, damage, dimension);
+        if(healthLeft - damage < 0) {
             world.playEvent(2001, pos, Block.getStateId(state));
             return replaceGrass(world, pos);
         } else {
-            world.setBlockState(pos, state.withProperty(HEALTH, state.getValue(HEALTH) - damage));
-
-            /*EntityItem entityItem = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, new ItemStack(ModItems.BRICK));
-            entityItem.motionX = RANDOM.nextGaussian() * 0.05D;
-            entityItem.motionZ = RANDOM.nextGaussian() * 0.05D;
-            world.spawnEntity(entityItem);*/
-
-            for(int i = 0; i < 4; i++) {
-                ParticleRenderer.getInstance().addParticle(new ParticleBrick(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, RANDOM.nextGaussian(), 0.5, RANDOM.nextGaussian()));
-            }
+            world.setBlockState(pos, state.withProperty(HEALTH, healthLeft - damage));
         }
         return false;
+    }
+
+    private void spawnBrickParticles(World world, BlockPos pos, int healthLeft, int damage, int dimension) {
+        if(world.isRemote)
+            return;
+        damage = Math.min(healthLeft, damage);
+        for(int i = 0; i < 4 * damage; i++) {
+            PacketHandler.INSTANCE.sendToAllTracking(new MessageParticle(EnumParticles.BRICK, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, RANDOM.nextGaussian(), 0.5, RANDOM.nextGaussian()), new NetworkRegistry.TargetPoint(dimension, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 32));
+        }
     }
 
     private boolean replaceGrass(World world, BlockPos pos) {
