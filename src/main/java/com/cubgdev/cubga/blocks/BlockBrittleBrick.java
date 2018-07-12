@@ -6,7 +6,6 @@ import com.cubgdev.cubga.init.ModItems;
 import com.cubgdev.cubga.network.PacketHandler;
 import com.cubgdev.cubga.network.message.MessageParticle;
 import com.cubgdev.cubga.tileentity.TileEntityBrittleBrick;
-import com.mrcrayfish.guns.entity.EntityProjectile;
 import com.mrcrayfish.guns.interfaces.IDamageable;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockTallGrass;
@@ -65,7 +64,7 @@ public class BlockBrittleBrick extends Block implements IDamageable {
         if(player.capabilities.isCreativeMode) {
             return replaceGrass(world, pos);
         }
-        return damageBlock(world, pos, state, 1, player.dimension);
+        return damageBlock(world, pos, state, 1);
     }
 
     @Override
@@ -74,14 +73,13 @@ public class BlockBrittleBrick extends Block implements IDamageable {
     }
 
     @Override
-    public void onProjectileDamaged(World world, IBlockState state, BlockPos pos, EntityProjectile projectile) {
-        int damage = (int) Math.ceil(projectile.getDamage() / 2.0) + 1;
-        damageBlock(world, pos, state, damage, projectile.dimension);
+    public void onBlockDamaged(World world, IBlockState state, BlockPos pos, int damage) {
+        damageBlock(world, pos, state, damage);
     }
 
-    private boolean damageBlock(World world, BlockPos pos, IBlockState state, int damage, int dimension) {
+    private boolean damageBlock(World world, BlockPos pos, IBlockState state, int damage) {
         int healthLeft = state.getValue(HEALTH);
-        spawnBrickParticles(world, pos, healthLeft, damage, dimension);
+        spawnBrickParticles(world, pos, healthLeft, damage);
         if(healthLeft - damage < 0) {
             world.playEvent(2001, pos, Block.getStateId(state));
             return replaceGrass(world, pos);
@@ -96,12 +94,12 @@ public class BlockBrittleBrick extends Block implements IDamageable {
         return false;
     }
 
-    private void spawnBrickParticles(World world, BlockPos pos, int healthLeft, int damage, int dimension) {
+    private void spawnBrickParticles(World world, BlockPos pos, int healthLeft, int damage) {
         if(world.isRemote)
             return;
         damage = Math.min(healthLeft, damage);
         for(int i = 0; i < 4 * damage; i++) {
-            PacketHandler.INSTANCE.sendToAllTracking(new MessageParticle(EnumParticles.BRICK, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, RANDOM.nextGaussian(), 0.5, RANDOM.nextGaussian()), new NetworkRegistry.TargetPoint(dimension, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 32));
+            PacketHandler.INSTANCE.sendToAllTracking(new MessageParticle(EnumParticles.BRICK, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, RANDOM.nextGaussian(), 0.5, RANDOM.nextGaussian()), new NetworkRegistry.TargetPoint(world.provider.getDimension(), pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 32));
         }
     }
 
