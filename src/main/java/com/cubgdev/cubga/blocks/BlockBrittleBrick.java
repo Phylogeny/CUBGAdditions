@@ -118,6 +118,12 @@ public class BlockBrittleBrick extends Block implements IDamageable {
     }
 
     @Override
+    public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, EnumFacing side) {
+        IBlockState state = worldIn.getBlockState(pos);
+        return !state.getMaterial().isLiquid();
+    }
+
+    @Override
     public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
         drops.add(new ItemStack(ModItems.BRICK, 2));
     }
