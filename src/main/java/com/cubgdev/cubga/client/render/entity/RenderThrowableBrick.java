@@ -1,5 +1,6 @@
-package com.cubgdev.cubga.entity;
+package com.cubgdev.cubga.client.render.entity;
 
+import com.cubgdev.cubga.entity.EntityThrowableBrick;
 import com.cubgdev.cubga.init.ModItems;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderItem;
