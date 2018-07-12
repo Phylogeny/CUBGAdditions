@@ -1,0 +1,15 @@
+{
+    "result": {
+        "item": "cubga:brittle_brick"
+    },
+    "pattern": [
+        "BB",
+        "BB"
+    ],
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "B": {
+            "item": "cubga:brick"
+        }
+    }
+}
