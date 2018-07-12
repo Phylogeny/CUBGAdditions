@@ -5,7 +5,7 @@ import com.cubgdev.cubga.client.particle.ParticleBrick;
 import com.cubgdev.cubga.client.particle.ParticleRenderer;
 import com.cubgdev.cubga.common.EnumParticles;
 import com.cubgdev.cubga.entity.EntityThrowableBrick;
-import com.cubgdev.cubga.entity.RenderThrowableBrick;
+import com.cubgdev.cubga.client.render.entity.RenderThrowableBrick;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
