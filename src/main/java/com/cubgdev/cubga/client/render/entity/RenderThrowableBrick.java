@@ -30,7 +30,7 @@ public class RenderThrowableBrick extends Render<EntityThrowableBrick> {
 
         GlStateManager.rotate(-this.renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
         GlStateManager.rotate( (float) (this.renderManager.options.thirdPersonView == 2 ? -1 : 1) * this.renderManager.playerViewX, 1.0F, 0.0F, 0.0F);
-        GlStateManager.rotate( 180F, 0.0F, 1.0F, 0.0F);
+        GlStateManager.rotate( 90F, 0.0F, 1.0F, 0.0F);
 
         this.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
 
@@ -39,7 +39,7 @@ public class RenderThrowableBrick extends Render<EntityThrowableBrick> {
             GlStateManager.enableOutlineMode(this.getTeamColor(entity));
         }
 
-        this.itemRenderer.renderItem(this.getStackToRender(entity), ItemCameraTransforms.TransformType.GROUND);
+        this.itemRenderer.renderItem(new ItemStack(ModItems.BRICK), ItemCameraTransforms.TransformType.GROUND);
 
         if (this.renderOutlines) {
             GlStateManager.disableOutlineMode();
@@ -49,10 +49,6 @@ public class RenderThrowableBrick extends Render<EntityThrowableBrick> {
         GlStateManager.disableRescaleNormal();
         GlStateManager.popMatrix();
         super.doRender(entity, x, y, z, entityYaw, partialTicks);
-    }
-
-    public ItemStack getStackToRender(EntityThrowableBrick entity) {
-        return new ItemStack(ModItems.BRICK);
     }
 
     protected ResourceLocation getEntityTexture(EntityThrowableBrick entity) {

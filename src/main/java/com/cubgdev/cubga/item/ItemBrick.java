@@ -5,9 +5,12 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
@@ -22,20 +25,37 @@ public class ItemBrick extends ItemBase {
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer entityPlayer, EnumHand hand) {
-        ItemStack parItemStack = entityPlayer.getHeldItem(hand);
+    public EnumAction getItemUseAction(ItemStack stack) {
+        return EnumAction.BOW;
+    }
 
-        if (!entityPlayer.capabilities.isCreativeMode) {
-            parItemStack.shrink(1);
+    @Override
+    public int getMaxItemUseDuration(ItemStack stack) {
+        return 72000;
+    }
+
+    @Override
+    public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft) {
+        if(entityLiving instanceof EntityPlayer) {
+            if(!((EntityPlayer) entityLiving).capabilities.isCreativeMode) {
+                stack.shrink(1);
+            }
         }
+        if (!worldIn.isRemote && entityLiving instanceof EntityPlayer)  {
+            int duration = this.getMaxItemUseDuration(stack) - timeLeft;
 
-        if (!world.isRemote)  {
-            EntityThrowableBrick throwableBrick = new EntityThrowableBrick(world, entityPlayer);
-            throwableBrick.shoot(entityPlayer, entityPlayer.rotationPitch, entityPlayer.rotationYaw, 0.0F, 1.5F, 1.0F);
-            world.spawnEntity(throwableBrick);
+            EntityPlayer player = (EntityPlayer) entityLiving;
+            EntityThrowableBrick throwableBrick = new EntityThrowableBrick(worldIn, player);
+            throwableBrick.shoot(player, player.rotationPitch, player.rotationYaw, 0.0F, duration / 20F, 1.0F);
+            worldIn.spawnEntity(throwableBrick);
         }
+    }
 
-        return super.onItemRightClick(world, entityPlayer, hand);
+    @Override
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+        ItemStack stack = playerIn.getHeldItem(handIn);
+        playerIn.setActiveHand(handIn);
+        return new ActionResult<>(EnumActionResult.SUCCESS, stack);
     }
 
     @Override
