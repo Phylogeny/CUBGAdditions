@@ -37,28 +37,28 @@ public class EntityThrowableBrick extends EntityThrowable {
             this.world.setEntityState(this, (byte) 3);
             this.setDead();
 
-            if (result.typeOfHit == RayTraceResult.Type.BLOCK) {
-                BlockPos pos = result.getBlockPos();
-                IBlockState state = this.world.getBlockState(pos);
+            //if (result.typeOfHit == RayTraceResult.Type.BLOCK) {
+            //    BlockPos pos = result.getBlockPos();
+            //    IBlockState state = this.world.getBlockState(pos);
 
-                if (state.getBlock() instanceof IDamageable) {
-                    IDamageable damageable = (IDamageable) state.getBlock();
+            //    if (state.getBlock() instanceof IDamageable) {
+            //        IDamageable damageable = (IDamageable) state.getBlock();
 
-                    EntityProjectile projectile = new EntityProjectile(this.world);
-                    projectile.setDamageModifier(1F + new Random().nextInt(1)); // Damage will be random 1 to 2
-                    this.world.spawnEntity(projectile);
+            //        EntityProjectile projectile = new EntityProjectile(this.world);
+            //        projectile.setDamageModifier(1F + new Random().nextInt(1)); // Damage will be random 1 to 2
+            //        this.world.spawnEntity(projectile);
 
-                    damageable.onProjectileDamaged(this.world, state, pos, projectile);
-                } else {
-                    doSpawnItem();
-                }
+            //        damageable.onProjectileDamaged(this.world, state, pos, projectile);
+            //    } else {
+            //        doSpawnItem();
+            //    }
+            //} else {
+            if (result.entityHit instanceof EntityPlayer) {
+                result.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), (float) 2);
             } else {
-                if (result.entityHit instanceof EntityPlayer) {
-                    result.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), (float) 2);
-                } else {
-                    doSpawnItem();
-                }
+                doSpawnItem();
             }
+            //}
         }
     }
 
