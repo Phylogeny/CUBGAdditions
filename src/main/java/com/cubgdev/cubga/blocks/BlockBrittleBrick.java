@@ -2,6 +2,7 @@ package com.cubgdev.cubga.blocks;
 
 import com.cubgdev.cubga.CUBG;
 import com.cubgdev.cubga.common.EnumParticles;
+import com.cubgdev.cubga.init.ModItems;
 import com.cubgdev.cubga.network.PacketHandler;
 import com.cubgdev.cubga.network.message.MessageParticle;
 import com.cubgdev.cubga.tileentity.TileEntityBrittleBrick;
@@ -17,11 +18,14 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
@@ -65,8 +69,7 @@ public class BlockBrittleBrick extends Block implements IDamageable {
     }
 
     @Override
-    public void onBlockExploded(World world, BlockPos pos, Explosion explosion)
-    {
+    public void onBlockExploded(World world, BlockPos pos, Explosion explosion) {
         replaceGrass(world, pos);
     }
 
@@ -105,14 +108,18 @@ public class BlockBrittleBrick extends Block implements IDamageable {
     private boolean replaceGrass(World world, BlockPos pos) {
         TileEntity tileEntity = world.getTileEntity(pos);
         if(tileEntity instanceof TileEntityBrittleBrick) {
+            world.destroyBlock(pos, true);
             if(((TileEntityBrittleBrick) tileEntity).isGrass()) {
                 world.setBlockState(pos, Blocks.TALLGRASS.getDefaultState().withProperty(BlockTallGrass.TYPE, BlockTallGrass.EnumType.GRASS));
-            } else {
-                world.setBlockToAir(pos);
             }
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+        drops.add(new ItemStack(ModItems.BRICK, 2));
     }
 
     @Override
