@@ -46,7 +46,7 @@ public class ItemBrick extends ItemBase {
 
             EntityPlayer player = (EntityPlayer) entityLiving;
             EntityThrowableBrick throwableBrick = new EntityThrowableBrick(worldIn, player);
-            throwableBrick.shoot(player, player.rotationPitch, player.rotationYaw, 0.0F, duration / 20F, 1.0F);
+            throwableBrick.shoot(player, player.rotationPitch, player.rotationYaw, 0.0F, Math.min(1.0F, duration / 20F), 1.0F);
             worldIn.spawnEntity(throwableBrick);
         }
     }
