@@ -83,7 +83,12 @@ public class BlockBrittleBrick extends Block implements IDamageable {
             world.playEvent(2001, pos, Block.getStateId(state));
             return replaceGrass(world, pos);
         } else {
+            TileEntity tileEntity = world.getTileEntity(pos);
             world.setBlockState(pos, state.withProperty(HEALTH, healthLeft - damage));
+            if(tileEntity != null) {
+                tileEntity.validate();
+                world.setTileEntity(pos, tileEntity);
+            }
         }
         return false;
     }
