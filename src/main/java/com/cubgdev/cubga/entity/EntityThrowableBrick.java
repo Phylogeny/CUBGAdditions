@@ -41,16 +41,13 @@ public class EntityThrowableBrick extends EntityThrowable {
                 if (state.getBlock() instanceof IDamageable) {
                     IDamageable damageable = (IDamageable) state.getBlock();
                     damageable.onBlockDamaged(this.world, state, pos, 2);
-                } else {
-                    dropItem();
                 }
-                this.world.setEntityState(this, (byte) 3);
-                this.setDead();
             } else if (result.entityHit instanceof EntityLivingBase) {
                 result.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), (float) 2);
-            } else {
                 dropItem();
             }
+            this.world.setEntityState(this, (byte) 3);
+            this.setDead();
         }
     }
 
