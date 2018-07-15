@@ -1,9 +1,14 @@
 package com.cubgdev.cubga.item;
 
+import java.util.List;
 import java.util.UUID;
 
 import com.cubgdev.cubga.init.ModBlocks;
 import com.cubgdev.cubga.tileentity.TileEntityPlayerPlush;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.util.text.TextFormatting;
 import org.apache.commons.lang3.StringUtils;
 
 import com.mojang.authlib.GameProfile;
@@ -26,6 +31,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 public class ItemPlayerPlush extends ItemBlock {
 
@@ -127,6 +134,16 @@ public class ItemPlayerPlush extends ItemBlock {
 			return true;
 		} else {
 			return false;
+		}
+	}
+
+	@Override
+	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+		if (GuiScreen.isShiftKeyDown()) {
+			String info = I18n.format(this.getUnlocalizedName() + ".info");
+			tooltip.addAll(Minecraft.getMinecraft().fontRenderer.listFormattedStringToWidth(info, 150));
+		} else {
+			tooltip.add(TextFormatting.YELLOW + I18n.format("item.show_info", "SHIFT"));
 		}
 	}
 }
