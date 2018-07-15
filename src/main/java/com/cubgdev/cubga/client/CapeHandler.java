@@ -1,7 +1,7 @@
 package com.cubgdev.cubga.client;
 
 import com.cubgdev.cubga.proxy.ClientProxy;
-import com.cubgdev.cubga.util.LibObfuscation;
+import com.cubgdev.cubga.utils.LibObfuscation;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;

@@ -20,7 +20,9 @@ item.canadian_flag.name=§c§lDoodler's Bane
 item.modder_nightmare.name=§d§lModder's §8§lNightmare
 item.master_gauntlet.name=§a§lMaster §7§lGauntlet
 
-
+#Plushes
+tile.player_plush.name=Player Plush
+tile.player_plush.nbt.name=%s Plush
 
 #Block Descriptions
 tile.brittle_brick.info=Very fragile bricks, easily breakable by hand and gun.
