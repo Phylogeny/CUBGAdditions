@@ -29,8 +29,7 @@ tile.brittle_brick.info=Very fragile bricks, easily breakable by hand and gun.
 
 #Item Descriptions
 item.brick.info=A brick that came off of a Brittle Brick. Craft a brittle brick with four bricks and hold right click to charge and throw the brick.
-item.player_plush.info=A cute little plush of a Minecraft player.
-item.player_plush.nbt.info=A cute little plush of a Minecraft player.
+tile.player_plush.info=A cute little plush of a Minecraft player.
 
 #Health Item Descriptions
 item.medkit.info=Military grade first aid. Restores 100% of the player's health (10 hearts).

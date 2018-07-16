@@ -8,13 +8,16 @@ import com.cubgdev.cubga.entity.EntityThrowableBrick;
 import com.cubgdev.cubga.client.render.entity.RenderThrowableBrick;
 import com.cubgdev.cubga.tileentity.TileEntityPlayerPlush;
 import com.cubgdev.cubga.tileentity.render.TileEntityRendererPlayerPlush;
+import com.cubgdev.cubga.utils.Access;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.mojang.authlib.minecraft.MinecraftSessionService;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.server.management.PlayerProfileCache;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -69,6 +72,8 @@ public class ClientProxy extends CommonProxy
 
     public void postInit(FMLPostInitializationEvent event) {
         super.postInit(event);
+        TileEntityPlayerPlush.setProfileCache(Access.getPlayerProfileCache());
+        TileEntityPlayerPlush.setSessionService(Access.getMinecraftSessionService());
     }
 
     public static HashMap<UUID, String> getCapeMap()

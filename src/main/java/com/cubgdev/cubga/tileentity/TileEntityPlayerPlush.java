@@ -39,7 +39,7 @@ public class TileEntityPlayerPlush extends TileEntity {
 		TileEntityPlayerPlush.setSessionService(Access.getMinecraftSessionService());
 	}
 
-	public static void setProfileCache(PlayerProfileCache profileCacheIn) {
+		public static void setProfileCache(PlayerProfileCache profileCacheIn) {
 		profileCache = profileCacheIn;
 	}
 
