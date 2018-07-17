@@ -22,7 +22,7 @@ public class TileEntityCrystalContainerRenderer extends TileEntitySpecialRendere
         float f = te.innerRotation + partialTicks;
         float f1 = MathHelper.sin(f * 0.2F) / 2.0F + 0.45F;
         f1 = f1 * f1 + f1;
-
+        
         GlStateManager.pushMatrix();
         {
             GlStateManager.translate((float) x + 0.5f, (float) y + 0.25f, (float) z + 0.5f);

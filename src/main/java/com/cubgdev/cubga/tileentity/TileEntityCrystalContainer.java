@@ -1,39 +1,70 @@
 package com.cubgdev.cubga.tileentity;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
 
 /**
  * Author: CoffeeCatRailway
  */
-public class TileEntityCrystalContainer extends TileEntity {
+public class TileEntityCrystalContainer extends TileEntity
+{
 
-    public float innerRotation = 0.0f;
+	public float innerRotation;
+	private float speed;
+	private float scale;
 
-    private float speed = 1.0f;
-    private float scale = 1.0f;
+	public TileEntityCrystalContainer()
+	{
+		this.innerRotation = 0.0f;
+		this.speed = 1.0f;
+		this.scale = 1.0f;
+	}
 
-    public float getSpeed() {
-        return speed;
-    }
+	@Override
+	public NBTTagCompound writeToNBT(NBTTagCompound nbt)
+	{
+		super.writeToNBT(nbt);
+		nbt.setFloat("speed", this.speed);
+		nbt.setFloat("scale", this.scale);
+		return nbt;
+	}
 
-    public float getScale() {
-        return scale;
-    }
+	@Override
+	public void readFromNBT(NBTTagCompound nbt)
+	{
+		super.readFromNBT(nbt);
+		this.speed = nbt.getFloat("speed");
+		this.scale = nbt.getFloat("scale");
+	}
 
-    @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-        compound.setFloat("speed", this.speed);
-        compound.setFloat("scale", this.scale);
-        return super.writeToNBT(compound);
-    }
+	@Nullable
+	@Override
+	public SPacketUpdateTileEntity getUpdatePacket()
+	{
+		return new SPacketUpdateTileEntity(this.pos, 0, this.getUpdateTag());
+	}
 
-    @Override
-    public void readFromNBT(NBTTagCompound compound) {
-        super.readFromNBT(compound);
-        this.speed = compound.getFloat("speed");
-        this.scale = compound.getFloat("scale");
-    }
+	@Override
+	public NBTTagCompound getUpdateTag()
+	{
+		return this.writeToNBT(new NBTTagCompound());
+	}
+
+	public float getInnerRotation()
+	{
+		return innerRotation;
+	}
+
+	public float getSpeed()
+	{
+		return speed;
+	}
+
+	public float getScale()
+	{
+		return scale;
+	}
 }
