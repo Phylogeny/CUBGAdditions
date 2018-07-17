@@ -9,6 +9,7 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 
 public class ModEntities {
 
+    // CoffeeCatRailway - Forgot to change entity id!
     public static void init() {
         registerEntity("locomotive", EntityThrowableBrick.class, 0, 80);
     }
