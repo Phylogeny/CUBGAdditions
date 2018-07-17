@@ -99,7 +99,9 @@ public class ClientProxy extends CommonProxy
     }
 
     private static String convertStreamToString(InputStream inputStream) {
-        String text = new Scanner(inputStream, "UTF-8").useDelimiter("\\Z").next();
+    	Scanner scanner = new Scanner(inputStream, "UTF-8");
+        String text = scanner.useDelimiter("\\Z").next();
+        scanner.close();
         return text;
     }
 
