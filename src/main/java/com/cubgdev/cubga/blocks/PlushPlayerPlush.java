@@ -31,7 +31,7 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockPlayerPlush extends BlockBase implements ITileEntityProvider {
+public class PlushPlayerPlush extends PlushBase implements ITileEntityProvider {
 
 	public static final String[] SPECIAL_USERS =
 			{
@@ -50,7 +50,7 @@ public class BlockPlayerPlush extends BlockBase implements ITileEntityProvider {
 
 	public static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.0625 * 5.5, 0, 0.0625 * 5.5, 0.0625 * 10.5, 0.0625 * 13, 0.0625 * 10.5);
 
-	public BlockPlayerPlush() {
+	public PlushPlayerPlush() {
 		super(Material.CLOTH);
 		setRegistryName("player_plush");
 		setUnlocalizedName("player_plush");
