@@ -1,20 +1,17 @@
-package com.cubgdev.cubga.client.render;
+package com.cubgdev.cubga.tileentity.render;
 
 import com.cubgdev.cubga.tileentity.TileEntityCrystalContainer;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelEnderCrystal;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.entity.RenderDragon;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import org.lwjgl.Sys;
 
 /**
  * Author: CoffeeCatRailway
  */
-public class CrystalContainerRenderer extends TileEntitySpecialRenderer<TileEntityCrystalContainer> {
+public class TileEntityCrystalContainerRenderer extends TileEntitySpecialRenderer<TileEntityCrystalContainer> {
 
     private static final ResourceLocation ENDER_CRYSTAL_TEXTURES = new ResourceLocation("textures/entity/endercrystal/endercrystal.png");
     private final ModelBase modelEnderCrystal = new ModelEnderCrystal(0.0F, false);

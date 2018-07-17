@@ -7,11 +7,10 @@ import com.cubgdev.cubga.init.RegistrationHandler;
 import com.cubgdev.cubga.network.PacketHandler;
 import com.cubgdev.cubga.proxy.CommonProxy;
 import com.cubgdev.cubga.tileentity.TileEntityBrittleBrick;
-import com.cubgdev.cubga.tileentity.TileEntityCrystalContainer;
 import com.cubgdev.cubga.tileentity.TileEntityPlayerPlush;
+import com.cubgdev.cubga.tileentity.TileEntityCrystalContainer;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -49,6 +48,7 @@ public class CUBG
         proxy.init(event);
         GameRegistry.registerTileEntity(TileEntityBrittleBrick.class, Reference.MOD_ID + ":brittle_brick");
         GameRegistry.registerTileEntity(TileEntityPlayerPlush.class, Reference.MOD_ID + ":player_plush");
+
         GameRegistry.registerTileEntity(TileEntityCrystalContainer.class, Reference.MOD_ID + ":crystal_container");
     }
 

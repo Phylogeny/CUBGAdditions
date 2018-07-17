@@ -3,13 +3,13 @@ package com.cubgdev.cubga.proxy;
 import com.cubgdev.cubga.client.CapeHandler;
 import com.cubgdev.cubga.client.particle.ParticleBrick;
 import com.cubgdev.cubga.client.particle.ParticleRenderer;
-import com.cubgdev.cubga.client.render.CrystalContainerRenderer;
 import com.cubgdev.cubga.client.render.entity.RenderThrowableBrick;
 import com.cubgdev.cubga.common.EnumParticles;
 import com.cubgdev.cubga.entity.EntityThrowableBrick;
-import com.cubgdev.cubga.tileentity.TileEntityCrystalContainer;
 import com.cubgdev.cubga.tileentity.TileEntityPlayerPlush;
+import com.cubgdev.cubga.tileentity.TileEntityCrystalContainer;
 import com.cubgdev.cubga.tileentity.render.TileEntityRendererPlayerPlush;
+import com.cubgdev.cubga.tileentity.render.TileEntityCrystalContainerRenderer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -50,8 +50,8 @@ public class ClientProxy extends CommonProxy
         RenderManager renderManager = Minecraft.getMinecraft().getRenderManager();
         RenderingRegistry.registerEntityRenderingHandler(EntityThrowableBrick.class, new RenderThrowableBrick(renderManager, Minecraft.getMinecraft().getRenderItem()));
 
-        // Render CrystalContainer
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCrystalContainer.class, new CrystalContainerRenderer());
+        // Render Containers
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCrystalContainer.class, new TileEntityCrystalContainerRenderer());
 
         // Cape, Particles, etc...
         MinecraftForge.EVENT_BUS.register(CapeHandler.class);

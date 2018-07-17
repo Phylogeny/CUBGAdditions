@@ -1,8 +1,8 @@
 package com.cubgdev.cubga.init;
 
 import com.cubgdev.cubga.blocks.BlockBrittleBrick;
-import com.cubgdev.cubga.blocks.BlockCrystalContainer;
 import com.cubgdev.cubga.blocks.BlockPlayerPlush;
+import com.cubgdev.cubga.blocks.BlockCrystalContainer;
 import com.cubgdev.cubga.item.ItemBrittleBrick;
 import com.cubgdev.cubga.item.ItemPlayerPlush;
 import net.minecraft.block.Block;
