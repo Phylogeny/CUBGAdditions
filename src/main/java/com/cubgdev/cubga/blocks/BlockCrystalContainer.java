@@ -32,6 +32,7 @@ public class BlockCrystalContainer extends Block implements ITileEntityProvider 
         super(Material.IRON);
         this.setUnlocalizedName(name);
         this.setRegistryName(name);
+        this.setLightLevel(1.5f);
         this.setCreativeTab(CUBG.TAB);
         this.setLightLevel(1.5f);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
