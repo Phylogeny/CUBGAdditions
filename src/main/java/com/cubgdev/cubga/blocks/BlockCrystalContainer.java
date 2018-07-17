@@ -3,7 +3,6 @@ package com.cubgdev.cubga.blocks;
 import com.cubgdev.cubga.CUBG;
 import com.cubgdev.cubga.tileentity.TileEntityCrystalContainer;
 import net.minecraft.block.Block;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
@@ -29,9 +28,9 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * Author: CoffeeCatRailway
+ * Author: CoffeeCatRailway & JacksonPlayzYT
  */
-public class BlockCrystalContainer extends Block implements ITileEntityProvider {
+public class BlockCrystalContainer extends Block {
 
     public static final PropertyDirection FACING = PropertyDirection.create("facing");
 
@@ -55,13 +54,13 @@ public class BlockCrystalContainer extends Block implements ITileEntityProvider 
     }
 
     @Override
-    public boolean hasTileEntity() {
+    public boolean hasTileEntity(IBlockState state) {
         return true;
     }
 
     @Nullable
     @Override
-    public TileEntity createNewTileEntity(World worldIn, int meta) {
+    public TileEntity createTileEntity(World world, IBlockState state) {
         return new TileEntityCrystalContainer();
     }
 
@@ -86,26 +85,22 @@ public class BlockCrystalContainer extends Block implements ITileEntityProvider 
     }
 
     @Override
-    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand)
-    {
+    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
         return this.getDefaultState().withProperty(FACING, facing);
     }
 
     @Override
-    public int getMetaFromState(IBlockState state)
-    {
+    public int getMetaFromState(IBlockState state) {
         return state.getValue(FACING).getIndex();
     }
 
     @Override
-    public IBlockState getStateFromMeta(int meta)
-    {
+    public IBlockState getStateFromMeta(int meta) {
         return this.getDefaultState().withProperty(FACING, EnumFacing.getFront(meta));
     }
 
     @Override
-    protected BlockStateContainer createBlockState()
-    {
+    protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, FACING);
     }
 }
