@@ -1,7 +1,6 @@
 package com.cubgdev.cubga.init;
 
 import com.cubgdev.cubga.blocks.BlockBrittleBrick;
-import com.cubgdev.cubga.blocks.BlockCrystalContainer;
 import com.cubgdev.cubga.blocks.BlockPlayerPlush;
 import com.cubgdev.cubga.item.ItemBrittleBrick;
 import com.cubgdev.cubga.item.ItemPlayerPlush;
@@ -13,29 +12,22 @@ public class ModBlocks
     public static final Block BRITTLE_BRICK;
     public static final Block PLAYER_PLUSH;
 
-    public static final Block CRYSTAL_CONTAINER;
-
     static
     {
         BRITTLE_BRICK = new BlockBrittleBrick("brittle_brick");
         PLAYER_PLUSH = new BlockPlayerPlush();
-
-        CRYSTAL_CONTAINER = new BlockCrystalContainer("crystal_container");
     }
 
     public static void register()
     {
         registerBlock(BRITTLE_BRICK, new ItemBrittleBrick(BRITTLE_BRICK));
         registerBlock(PLAYER_PLUSH, new ItemPlayerPlush());
-
-        registerBlock(CRYSTAL_CONTAINER);
     }
 
     public static void registerBlock(Block block)
     {
-        RegistrationHandler.Blocks.add(block);
-        ItemBlock itemBlock = (ItemBlock) new ItemBlock(block).setRegistryName(block.getRegistryName());
-        RegistrationHandler.Items.add(itemBlock);
+        registerBlock(block, new ItemBlock(block));
+        registerBlock(block, new ItemBlock(block));
     }
 
     public static void registerBlock(Block block, ItemBlock item)
