@@ -1,23 +1,21 @@
 package com.cubgdev.cubga.proxy;
 
-import com.cubgdev.cubga.client.*;
+import com.cubgdev.cubga.client.CapeHandler;
 import com.cubgdev.cubga.client.particle.ParticleBrick;
 import com.cubgdev.cubga.client.particle.ParticleRenderer;
+import com.cubgdev.cubga.client.render.CrystalContainerRenderer;
+import com.cubgdev.cubga.client.render.entity.RenderThrowableBrick;
 import com.cubgdev.cubga.common.EnumParticles;
 import com.cubgdev.cubga.entity.EntityThrowableBrick;
-import com.cubgdev.cubga.client.render.entity.RenderThrowableBrick;
+import com.cubgdev.cubga.tileentity.TileEntityCrystalContainer;
 import com.cubgdev.cubga.tileentity.TileEntityPlayerPlush;
 import com.cubgdev.cubga.tileentity.render.TileEntityRendererPlayerPlush;
-import com.cubgdev.cubga.utils.Access;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.mojang.authlib.minecraft.MinecraftSessionService;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.server.management.PlayerProfileCache;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -52,6 +50,9 @@ public class ClientProxy extends CommonProxy
         RenderManager renderManager = Minecraft.getMinecraft().getRenderManager();
         RenderingRegistry.registerEntityRenderingHandler(EntityThrowableBrick.class, new RenderThrowableBrick(renderManager, Minecraft.getMinecraft().getRenderItem()));
 
+        // Render CrystalContainer
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCrystalContainer.class, new CrystalContainerRenderer());
+
         // Cape, Particles, etc...
         MinecraftForge.EVENT_BUS.register(CapeHandler.class);
         MinecraftForge.EVENT_BUS.register(ParticleRenderer.getInstance());
@@ -72,8 +73,6 @@ public class ClientProxy extends CommonProxy
 
     public void postInit(FMLPostInitializationEvent event) {
         super.postInit(event);
-        TileEntityPlayerPlush.setProfileCache(Access.getPlayerProfileCache());
-        TileEntityPlayerPlush.setSessionService(Access.getMinecraftSessionService());
     }
 
     public static HashMap<UUID, String> getCapeMap()

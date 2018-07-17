@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "normal": { "model": "cubga:crystal_container" }
+  }
+}
