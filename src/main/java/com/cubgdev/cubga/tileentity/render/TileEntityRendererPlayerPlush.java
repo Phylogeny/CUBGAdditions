@@ -76,7 +76,7 @@ public class TileEntityRendererPlayerPlush extends TileEntitySpecialRenderer<Til
 		GlStateManager.scale(scale, scale, scale);
 
 		TextureUtils.bindTexture(skinTexture);
-		model.render(entity, 0, 0, Minecraft.getMinecraft().player.ticksExisted * 2, 0, 0, 1);
+		model.render(entity, 0, 0.001f, 1, 0, 0, 1);
 
 		GlStateManager.popMatrix();
 		GlStateManager.disableBlendProfile(GlStateManager.Profile.PLAYER_SKIN);

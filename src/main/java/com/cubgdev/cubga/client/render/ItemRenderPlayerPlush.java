@@ -137,7 +137,7 @@ public class ItemRenderPlayerPlush extends ItemRenderer {
 
 		if (fakeEntity != null) {
 			TextureUtils.bindTexture(skinTexture);
-			model.render(fakeEntity, 0, 0, 1, 0, 0, 1);
+			model.render(fakeEntity, 0, 0.001f, 1, 0, 0, 1);
 		}
 
 		GlStateManager.popMatrix();
