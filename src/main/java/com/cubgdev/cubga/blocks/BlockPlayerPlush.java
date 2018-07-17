@@ -31,7 +31,7 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockPlayerPlush extends BlockBase implements ITileEntityProvider {
+public class BlockPlayerPlush extends PlushBase implements ITileEntityProvider {
 
 	public static final String[] SPECIAL_USERS =
 			{
