@@ -11,6 +11,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import org.lwjgl.Sys;
 
+/**
+ * Author: CoffeeCatRailway
+ */
 public class CrystalContainerRenderer extends TileEntitySpecialRenderer<TileEntityCrystalContainer> {
 
     private static final ResourceLocation ENDER_CRYSTAL_TEXTURES = new ResourceLocation("textures/entity/endercrystal/endercrystal.png");

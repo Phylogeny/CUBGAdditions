@@ -2,8 +2,6 @@ itemGroup.tabCUBG=CUBG Additions
 
 item.show_info=Hold %s for Info
 
-
-
 #Health Items
 item.medkit.name=§a§lMedkit
 item.first_aid_kit.name=§c§lFirst Aid Kit
@@ -12,6 +10,8 @@ item.bandaid.name=§lBand-Aid
 
 #Blocks
 tile.brittle_brick.name=Brittle Bricks
+
+tile.crystal_container.name=Ender Crystal Container
 
 #Easter Eggs
 item.coffee_cup.name=§6§lCoffee Cup
@@ -26,6 +26,8 @@ tile.player_plush.nbt.name=%s Plush
 
 #Block Descriptions
 tile.brittle_brick.info=Very fragile bricks, easily breakable by hand and gun.
+
+tile.crystal_container.info=Contains a highly explosive crystal from another dimension.
 
 #Item Descriptions
 item.brick.info=A brick that came off of a Brittle Brick. Craft a brittle brick with four bricks and hold right click to charge and throw the brick.
