@@ -6,10 +6,13 @@ import com.cubgdev.cubga.client.particle.ParticleRenderer;
 import com.cubgdev.cubga.client.render.entity.RenderThrowableBrick;
 import com.cubgdev.cubga.common.EnumParticles;
 import com.cubgdev.cubga.entity.EntityThrowableBrick;
+import com.cubgdev.cubga.tileentity.TileEntityCrystal;
 import com.cubgdev.cubga.tileentity.TileEntityPlayerPlush;
 import com.cubgdev.cubga.tileentity.TileEntityCrystalContainer;
+import com.cubgdev.cubga.tileentity.render.TileEntityCrystalRenderer;
 import com.cubgdev.cubga.tileentity.render.TileEntityRendererPlayerPlush;
 import com.cubgdev.cubga.tileentity.render.TileEntityCrystalContainerRenderer;
+import com.cubgdev.cubga.utils.Access;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -43,6 +46,9 @@ public class ClientProxy extends CommonProxy
 
     public void init(FMLInitializationEvent event) {
         super.init(event);
+        //RenderCrystal
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCrystal.class, new TileEntityCrystalRenderer());
+
         //RenderPlayerPlush
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPlayerPlush.class, new TileEntityRendererPlayerPlush());
 

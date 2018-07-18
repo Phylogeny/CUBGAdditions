@@ -35,7 +35,8 @@ public class BlockPlayerPlush extends PlushBase implements ITileEntityProvider
 {
 
 	public static final String[] SPECIAL_USERS =
-	{ PlushUtil.getPlayerName("68c08594e7cd43fbbdf9240147ee26cf"), // JacksonPlayzYT
+	{
+			PlushUtil.getPlayerName("68c08594e7cd43fbbdf9240147ee26cf"), // JacksonPlayzYT
 			PlushUtil.getPlayerName("b61e1172e4f0450a9f9858ec91bc41dc"), // MinecraftDoodler
 			PlushUtil.getPlayerName("62d17f0b524841f4befc2daa457fb266"), // MrCrayfish
 			PlushUtil.getPlayerName("000399b665d14979b3c0af309112625f"), // HauntedCorpse
