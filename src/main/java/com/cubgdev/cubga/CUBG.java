@@ -7,6 +7,7 @@ import com.cubgdev.cubga.init.RegistrationHandler;
 import com.cubgdev.cubga.network.PacketHandler;
 import com.cubgdev.cubga.proxy.CommonProxy;
 import com.cubgdev.cubga.tileentity.TileEntityBrittleBrick;
+import com.cubgdev.cubga.tileentity.TileEntityCrystal;
 import com.cubgdev.cubga.tileentity.TileEntityPlayerPlush;
 import com.cubgdev.cubga.tileentity.TileEntityCrystalContainer;
 import net.minecraft.creativetab.CreativeTabs;
@@ -47,9 +48,10 @@ public class CUBG
     public void init(FMLInitializationEvent event) {
         proxy.init(event);
         GameRegistry.registerTileEntity(TileEntityBrittleBrick.class, Reference.MOD_ID + ":brittle_brick");
-        GameRegistry.registerTileEntity(TileEntityPlayerPlush.class, Reference.MOD_ID + ":player_plush");
+        // GameRegistry.registerTileEntity(TileEntityPlayerPlush.class, Reference.MOD_ID + ":player_plush");
 
         GameRegistry.registerTileEntity(TileEntityCrystalContainer.class, Reference.MOD_ID + ":crystal_container");
+        GameRegistry.registerTileEntity(TileEntityCrystal.class, Reference.MOD_ID + ":crystal");
     }
 
     @Mod.EventHandler
