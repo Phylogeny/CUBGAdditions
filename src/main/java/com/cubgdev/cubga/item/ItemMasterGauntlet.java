@@ -20,12 +20,10 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemMasterGauntlet extends Item
+public class ItemMasterGauntlet extends ItemBase
 {
     public ItemMasterGauntlet() {
-        this.setUnlocalizedName("master_gauntlet");
-        this.setRegistryName("master_gauntlet");
-        this.setCreativeTab(CUBG.TAB);
+        super("master_gauntlet");
     }
 
     @Override
@@ -41,16 +39,6 @@ public class ItemMasterGauntlet extends Item
     public boolean hasEffect(ItemStack par1ItemStack)
     {
         return true;
-    }
-
-    @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-        if (GuiScreen.isShiftKeyDown()) {
-            String info = I18n.format(this.getUnlocalizedName() + ".info");
-            tooltip.addAll(Minecraft.getMinecraft().fontRenderer.listFormattedStringToWidth(info, 150));
-        } else {
-            tooltip.add(TextFormatting.YELLOW + I18n.format("item.show_info", "SHIFT"));
-        }
     }
 
     @Override

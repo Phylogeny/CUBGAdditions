@@ -34,7 +34,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class ItemPlayerPlush extends ItemBlock {
+public class ItemPlayerPlush extends ItemBlockBase {
 
 	public ItemPlayerPlush() {
 		super(ModBlocks.PLAYER_PLUSH);
@@ -112,10 +112,10 @@ public class ItemPlayerPlush extends ItemBlock {
 			}
 
 			if (stack.getTagCompound().hasKey("Owner", 10)) {
-				NBTTagCompound nbttagcompound = stack.getTagCompound().getCompoundTag("Owner");
+				NBTTagCompound nbt = stack.getTagCompound().getCompoundTag("Owner");
 
-				if (nbttagcompound.hasKey("Name", 8)) {
-					return I18n.format(this.getUnlocalizedNameInefficiently(stack) + ".nbt.name", nbttagcompound.getString("Name"));
+				if (nbt.hasKey("Name", 8)) {
+					return I18n.format(this.getUnlocalizedNameInefficiently(stack) + ".nbt.name", nbt.getString("Name"));
 				}
 			}
 		}
@@ -134,16 +134,6 @@ public class ItemPlayerPlush extends ItemBlock {
 			return true;
 		} else {
 			return false;
-		}
-	}
-
-	@Override
-	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-		if (GuiScreen.isShiftKeyDown()) {
-			String info = I18n.format(this.getUnlocalizedName() + ".info");
-			tooltip.addAll(Minecraft.getMinecraft().fontRenderer.listFormattedStringToWidth(info, 150));
-		} else {
-			tooltip.add(TextFormatting.YELLOW + I18n.format("item.show_info", "SHIFT"));
 		}
 	}
 }

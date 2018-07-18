@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import com.cubgdev.cubga.tileentity.TileEntityPlayerPlush;
+import com.cubgdev.cubga.utils.Access;
 import com.cubgdev.cubga.utils.TextureUtils;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
@@ -21,6 +22,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTUtil;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.relauncher.Side;
 
 public class ItemRenderPlayerPlush extends ItemRenderer {
 
