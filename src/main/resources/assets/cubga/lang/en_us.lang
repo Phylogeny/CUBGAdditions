@@ -10,8 +10,9 @@ item.bandaid.name=§lBand-Aid
 
 #Blocks
 tile.brittle_brick.name=Brittle Bricks
-
 tile.crystal_container.name=Ender Crystal Container
+item.beam_rod.name=Beam Rod
+item.beam_rod.position=Crystal Position: %s
 
 #Easter Eggs
 item.coffee_cup.name=§6§lCoffee Cup
@@ -26,11 +27,11 @@ tile.player_plush.nbt.name=%s Plush
 
 #Block Descriptions
 tile.brittle_brick.info=Very fragile bricks, easily breakable by hand and gun.
-
 tile.crystal_container.info=Contains a highly explosive crystal from another dimension.
 
 #Item Descriptions
 item.brick.info=A brick that came off of a Brittle Brick. Craft a brittle brick with four bricks and hold right click to charge and throw the brick.
+item.beam_rod.info=A magical wand that allows full control over crystal containers. Simply click the container you want to add beams to and then press any other block to make a beam go to that position.
 tile.player_plush.info=A cute little plush of a Minecraft player.
 
 #Health Item Descriptions
