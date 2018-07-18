@@ -7,8 +7,6 @@ import javax.annotation.Nullable;
 import com.cubgdev.cubga.tileentity.TileEntityCrystalContainer;
 import com.cubgdev.cubga.utils.Lib;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -31,16 +29,9 @@ public class ItemBeamRod extends ItemBase
 	}
 
 	@Override
-	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag flagIn)
+	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag flag)
 	{
-		if (GuiScreen.isShiftKeyDown())
-		{
-			String info = I18n.format(this.getUnlocalizedName() + ".info");
-			tooltip.addAll(Minecraft.getMinecraft().fontRenderer.listFormattedStringToWidth(info, 150));
-		} else
-		{
-			tooltip.add(TextFormatting.YELLOW + I18n.format("item.show_info", "SHIFT"));
-		}
+		super.addInformation(stack, world, tooltip, flag);
 
 		BlockPos crystalPosition = ItemBeamRod.getCrystalPosition(stack);
 		tooltip.add("");
