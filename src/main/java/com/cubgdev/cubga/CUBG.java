@@ -48,7 +48,7 @@ public class CUBG
     public void init(FMLInitializationEvent event) {
         proxy.init(event);
         GameRegistry.registerTileEntity(TileEntityBrittleBrick.class, Reference.MOD_ID + ":brittle_brick");
-        GameRegistry.registerTileEntity(TileEntityPlayerPlush.class, Reference.MOD_ID + ":player_plush");
+        // GameRegistry.registerTileEntity(TileEntityPlayerPlush.class, Reference.MOD_ID + ":player_plush");
 
         GameRegistry.registerTileEntity(TileEntityCrystalContainer.class, Reference.MOD_ID + ":crystal_container");
         GameRegistry.registerTileEntity(TileEntityCrystal.class, Reference.MOD_ID + ":crystal");
