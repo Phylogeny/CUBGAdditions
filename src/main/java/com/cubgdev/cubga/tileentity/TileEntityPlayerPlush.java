@@ -20,6 +20,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.StringUtils;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -34,9 +35,11 @@ public class TileEntityPlayerPlush extends TileEntity {
 	public TileEntityPlayerPlush() {
 		this.rotation = 0;
 		this.skinType = "default";
-
-		TileEntityPlayerPlush.setProfileCache(Access.getPlayerProfileCache());
-		TileEntityPlayerPlush.setSessionService(Access.getMinecraftSessionService());
+		
+		if(FMLCommonHandler.instance().getSide() == Side.CLIENT) {
+			TileEntityPlayerPlush.setProfileCache(Access.getPlayerProfileCache());
+			TileEntityPlayerPlush.setSessionService(Access.getMinecraftSessionService());
+		}
 	}
 
 		public static void setProfileCache(PlayerProfileCache profileCacheIn) {
