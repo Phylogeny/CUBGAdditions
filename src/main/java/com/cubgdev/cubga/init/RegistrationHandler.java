@@ -14,7 +14,6 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
-import vazkii.arl.recipe.ModRecipe;
 
 import java.util.LinkedList;
 import java.util.List;

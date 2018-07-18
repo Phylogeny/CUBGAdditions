@@ -12,7 +12,6 @@ import com.cubgdev.cubga.tileentity.TileEntityCrystalContainer;
 import com.cubgdev.cubga.tileentity.render.TileEntityCrystalRenderer;
 import com.cubgdev.cubga.tileentity.render.TileEntityRendererPlayerPlush;
 import com.cubgdev.cubga.tileentity.render.TileEntityCrystalContainerRenderer;
-import com.cubgdev.cubga.utils.Access;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -50,7 +49,7 @@ public class ClientProxy extends CommonProxy
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCrystal.class, new TileEntityCrystalRenderer());
 
         //RenderPlayerPlush
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPlayerPlush.class, new TileEntityRendererPlayerPlush());
+        // ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPlayerPlush.class, new TileEntityRendererPlayerPlush());
 
         // RenderThrowableBrick
         RenderManager renderManager = Minecraft.getMinecraft().getRenderManager();

@@ -2,7 +2,6 @@ package com.cubgdev.cubga.tileentity.render;
 
 import com.cubgdev.cubga.Reference;
 import com.cubgdev.cubga.tileentity.TileEntityCrystal;
-import com.cubgdev.cubga.tileentity.TileEntityCrystalContainer;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelEnderCrystal;
 import net.minecraft.client.renderer.GlStateManager;
