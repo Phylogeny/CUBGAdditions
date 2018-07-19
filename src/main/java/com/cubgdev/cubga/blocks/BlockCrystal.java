@@ -65,7 +65,7 @@ public class BlockCrystal extends Block implements ITileEntityProvider {
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta)
 	{
-		return new TileEntityCrystalContainer(true, 3.0f);
+		return new TileEntityCrystalContainer();
 	}
 }
 
