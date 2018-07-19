@@ -163,9 +163,12 @@ public class RenderEvents
 	{
 		if(event.getItemStack().getItem() == Item.getItemFromBlock(ModBlocks.LOOT_CHEST))
 		{
+			GlStateManager.pushMatrix();
+			boolean right = Minecraft.getMinecraft().gameSettings.mainHand == EnumHandSide.RIGHT ? event.getHand() == EnumHand.MAIN_HAND : event.getHand() == EnumHand.OFF_HAND;
 			GlStateManager.translate(0, -event.getEquipProgress(), 0);
-			GlStateManager.translate(0.56F, -0.52F, -0.72F);
-			renderLootChest(event.getItemStack(), ItemCameraTransforms.TransformType.FIRST_PERSON_RIGHT_HAND, event.getPartialTicks(), event.getHand() == EnumHand.MAIN_HAND);
+			GlStateManager.translate(right ? 0.56F : -0.56F, -0.52F, -0.72F);
+			renderLootChest(event.getItemStack(), right ? ItemCameraTransforms.TransformType.FIRST_PERSON_RIGHT_HAND : ItemCameraTransforms.TransformType.FIRST_PERSON_LEFT_HAND, event.getPartialTicks(), !right);
+			GlStateManager.popMatrix();
 		}
 	}
 
