@@ -147,19 +147,19 @@ public class RenderEvents
 	}
 
 	@SubscribeEvent
-	public void onRenderItemGui(RenderItemEvent.Entity.Pre event)
+	public void onRenderItemEntity(RenderItemEvent.Entity.Pre event)
 	{
 		renderLootChest(event.getItem(), event.getTransformType(), event.getPartialTicks(), false);
 	}
 
 	@SubscribeEvent
-	public void onRenderItemGui(RenderItemEvent.Held.Pre event)
+	public void onRenderItemHeld(RenderItemEvent.Held.Pre event)
 	{
 		renderLootChest(event.getItem(), event.getTransformType(), event.getPartialTicks(), event.getHandSide() == EnumHandSide.LEFT);
 	}
 
 	@SubscribeEvent
-	public void onRenderItemGui(RenderSpecificHandEvent event)
+	public void onRenderSpecificHand(RenderSpecificHandEvent event)
 	{
 		if(event.getItemStack().getItem() == Item.getItemFromBlock(ModBlocks.LOOT_CHEST))
 		{
