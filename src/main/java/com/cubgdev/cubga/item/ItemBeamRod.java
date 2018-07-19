@@ -74,9 +74,9 @@ public class ItemBeamRod extends ItemBase
 			if (ItemBeamRod.getCrystalPosition(heldItem) != null)
 			{
 				BlockPos crystalPosition = ItemBeamRod.getCrystalPosition(heldItem);
-				TileEntityCrystalContainer te = TileEntityCrystalContainer.CRYSTALS.get(crystalPosition.toString());
-				if (te != null)
+				if (world.getTileEntity(crystalPosition) instanceof TileEntityCrystalContainer)
 				{
+					TileEntityCrystalContainer te = (TileEntityCrystalContainer) world.getTileEntity(crystalPosition);
 					return te.addBeamPosition(pos) ? EnumActionResult.SUCCESS : te.removeBeamPosition(pos) ? EnumActionResult.SUCCESS : EnumActionResult.FAIL;
 				}
 			}

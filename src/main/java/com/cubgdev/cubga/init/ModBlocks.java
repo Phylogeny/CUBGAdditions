@@ -4,6 +4,7 @@ import com.cubgdev.cubga.blocks.BlockBrittleBrick;
 import com.cubgdev.cubga.blocks.BlockCrystal;
 import com.cubgdev.cubga.blocks.BlockCrystalContainer;
 import com.cubgdev.cubga.blocks.BlockPlayerPlush;
+import com.cubgdev.cubga.item.ItemBlockBase;
 import com.cubgdev.cubga.item.ItemBrittleBrick;
 
 import net.minecraft.block.Block;
@@ -38,7 +39,7 @@ public class ModBlocks
 	public static void registerBlock(Block block)
 	{
 		RegistrationHandler.Blocks.add(block);
-		ItemBlock itemBlock = (ItemBlock) new ItemBlock(block).setRegistryName(block.getRegistryName());
+		ItemBlock itemBlock = (ItemBlock) new ItemBlockBase(block).setRegistryName(block.getRegistryName());
 		RegistrationHandler.Items.add(itemBlock);
 	}
 

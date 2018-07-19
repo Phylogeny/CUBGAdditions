@@ -4,8 +4,6 @@ import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.cubgdev.cubga.Reference;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -95,7 +93,7 @@ public class TextureUtils {
 	 *            The path to the texture
 	 */
 	public static void bindTexture(String path) {
-		String locationString = Reference.MOD_ID + ":" + path;
+		String locationString = "minecraft:" + path;
 		if (textures.containsKey(locationString)) {
 			mc.getTextureManager().bindTexture(textures.get(locationString));
 		} else {

@@ -105,20 +105,4 @@ public class BlockCrystalContainer extends Block implements ITileEntityProvider
 	{
 		return new TileEntityCrystalContainer();
 	}
-
-	@Override
-	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
-	{
-		if (world.getTileEntity(pos) instanceof TileEntityCrystalContainer)
-		{
-			TileEntityCrystalContainer.CRYSTALS.put(pos.toString(), (TileEntityCrystalContainer) world.getTileEntity(pos));
-		}
-	}
-
-	@Override
-	public void breakBlock(World world, BlockPos pos, IBlockState state)
-	{
-		super.breakBlock(world, pos, state);
-		TileEntityCrystalContainer.removeCrystal(pos);
-	}
 }

@@ -17,15 +17,13 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 
 /**
  * Author: CoffeeCatRailway
  */
 public class TileEntityCrystalContainer extends TileEntity
 {
-	public static final Map<String, TileEntityCrystalContainer> CRYSTALS = Maps.<String, TileEntityCrystalContainer>newHashMap();
-	public static final List<BlockPos> REMOVED = Lists.<BlockPos>newArrayList();
-
 	private float lastInnerRotation;
 	private float innerRotation;
 	private float speed;
@@ -57,9 +55,11 @@ public class TileEntityCrystalContainer extends TileEntity
 		NBTTagList positions = new NBTTagList();
 		for (int i = 0; i < this.beamPositions.size(); i++)
 		{
-			positions.appendTag(Lib.writeBlockPos(this.beamPositions.get(i)));
+			NBTTagCompound beam = new NBTTagCompound();
+			beam.setTag("position", Lib.writeBlockPos(this.beamPositions.get(i)));
+			positions.appendTag(beam);
 		}
-		nbt.setTag("beamPositions", positions);
+		nbt.setTag("beams", positions);
 		return nbt;
 	}
 
@@ -70,18 +70,14 @@ public class TileEntityCrystalContainer extends TileEntity
 		this.speed = nbt.getFloat("speed");
 		this.scale = nbt.getFloat("scale");
 		this.beamPositions = new ArrayList<BlockPos>();
-		NBTTagList positions = nbt.getTagList("beamPositions", 0);
+		NBTTagList positions = nbt.getTagList("beams", 0);
 		for (NBTBase tag : positions)
 		{
 			if (tag instanceof NBTTagCompound)
 			{
-				this.beamPositions.add(Lib.readBlockPos((NBTTagCompound) tag));
+				NBTTagCompound beam = (NBTTagCompound) tag;
+				this.beamPositions.add(Lib.readBlockPos(beam.getCompoundTag("position")));
 			}
-		}
-
-		if (!CRYSTALS.containsKey(this.getPos().toString()))
-		{
-			CRYSTALS.put(this.pos.toString(), this);
 		}
 	}
 
@@ -151,11 +147,6 @@ public class TileEntityCrystalContainer extends TileEntity
 
 	public BlockPos[] getBeamPositions()
 	{
-		return beamPositions.toArray(new BlockPos[0]);
-	}
-
-	public static void removeCrystal(BlockPos pos)
-	{
-		REMOVED.add(pos);
+		return this.beamPositions.toArray(new BlockPos[0]);
 	}
 }
