@@ -1,29 +1,23 @@
 package com.cubgdev.cubga.item;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
-import com.cubgdev.cubga.CUBG;
-
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.item.EnumAction;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.EnumHelper;
 
-public class ItemBase extends Item {
+import javax.annotation.Nullable;
+import java.util.List;
 
-	public ItemBase(String id) {
-		this.setUnlocalizedName(id);
-		this.setRegistryName(id);
-		this.setCreativeTab(CUBG.TAB);
-	}
+public class ItemBlockBase extends ItemBlock
+{
+    public ItemBlockBase(Block block) {
+        super(block);
+    }
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {

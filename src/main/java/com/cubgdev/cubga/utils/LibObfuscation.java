@@ -1,4 +1,4 @@
-package com.cubgdev.cubga.util;
+package com.cubgdev.cubga.utils;
 
 public class LibObfuscation
 {

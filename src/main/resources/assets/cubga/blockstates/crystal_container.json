@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "facing=north": { "model": "cubga:crystal_container", "x": 270,  "y": 180 },
+    "facing=east":  { "model": "cubga:crystal_container", "x": 270,  "y": 270 },
+    "facing=south": { "model": "cubga:crystal_container", "x": 270,  "y": 0   },
+    "facing=west":  { "model": "cubga:crystal_container", "x": 270,  "y": 90  },
+    "facing=up":    { "model": "cubga:crystal_container", "x": 0,    "y": 0   },
+    "facing=down":  { "model": "cubga:crystal_container", "x": 180,  "y": 0   }
+  }
+}

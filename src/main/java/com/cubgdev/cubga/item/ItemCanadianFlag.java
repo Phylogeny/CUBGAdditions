@@ -16,12 +16,10 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemCanadianFlag extends Item
+public class ItemCanadianFlag extends ItemBase
 {
     public ItemCanadianFlag() {
-        this.setUnlocalizedName("canadian_flag");
-        this.setRegistryName("canadian_flag");
-        this.setCreativeTab(CUBG.TAB);
+        super("canadian_flag");
     }
 
     @Override
@@ -42,15 +40,5 @@ public class ItemCanadianFlag extends Item
     public boolean hasEffect(ItemStack par1ItemStack)
     {
         return false;
-    }
-
-    @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-        if (GuiScreen.isShiftKeyDown()) {
-            String info = I18n.format(this.getUnlocalizedName() + ".info");
-            tooltip.addAll(Minecraft.getMinecraft().fontRenderer.listFormattedStringToWidth(info, 150));
-        } else {
-            tooltip.add(TextFormatting.YELLOW + I18n.format("item.show_info", "SHIFT"));
-        }
     }
 }

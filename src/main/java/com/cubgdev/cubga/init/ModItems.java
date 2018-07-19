@@ -1,10 +1,18 @@
 package com.cubgdev.cubga.init;
 
-import com.cubgdev.cubga.item.*;
+import com.cubgdev.cubga.item.ItemBeamRod;
+import com.cubgdev.cubga.item.ItemBrick;
+import com.cubgdev.cubga.item.ItemCanadianFlag;
+import com.cubgdev.cubga.item.ItemCoffee;
+import com.cubgdev.cubga.item.ItemHeal;
+import com.cubgdev.cubga.item.ItemMasterGauntlet;
+import com.cubgdev.cubga.item.ItemModderNightmare;
+
 import net.minecraft.item.Item;
 
-public class ModItems {
-	
+public class ModItems
+{
+
 	public static final Item MEDKIT;
 	public static final Item FIRST_AID;
 	public static final Item BANDAGE;
@@ -18,7 +26,10 @@ public class ModItems {
 
 	public static final Item BRICK;
 
-	static {
+	public static final Item BEAM_ROD;
+
+	static
+	{
 		MEDKIT = new ItemHeal("medkit", 64, 20);
 		FIRST_AID = new ItemHeal("first_aid_kit", 32, 10);
 		BANDAGE = new ItemHeal("bandage", 24, 4);
@@ -31,9 +42,12 @@ public class ModItems {
 		MASTER_GAUNTLET = new ItemMasterGauntlet();
 
 		BRICK = new ItemBrick("brick");
+
+		BEAM_ROD = new ItemBeamRod();
 	}
 
-	public static void register() {
+	public static void register()
+	{
 		register(MEDKIT);
 		register(FIRST_AID);
 		register(BANDAGE);
@@ -46,9 +60,12 @@ public class ModItems {
 		register(MASTER_GAUNTLET);
 
 		register(BRICK);
+		
+		register(BEAM_ROD);
 	}
 
-	private static void register(Item item) {
+	private static void register(Item item)
+	{
 		RegistrationHandler.Items.add(item);
 	}
 }

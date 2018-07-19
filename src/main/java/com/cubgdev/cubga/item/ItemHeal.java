@@ -43,7 +43,7 @@ public class ItemHeal extends Item {
 	@Override
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 		if (GuiScreen.isShiftKeyDown()) {
-			String info = I18n.format(this.getUnlocalizedName() + ".info");
+			String info = I18n.format(this.getUnlocalizedName() + ".info", "%");
 			tooltip.addAll(Minecraft.getMinecraft().fontRenderer.listFormattedStringToWidth(info, 150));
 		} else {
 			tooltip.add(TextFormatting.YELLOW + I18n.format("item.show_info", "SHIFT"));
