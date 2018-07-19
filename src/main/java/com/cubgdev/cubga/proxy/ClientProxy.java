@@ -51,6 +51,7 @@ public class ClientProxy extends CommonProxy
 	{
 		super.init(event);
 		// RenderPlayerPlush
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCrystalContainer.class, new TileEntityCrystalContainerRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPlayerPlush.class, new TileEntityRendererPlayerPlush());
 
 		// RenderThrowableBrick

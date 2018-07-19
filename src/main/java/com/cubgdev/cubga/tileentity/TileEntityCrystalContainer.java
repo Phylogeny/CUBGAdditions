@@ -13,6 +13,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 
 /**
@@ -115,7 +116,8 @@ public class TileEntityCrystalContainer extends TileEntity
 		if (index == -1)
 		{
 			return false;
-		} else
+		}
+		else
 		{
 			this.beamPositions.remove(index);
 			return true;
@@ -135,11 +137,17 @@ public class TileEntityCrystalContainer extends TileEntity
 		return this.writeToNBT(new NBTTagCompound());
 	}
 
+	@Override
+	public AxisAlignedBB getRenderBoundingBox()
+	{
+		return INFINITE_EXTENT_AABB;
+	}
+
 	public boolean renderBase()
 	{
 		return renderBase;
 	}
-	
+
 	public float getInnerRotation()
 	{
 		return this.lastInnerRotation + (this.innerRotation - this.lastInnerRotation) * Minecraft.getMinecraft().getRenderPartialTicks();

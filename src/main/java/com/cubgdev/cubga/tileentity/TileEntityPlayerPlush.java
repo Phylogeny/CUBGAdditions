@@ -60,7 +60,7 @@ public class TileEntityPlayerPlush extends TileEntity {
 			this.playerProfile = NBTUtil.readGameProfileFromNBT(nbt.getCompoundTag("Owner"));
 		} else if (nbt.hasKey("ExtraType", 8)) {
 			String s = nbt.getString("ExtraType");
-
+			
 			if (!StringUtils.isNullOrEmpty(s)) {
 				this.playerProfile = new GameProfile((UUID) null, s);
 				this.updatePlayerProfile();
