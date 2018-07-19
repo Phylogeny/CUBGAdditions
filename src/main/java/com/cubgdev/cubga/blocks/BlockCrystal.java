@@ -4,6 +4,7 @@ import com.cubgdev.cubga.CUBG;
 import com.cubgdev.cubga.tileentity.TileEntityCrystal;
 import com.cubgdev.cubga.tileentity.TileEntityCrystalContainer;
 
+import com.cubgdev.cubga.utils.aabb.Bounds;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -32,6 +33,8 @@ import java.util.List;
 
 public class BlockCrystal extends Block implements ITileEntityProvider {
 
+    // MrCrayfish! - CoffeeCat
+    private static final Bounds bounds = new Bounds(5, 5, 5, 11, 11, 11);
 
     public BlockCrystal(String name) {
         super(Material.IRON);
@@ -71,5 +74,10 @@ public class BlockCrystal extends Block implements ITileEntityProvider {
 	{
 		return new TileEntityCrystalContainer();
 	}
+
+    @Override
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos) {
+        return bounds.toAABB();
+    }
 }
 
