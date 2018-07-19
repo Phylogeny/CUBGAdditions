@@ -2,6 +2,7 @@ package com.cubgdev.cubga.client;
 
 import java.util.Map;
 
+import com.cubgdev.cubga.Reference;
 import com.cubgdev.cubga.tileentity.TileEntityCrystalContainer;
 import com.cubgdev.cubga.utils.TextureUtils;
 import com.google.common.collect.Maps;
@@ -22,7 +23,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class RenderEvents
 {
 
-	private static final ResourceLocation ENDER_CRYSTAL_TEXTURES = new ResourceLocation("textures/entity/endercrystal/endercrystal.png");
+	private static final ResourceLocation ENDER_CRYSTAL_TEXTURES = new ResourceLocation(Reference.MOD_ID,"textures/models/crystal.png");
 	private static final ModelBase ENDER_CRYSTAL_MODEL = new ModelEnderCrystal(0.0F, false);
 	private static final Map<BlockPos, TileEntity> NEARBY_TILE_ENTITIES = Maps.<BlockPos, TileEntity>newHashMap();
 
@@ -39,7 +40,7 @@ public class RenderEvents
 
 		GlStateManager.translate(-posX, -posY, -posZ);
 
-		TextureUtils.bindTexture("textures/entity/endercrystal/endercrystal.png");
+		TextureUtils.bindTexture(Reference.MOD_ID,"textures/models/crystal.png");
 
 		this.renderCrystalContainers(player, world, partialTicks);
 	}

@@ -1,5 +1,6 @@
 package com.cubgdev.cubga.tileentity.render;
 
+import com.cubgdev.cubga.Reference;
 import com.cubgdev.cubga.tileentity.TileEntityCrystalContainer;
 
 import net.minecraft.client.model.ModelBase;
@@ -15,7 +16,7 @@ import net.minecraft.util.math.MathHelper;
 @Deprecated
 public class TileEntityCrystalContainerRenderer extends TileEntitySpecialRenderer<TileEntityCrystalContainer>
 {
-	private static final ResourceLocation ENDER_CRYSTAL_TEXTURES = new ResourceLocation("textures/entity/endercrystal/endercrystal.png");
+	private static final ResourceLocation ENDER_CRYSTAL_TEXTURES = new ResourceLocation(Reference.MOD_ID,"textures/models/crystal.png");
 	private static final ModelBase MODEL = new ModelEnderCrystal(0.0F, false);
 
 	@Override
