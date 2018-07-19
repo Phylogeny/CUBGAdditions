@@ -2,10 +2,13 @@ package com.cubgdev.cubga.tileentity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Nullable;
 
 import com.cubgdev.cubga.utils.Lib;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.NBTBase;
@@ -14,13 +17,13 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 
 /**
  * Author: CoffeeCatRailway
  */
 public class TileEntityCrystalContainer extends TileEntity
 {
-	private boolean renderBase;
 	private float lastInnerRotation;
 	private float innerRotation;
 	private float speed;
@@ -29,16 +32,10 @@ public class TileEntityCrystalContainer extends TileEntity
 
 	public TileEntityCrystalContainer()
 	{
-		this(false, 1.0f);
-	}
-
-	public TileEntityCrystalContainer(boolean renderBase, float scale)
-	{
-		this.renderBase = renderBase;
 		this.lastInnerRotation = 0.0f;
 		this.innerRotation = 0.0f;
 		this.speed = 1.0f;
-		this.scale = scale;
+		this.scale = 1.0f;
 		this.beamPositions = new ArrayList<BlockPos>();
 	}
 
@@ -52,7 +49,6 @@ public class TileEntityCrystalContainer extends TileEntity
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt)
 	{
 		super.writeToNBT(nbt);
-		nbt.getBoolean("renderBase");
 		nbt.setFloat("speed", this.speed);
 		nbt.setFloat("scale", this.scale);
 
@@ -71,7 +67,6 @@ public class TileEntityCrystalContainer extends TileEntity
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
-		this.renderBase = nbt.getBoolean("renderBase");
 		this.speed = nbt.getFloat("speed");
 		this.scale = nbt.getFloat("scale");
 		this.beamPositions = new ArrayList<BlockPos>();
@@ -135,11 +130,6 @@ public class TileEntityCrystalContainer extends TileEntity
 		return this.writeToNBT(new NBTTagCompound());
 	}
 
-	public boolean renderBase()
-	{
-		return renderBase;
-	}
-	
 	public float getInnerRotation()
 	{
 		return this.lastInnerRotation + (this.innerRotation - this.lastInnerRotation) * Minecraft.getMinecraft().getRenderPartialTicks();
