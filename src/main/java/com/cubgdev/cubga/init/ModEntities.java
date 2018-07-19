@@ -11,14 +11,10 @@ public class ModEntities {
 
     // CoffeeCatRailway - Forgot to change entity id!
     public static void init() {
-        registerEntity("locomotive", EntityThrowableBrick.class, 0, 80);
+        registerEntity("brick", EntityThrowableBrick.class, 0, 80);
     }
 
     private static void registerEntity(String name, Class<? extends Entity> entity, int id, int trackingRange) {
         EntityRegistry.registerModEntity(new ResourceLocation(Reference.MOD_ID + ":" + name), entity, name, id, CUBG.instance, trackingRange, 1, true);
-    }
-
-    private static void registerVehicle(String name, int  id, Class<? extends Entity> clazz) {
-        EntityRegistry.registerModEntity(new ResourceLocation(Reference.MOD_ID + ":" + name), clazz, name, id, CUBG.instance, 64, 1, true);
     }
 }

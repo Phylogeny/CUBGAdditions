@@ -10,7 +10,8 @@ item.bandaid.name=§lBand-Aid
 
 #Blocks
 tile.brittle_brick.name=Brittle Bricks
-tile.crystal_container.name=Ender Crystal Container
+tile.crystal_container.name=Crystal Container
+tile.crystal.name=Crystal
 item.beam_rod.name=Beam Rod
 item.beam_rod.position=Crystal Position: %s
 
@@ -28,6 +29,7 @@ tile.player_plush.nbt.name=%s Plush
 #Block Descriptions
 tile.brittle_brick.info=Very fragile bricks, easily breakable by hand and gun.
 tile.crystal_container.info=Contains a highly explosive crystal from another dimension.
+tile.crystal.info=A highly powerful (and explosive) crystal taken from another dimension.
 
 #Item Descriptions
 item.brick.info=A brick that came off of a Brittle Brick. Craft a brittle brick with four bricks and hold right click to charge and throw the brick.

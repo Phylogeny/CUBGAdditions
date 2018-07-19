@@ -29,25 +29,10 @@ public class TileEntityPlayerPlush extends TileEntity {
 	private int rotation;
 	private String skinType;
 	private GameProfile playerProfile;
-	private static PlayerProfileCache profileCache;
-	private static MinecraftSessionService sessionService;
 
 	public TileEntityPlayerPlush() {
 		this.rotation = 0;
 		this.skinType = "default";
-		
-		if(FMLCommonHandler.instance().getSide() == Side.CLIENT) {
-			TileEntityPlayerPlush.setProfileCache(Access.getPlayerProfileCache());
-			TileEntityPlayerPlush.setSessionService(Access.getMinecraftSessionService());
-		}
-	}
-
-		public static void setProfileCache(PlayerProfileCache profileCacheIn) {
-		profileCache = profileCacheIn;
-	}
-
-	public static void setSessionService(MinecraftSessionService sessionServiceIn) {
-		sessionService = sessionServiceIn;
 	}
 
 	@Override
@@ -115,8 +100,8 @@ public class TileEntityPlayerPlush extends TileEntity {
 		if (input != null && !StringUtils.isNullOrEmpty(input.getName())) {
 			if (input.isComplete() && input.getProperties().containsKey("textures")) {
 				return input;
-			} else if (profileCache != null && sessionService != null) {
-				GameProfile gameprofile = profileCache.getGameProfileForUsername(input.getName());
+			} else if (Access.getPlayerProfileCache() != null && Access.getMinecraftSessionService() != null) {
+				GameProfile gameprofile = Access.getPlayerProfileCache().getGameProfileForUsername(input.getName());
 
 				if (gameprofile == null) {
 					return input;
@@ -124,7 +109,7 @@ public class TileEntityPlayerPlush extends TileEntity {
 					Property property = (Property) Iterables.getFirst(gameprofile.getProperties().get("textures"), (Object) null);
 
 					if (property == null) {
-						gameprofile = sessionService.fillProfileProperties(gameprofile, true);
+						gameprofile = Access.getMinecraftSessionService().fillProfileProperties(gameprofile, true);
 					}
 
 					return gameprofile;
@@ -135,6 +120,10 @@ public class TileEntityPlayerPlush extends TileEntity {
 		} else {
 			return input;
 		}
+	}
+	
+	public static void loadPlayerTexture(GameProfile profile) {
+		
 	}
 
 	@SideOnly(Side.CLIENT)
