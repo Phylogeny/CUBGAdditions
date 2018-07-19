@@ -2,26 +2,43 @@ package com.cubgdev.cubga.client;
 
 import java.util.Map;
 
+import com.cubgdev.cubga.blocks.BlockLootChest;
+import com.cubgdev.cubga.init.ModBlocks;
 import com.cubgdev.cubga.tileentity.TileEntityCrystalContainer;
+import com.cubgdev.cubga.tileentity.TileEntityLootChest;
 import com.cubgdev.cubga.utils.TextureUtils;
 import com.google.common.collect.Maps;
 
+import com.mrcrayfish.obfuscate.client.event.RenderItemEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelChest;
 import net.minecraft.client.model.ModelEnderCrystal;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.block.model.IBakedModel;
+import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
+import net.minecraft.client.renderer.block.model.ItemTransformVec3f;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.entity.RenderDragon;
+import net.minecraft.client.renderer.texture.TextureUtil;
+import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.EnumHandSide;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.client.event.ModelBakeEvent;
+import net.minecraftforge.client.event.RenderSpecificHandEvent;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class RenderEvents
 {
-
 	private static final ResourceLocation ENDER_CRYSTAL_TEXTURES = new ResourceLocation("textures/entity/endercrystal/endercrystal.png");
 	private static final ModelBase ENDER_CRYSTAL_MODEL = new ModelEnderCrystal(0.0f, false);
 	private static final ModelBase ENDER_CRYSTAL_BASE_MODEL = new ModelEnderCrystal(0.0f, true);
@@ -113,5 +130,57 @@ public class RenderEvents
 			}
 		}
 		NEARBY_TILE_ENTITIES.clear();
+	}
+
+	private final TileEntityLootChest LOOT_CHEST_ENTITY = new TileEntityLootChest();
+
+	@SubscribeEvent
+	public void onRenderItemGui(RenderItemEvent.Gui.Pre event)
+	{
+		ItemStack stack = event.getItem();
+		if(stack.getItem() == Item.getItemFromBlock(ModBlocks.LOOT_CHEST))
+		{
+			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+			GlStateManager.enableRescaleNormal();
+			renderLootChest(stack, event.getTransformType(), event.getPartialTicks(), false);
+		}
+	}
+
+	@SubscribeEvent
+	public void onRenderItemGui(RenderItemEvent.Entity.Pre event)
+	{
+		renderLootChest(event.getItem(), event.getTransformType(), event.getPartialTicks(), false);
+	}
+
+	@SubscribeEvent
+	public void onRenderItemGui(RenderItemEvent.Held.Pre event)
+	{
+		renderLootChest(event.getItem(), event.getTransformType(), event.getPartialTicks(), event.getHandSide() == EnumHandSide.LEFT);
+	}
+
+	@SubscribeEvent
+	public void onRenderItemGui(RenderSpecificHandEvent event)
+	{
+		if(event.getItemStack().getItem() == Item.getItemFromBlock(ModBlocks.LOOT_CHEST))
+		{
+			GlStateManager.translate(0, -event.getEquipProgress(), 0);
+			GlStateManager.translate(0.56F, -0.52F, -0.72F);
+			renderLootChest(event.getItemStack(), ItemCameraTransforms.TransformType.FIRST_PERSON_RIGHT_HAND, event.getPartialTicks(), event.getHand() == EnumHand.MAIN_HAND);
+		}
+	}
+
+	private void renderLootChest(ItemStack stack, ItemCameraTransforms.TransformType transformType, float partialTicks, boolean leftHanded)
+	{
+		if(stack.getItem() == Item.getItemFromBlock(ModBlocks.LOOT_CHEST))
+		{
+			IBakedModel model = Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getItemModel(stack);
+			ItemTransformVec3f itemTransform = model.getItemCameraTransforms().getTransform(transformType);
+			ItemCameraTransforms.applyTransformSide(itemTransform, leftHanded);
+			GlStateManager.translate(-0.5, -0.5, -0.5);
+
+			LOOT_CHEST_ENTITY.setChestTexture(BlockLootChest.getChestTexture(stack));
+			LOOT_CHEST_ENTITY.setColor(BlockLootChest.getChestColor(stack));
+			TileEntityRendererDispatcher.instance.render(LOOT_CHEST_ENTITY, 0.0D, 0.0D, 0.0D, partialTicks);
+		}
 	}
 }

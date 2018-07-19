@@ -6,10 +6,7 @@ import com.cubgdev.cubga.init.ModItems;
 import com.cubgdev.cubga.init.RegistrationHandler;
 import com.cubgdev.cubga.network.PacketHandler;
 import com.cubgdev.cubga.proxy.CommonProxy;
-import com.cubgdev.cubga.tileentity.TileEntityBrittleBrick;
-import com.cubgdev.cubga.tileentity.TileEntityCrystal;
-import com.cubgdev.cubga.tileentity.TileEntityPlayerPlush;
-import com.cubgdev.cubga.tileentity.TileEntityCrystalContainer;
+import com.cubgdev.cubga.tileentity.*;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
@@ -20,6 +17,8 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+
+import java.sql.Ref;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION, acceptedMinecraftVersions = Reference.MOD_COMPATIBILITY, dependencies = Reference.MOD_DEPENDS)
 public class CUBG
@@ -48,10 +47,10 @@ public class CUBG
     public void init(FMLInitializationEvent event) {
         proxy.init(event);
         GameRegistry.registerTileEntity(TileEntityBrittleBrick.class, Reference.MOD_ID + ":brittle_brick");
-        // GameRegistry.registerTileEntity(TileEntityPlayerPlush.class, Reference.MOD_ID + ":player_plush");
-
+        //GameRegistry.registerTileEntity(TileEntityPlayerPlush.class, Reference.MOD_ID + ":player_plush");
         GameRegistry.registerTileEntity(TileEntityCrystalContainer.class, Reference.MOD_ID + ":crystal_container");
         GameRegistry.registerTileEntity(TileEntityCrystal.class, Reference.MOD_ID + ":crystal");
+        GameRegistry.registerTileEntity(TileEntityLootChest.class, Reference.MOD_ID + ":loot_chest");
     }
 
     @Mod.EventHandler
