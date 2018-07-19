@@ -69,20 +69,17 @@ public class ItemBeamRod extends ItemBase
 			return EnumActionResult.SUCCESS;
 		}
 
-		if (!world.isRemote)
+		if (ItemBeamRod.getCrystalPosition(heldItem) != null)
 		{
-			if (ItemBeamRod.getCrystalPosition(heldItem) != null)
+			BlockPos crystalPosition = ItemBeamRod.getCrystalPosition(heldItem);
+			if (world.getTileEntity(crystalPosition) instanceof TileEntityCrystalContainer)
 			{
-				BlockPos crystalPosition = ItemBeamRod.getCrystalPosition(heldItem);
-				if (world.getTileEntity(crystalPosition) instanceof TileEntityCrystalContainer)
-				{
-					TileEntityCrystalContainer te = (TileEntityCrystalContainer) world.getTileEntity(crystalPosition);
-					return te.addBeamPosition(pos) ? EnumActionResult.SUCCESS : te.removeBeamPosition(pos) ? EnumActionResult.SUCCESS : EnumActionResult.FAIL;
-				}
+				TileEntityCrystalContainer te = (TileEntityCrystalContainer) world.getTileEntity(crystalPosition);
+				return te.addBeamPosition(pos) ? EnumActionResult.SUCCESS : te.removeBeamPosition(pos) ? EnumActionResult.SUCCESS : EnumActionResult.FAIL;
 			}
 		}
 
-		return ItemBeamRod.getCrystalPosition(heldItem) != null ? EnumActionResult.SUCCESS : EnumActionResult.FAIL;
+		return EnumActionResult.FAIL;
 	}
 
 	@Override

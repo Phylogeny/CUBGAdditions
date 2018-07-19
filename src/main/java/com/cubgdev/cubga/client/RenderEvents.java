@@ -1,10 +1,10 @@
 package com.cubgdev.cubga.client;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import com.cubgdev.cubga.tileentity.TileEntityCrystalContainer;
 import com.cubgdev.cubga.utils.TextureUtils;
+import com.google.common.collect.Maps;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
@@ -18,13 +18,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import scala.actors.threadpool.Arrays;
 
 public class RenderEvents
 {
 
 	private static final ResourceLocation ENDER_CRYSTAL_TEXTURES = new ResourceLocation("textures/entity/endercrystal/endercrystal.png");
 	private static final ModelBase ENDER_CRYSTAL_MODEL = new ModelEnderCrystal(0.0F, false);
+	private static final Map<BlockPos, TileEntity> NEARBY_TILE_ENTITIES = Maps.<BlockPos, TileEntity>newHashMap();
 
 	@SubscribeEvent
 	public void onRenderWorldEvent(RenderWorldLastEvent event)
@@ -46,21 +46,20 @@ public class RenderEvents
 
 	private void renderCrystalContainers(EntityPlayer player, World world, float partialTicks)
 	{
-		Map<BlockPos, TileEntity> tileEntities = new HashMap<BlockPos, TileEntity>();
 		int chunkSize = 8;
 
 		for (int i = 0; i < chunkSize * chunkSize; i++)
 		{
-			int x = i % chunkSize;
-			int z = i / chunkSize;
-			tileEntities.putAll(world.getChunkFromBlockCoords(player.getPosition().add(x * 16, 0, z * 16)).getTileEntityMap());
+			int x = (i % chunkSize) - chunkSize / 2;
+			int z = (i / chunkSize) - chunkSize / 2;
+			NEARBY_TILE_ENTITIES.putAll(world.getChunkFromBlockCoords(player.getPosition().add(x * 16, 0, z * 16)).getTileEntityMap());
 		}
 
-		for (BlockPos position : tileEntities.keySet())
+		for (BlockPos position : NEARBY_TILE_ENTITIES.keySet())
 		{
-			if (tileEntities.get(position) instanceof TileEntityCrystalContainer)
+			if (NEARBY_TILE_ENTITIES.get(position) instanceof TileEntityCrystalContainer)
 			{
-				TileEntityCrystalContainer te = (TileEntityCrystalContainer) tileEntities.get(position);
+				TileEntityCrystalContainer te = (TileEntityCrystalContainer) NEARBY_TILE_ENTITIES.get(position);
 				BlockPos fromPos = te.getPos();
 				if (Minecraft.getMinecraft().player.getPosition().getDistance(fromPos.getX(), fromPos.getY(), fromPos.getZ()) < 128D)
 				{
@@ -72,6 +71,7 @@ public class RenderEvents
 					double scale = 0.3f * te.getScale();
 
 					GlStateManager.pushMatrix();
+					GlStateManager.disableLighting();
 					{
 						TextureUtils.bindTexture(ENDER_CRYSTAL_TEXTURES);
 						GlStateManager.translate(fromPos.getX(), fromPos.getY(), fromPos.getZ());
@@ -79,10 +79,10 @@ public class RenderEvents
 						GlStateManager.scale(scale, scale, scale);
 						this.ENDER_CRYSTAL_MODEL.render(null, 0.0F, (float) (innerRotation * 3.0), (float) (innerRotationSin * 0.1), 0.0F, 0.0F, 0.0625F);
 					}
+					GlStateManager.enableLighting();
 					GlStateManager.popMatrix();
 
 					BlockPos[] beamPositions = te.getBeamPositions();
-					System.out.println(Arrays.toString(beamPositions));
 					if (beamPositions != null)
 					{
 						for (int i = 0; i < beamPositions.length; i++)
@@ -108,6 +108,6 @@ public class RenderEvents
 				}
 			}
 		}
-		tileEntities.clear();
+		NEARBY_TILE_ENTITIES.clear();
 	}
 }
