@@ -1,12 +1,10 @@
 package com.cubgdev.cubga.init;
 
-import com.cubgdev.cubga.blocks.BlockBrittleBrick;
-import com.cubgdev.cubga.blocks.BlockCrystal;
-import com.cubgdev.cubga.blocks.BlockCrystalContainer;
-import com.cubgdev.cubga.blocks.BlockPlayerPlush;
+import com.cubgdev.cubga.blocks.*;
 import com.cubgdev.cubga.item.ItemBlockBase;
 import com.cubgdev.cubga.item.ItemBrittleBrick;
 
+import com.cubgdev.cubga.item.ItemFlag;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 
@@ -18,6 +16,8 @@ public class ModBlocks
 	public static final Block CRYSTAL_CONTAINER;
 	public static final Block CRYSTAL;
 
+	public static final Block FLAG;
+
 	static
 	{
 		BRITTLE_BRICK = new BlockBrittleBrick("brittle_brick");
@@ -25,6 +25,8 @@ public class ModBlocks
 
 		CRYSTAL_CONTAINER = new BlockCrystalContainer("crystal_container");
 		CRYSTAL = new BlockCrystal("crystal");
+
+		FLAG = new BlockFlag("flag");
 	}
 
 	public static void register()
@@ -34,6 +36,8 @@ public class ModBlocks
 
 		registerBlock(CRYSTAL_CONTAINER);
 		registerBlock(CRYSTAL);
+
+		registerBlock(FLAG, new ItemFlag(FLAG));
 	}
 
 	public static void registerBlock(Block block)

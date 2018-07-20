@@ -1,0 +1,21 @@
+{
+    "__comment": "Model generated using MrCrayfish's Model Creator (http://mrcrayfish.com/modelcreator/)",
+    "textures": {
+        "pole": "blocks/concrete_silver"
+    },
+    "elements": [
+        {
+            "name": "pole",
+            "from": [ 7.5, 0.0, 7.5 ], 
+            "to": [ 8.5, 16.0, 8.5 ], 
+            "faces": {
+                "north": { "texture": "pole", "uv": [ 7.5, 0.0, 8.5, 15.5 ] },
+                "east": { "texture": "pole", "uv": [ 7.5, 0.0, 8.5, 15.5 ] },
+                "south": { "texture": "pole", "uv": [ 7.5, 0.0, 8.5, 15.5 ] },
+                "west": { "texture": "pole", "uv": [ 7.5, 0.0, 8.5, 15.5 ] },
+                "up": { "texture": "pole", "uv": [ 7.5, 7.5, 8.5, 8.5 ] },
+                "down": { "texture": "pole", "uv": [ 7.5, 7.5, 8.5, 8.5 ] }
+            }
+        }
+    ]
+}

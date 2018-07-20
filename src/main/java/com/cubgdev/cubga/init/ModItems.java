@@ -2,7 +2,7 @@ package com.cubgdev.cubga.init;
 
 import com.cubgdev.cubga.item.ItemBeamRod;
 import com.cubgdev.cubga.item.ItemBrick;
-import com.cubgdev.cubga.item.ItemCanadianFlag;
+import com.cubgdev.cubga.item.ItemFlag;
 import com.cubgdev.cubga.item.ItemCoffee;
 import com.cubgdev.cubga.item.ItemHeal;
 import com.cubgdev.cubga.item.ItemMasterGauntlet;
@@ -20,7 +20,6 @@ public class ModItems
 
 	public static final Item COFFEE_CUP_FULL;
 	public static final Item COFFEE_CUP;
-	public static final Item CANADIAN_FLAG;
 	public static final Item MODDER_NIGHTMARE;
 	public static final Item MASTER_GAUNTLET;
 
@@ -37,7 +36,6 @@ public class ModItems
 
 		COFFEE_CUP_FULL = new ItemCoffee(true);
 		COFFEE_CUP = new ItemCoffee(false);
-		CANADIAN_FLAG = new ItemCanadianFlag();
 		MODDER_NIGHTMARE = new ItemModderNightmare();
 		MASTER_GAUNTLET = new ItemMasterGauntlet();
 
@@ -55,7 +53,6 @@ public class ModItems
 
 		register(COFFEE_CUP_FULL);
 		register(COFFEE_CUP);
-		register(CANADIAN_FLAG);
 		register(MODDER_NIGHTMARE);
 		register(MASTER_GAUNTLET);
 
