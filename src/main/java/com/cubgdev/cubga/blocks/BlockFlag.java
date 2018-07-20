@@ -34,31 +34,28 @@ import net.minecraftforge.fml.common.Mod;
 
 import java.util.List;
 
-public class BlockFlag extends Block
-{
+public class BlockFlag extends Block {
     public static final PropertyInteger COLOUR = PropertyInteger.create("colour", 0, 15);
     public static final PropertyBool UP = PropertyBool.create("up");
     public static final PropertyBool DOWN = PropertyBool.create("down");
 
-    private static final Bounds bounds = new Bounds(5, 16, 5, 11, 0, 11);
+    private static final Bounds bounds = new Bounds(6, 16, 6, 10, 0, 10);
 
     public BlockFlag(String name) {
-        super(Material.ROCK);
+        super(Material.IRON);
         this.setUnlocalizedName(name);
         this.setRegistryName(name);
-        this.setCreativeTab(CUBG.TAB);
         this.setDefaultState(this.blockState.getBaseState().withProperty(COLOUR, 0));
+        this.setCreativeTab(CUBG.TAB);
     }
 
     @Override
-    public boolean isOpaqueCube(IBlockState state)
-    {
+    public boolean isOpaqueCube(IBlockState state) {
         return false;
     }
 
     @Override
-    public boolean isFullCube(IBlockState state)
-    {
+    public boolean isFullCube(IBlockState state) {
         return false;
     }
 
@@ -77,50 +74,66 @@ public class BlockFlag extends Block
                 return true;
             }
         }
+
+        if (!(worldIn.getBlockState(pos.up()).getBlock() instanceof BlockFlag)) {
+            worldIn.setBlockState(pos, ModBlocks.FLAG.getDefaultState().withProperty(BlockFlag.COLOUR, (Integer) state.getValue(COLOUR)), 3);
+        } else {
+            int yOffset = 1;
+            while (worldIn.getBlockState(pos.up(++yOffset)).getBlock() instanceof BlockFlag) ;
+
+            int colour = worldIn.getBlockState(pos.up(yOffset).down()).getValue(COLOUR);
+
+            if (worldIn.getBlockState(pos.up(yOffset).down()).getBlock() instanceof BlockFlag) {
+                worldIn.setBlockState(pos.up(yOffset).down(), ModBlocks.FLAG.getDefaultState().withProperty(BlockFlag.COLOUR, colour));
+            } else {
+                worldIn.setBlockState(pos.up(yOffset).down(), ModBlocks.FLAG.getDefaultState().withProperty(BlockFlag.COLOUR, colour));
+            }
+        }
         return true;
     }
 
     @Override
-    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
-    {
+    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
         boolean up = worldIn.getBlockState(pos.up()).getBlock() instanceof BlockFlag;
         boolean down = worldIn.getBlockState(pos.down()).getBlock() instanceof BlockFlag;
         return state.withProperty(UP, up).withProperty(DOWN, down);
     }
 
     @Override
-    public IBlockState getStateFromMeta(int meta)
-    {
+    public IBlockState getStateFromMeta(int meta) {
         return getDefaultState().withProperty(COLOUR, meta);
     }
 
     @Override
-    public int getMetaFromState(IBlockState state)
-    {
+    public int getMetaFromState(IBlockState state) {
         return ((Integer) state.getValue(COLOUR)).intValue();
     }
 
     @Override
-    protected BlockStateContainer createBlockState()
-    {
-        return new BlockStateContainer(this, new IProperty[]{ COLOUR, UP, DOWN});
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, new IProperty[]{COLOUR, UP, DOWN});
     }
 
     @Override
-    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand)
-    {
+    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
         return super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer, hand).withProperty(COLOUR, Math.min(meta, 15));
     }
 
     @Override
-    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
-    {
+    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
         drops.add(new ItemStack(ModBlocks.FLAG, 1, Math.min(state.getValue(COLOUR), 15)));
     }
 
     @Override
-    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
-    {
+    public void getSubBlocks(CreativeTabs item, NonNullList<ItemStack> items) {
+        for (int i = 0; i < EnumDyeColor.values().length; i++) {
+            items.add(new ItemStack(this, 1, i));
+        }
+    }
+
+    @Override
+    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
         return new ItemStack(ModBlocks.FLAG, 1, state.getValue(COLOUR));
     }
 }
+

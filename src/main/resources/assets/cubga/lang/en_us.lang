@@ -2,23 +2,41 @@ itemGroup.tabCUBG=CUBG Additions
 
 item.show_info=Hold %s for Info
 
-#Health Items
+#Items
 item.medkit.name=§a§lMedkit
 item.first_aid_kit.name=§c§lFirst Aid Kit
 item.bandage.name=§lBandage
 item.bandaid.name=§lBand-Aid
 
+item.beam_rod.name=Beam Rod
+item.beam_rod.position=Crystal Position: %s
+
 #Blocks
 tile.brittle_brick.name=Brittle Bricks
 tile.crystal_container.name=Crystal Container
 tile.crystal.name=Crystal
-item.beam_rod.name=Beam Rod
-item.beam_rod.position=Crystal Position: %s
+
+tile.flag_white.name=White Canadian Flag
+tile.flag_black.name=Black Canadian Flag
+tile.flag_red.name=§c§lDoodler’s Patriocy
+tile.flag_orange.name=Orange Canadian Flag
+tile.flag_magenta.name=Magenta Canadian Flag
+tile.flag_pink.name=Pink Canadian Flag
+tile.flag_purple.name=Purple Canadian Flag
+tile.flag_lime.name=Lime Canadian Flag
+tile.flag_green.name=Green Canadian Flag
+tile.flag_gray.name=Gray Canadian Flag
+tile.flag_silver.name=Silver Canadian Flag
+tile.flag_brown.name=Brown Canadian Flag
+tile.flag_cyan.name=Cyan Canadian Flag
+tile.flag_blue.name=Blue Canadian Flag
+tile.flag_light_blue.name=Light Blue Canadian Flag
+tile.flag_yellow.name=Yellow Canadian Flag
 
 #Easter Eggs
 item.coffee_cup.name=§6§lCoffee Cup
 item.coffee_cup_full.name=§6§lCoffee Cup
-item.canadian_flag.name=§c§lDoodler's Bane
+item.canadian_flag.name=§c§lDoodler’s Patriocy
 item.modder_nightmare.name=§d§lModder's §8§lNightmare
 item.master_gauntlet.name=§a§lMaster §7§lGauntlet
 
@@ -45,6 +63,6 @@ item.bandaid.info=An adhesive piece of fabric that covers small cuts. Restores 2
 #Easter Egg Descriptions
 item.coffee_cup.info=An empty coffee cup. Oh, and you can wear it on your head.
 item.coffee_cup_full.info=A hot cup of coffee, pretty nice, right? Oh, and you can wear it on your head and drink it, but be careful, it's hot.
-item.canadian_flag.info=The iconic symbol of the superior country, Canada.
+item.flag.info=The iconic symbol of the superior country, Canada.
 item.modder_nightmare.info=A modder's worst nightmare, the glitched texture.
 item.master_gauntlet.info=A gauntlet made out of the finest material. Made for the Master of Chiefs. Wait, the name on the tag is different, is this misspelled?

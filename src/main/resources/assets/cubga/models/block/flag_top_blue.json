@@ -1,0 +1,6 @@
+{
+    "parent": "cubga:block/flag_top",
+    "textures": {
+        "flag": "cubga:flag/flag_blue"
+    }
+}

@@ -1,0 +1,6 @@
+{
+    "parent": "cubga:block/flag",
+    "textures": {
+        "flag": "cubga:flag/flag_silver"
+    }
+}
