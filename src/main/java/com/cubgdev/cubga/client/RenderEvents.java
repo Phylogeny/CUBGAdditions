@@ -30,6 +30,8 @@ public class RenderEvents
 	@SubscribeEvent
 	public void onRenderWorldEvent(RenderWorldLastEvent event)
 	{
+		GlStateManager.pushMatrix();
+
 		EntityPlayer player = Minecraft.getMinecraft().player;
 		World world = player.world;
 		float partialTicks = event.getPartialTicks();
@@ -43,6 +45,8 @@ public class RenderEvents
 		TextureUtils.bindTexture(ENDER_CRYSTAL_TEXTURES);
 
 		this.renderCrystalContainers(player, world, partialTicks);
+
+		GlStateManager.popMatrix();
 	}
 
 	private void renderCrystalContainers(EntityPlayer player, World world, float partialTicks)
