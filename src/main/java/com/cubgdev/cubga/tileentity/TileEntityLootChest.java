@@ -7,14 +7,14 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.ITickable;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.EnumSkyBlock;
 import net.minecraftforge.common.util.Constants;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Author: MrCrayfish
@@ -24,11 +24,33 @@ public class TileEntityLootChest extends TileEntityChest implements IValueContai
     private int color = 16750848;
     private ResourceLocation chestTexture;
     private boolean glowing;
+    private boolean needLightingUpdate = false;
+
+    private static final Random RAND = new Random(System.currentTimeMillis());
+
+    @Override
+    public void update()
+    {
+        super.update();
+        if(needLightingUpdate)
+        {
+            world.checkLightFor(EnumSkyBlock.BLOCK, pos);
+            needLightingUpdate = false;
+        }
+        if(glowing)
+        {
+            double posX = pos.getX() - 0.5 + RAND.nextDouble() * 2.0;
+            double posY = pos.getY() + RAND.nextDouble() * 1.5;
+            double posZ = pos.getZ() - 0.5 + RAND.nextDouble() * 2.0;
+            world.spawnParticle(EnumParticleTypes.CRIT, posX, posY, posZ, 0, 0, 0);
+        }
+    }
 
     @Override
     public void readFromNBT(NBTTagCompound compound)
     {
         super.readFromNBT(compound);
+        needLightingUpdate = true;
         chestTexture = null;
         if(compound.hasKey("ChestTexture", Constants.NBT.TAG_STRING))
         {

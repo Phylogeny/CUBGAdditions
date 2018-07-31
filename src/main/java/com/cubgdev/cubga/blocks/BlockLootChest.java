@@ -4,6 +4,7 @@ import com.cubgdev.cubga.CUBG;
 import com.cubgdev.cubga.Reference;
 import com.cubgdev.cubga.init.ModBlocks;
 import com.cubgdev.cubga.tileentity.TileEntityLootChest;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -43,8 +44,13 @@ public class BlockLootChest extends BlockChest {
 
     @Override
     public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
-        //TODO change light level depending on tile entity values
-        return super.getLightValue(state, world, pos);
+        TileEntity tileEntity = world.getTileEntity(pos);
+        if(tileEntity instanceof TileEntityLootChest) {
+            if(((TileEntityLootChest) tileEntity).isGlowing()) {
+                return 12;
+            }
+        }
+        return 0;
     }
 
     @Override
