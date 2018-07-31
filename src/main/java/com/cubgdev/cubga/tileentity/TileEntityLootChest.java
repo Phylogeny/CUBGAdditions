@@ -1,6 +1,8 @@
 package com.cubgdev.cubga.tileentity;
 
-import com.cubgdev.cubga.Reference;
+import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
@@ -8,13 +10,20 @@ import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.Constants;
 
+import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+
 /**
  * Author: MrCrayfish
  */
-public class TileEntityLootChest extends TileEntityChest
+public class TileEntityLootChest extends TileEntityChest implements IValueContainer
 {
     private int color = 16750848;
-    private ResourceLocation chestTexture = null;
+    private ResourceLocation chestTexture;
+    private boolean glowing;
 
     @Override
     public void readFromNBT(NBTTagCompound compound)
@@ -33,6 +42,10 @@ public class TileEntityLootChest extends TileEntityChest
                 color = ((c[0] & 0xFF) << 16) | ((c[1] & 0xFF) << 8) | ((c[2] & 0xFF));
             }
         }
+        if(compound.hasKey("Glowing", Constants.NBT.TAG_BYTE))
+        {
+            glowing = compound.getBoolean("Glowing");
+        }
     }
 
     @Override
@@ -44,6 +57,7 @@ public class TileEntityLootChest extends TileEntityChest
             compound.setString("ChestTexture", chestTexture.toString());
         }
         compound.setIntArray("Color", this.getColor());
+        compound.setBoolean("Glowing", glowing);
         return compound;
     }
 
@@ -76,14 +90,51 @@ public class TileEntityLootChest extends TileEntityChest
     @Override
     public final NBTTagCompound getUpdateTag()
     {
-        System.out.println(this.getColor());
-        NBTTagCompound t = this.writeToNBT(new NBTTagCompound());
-        return t;
+        return this.writeToNBT(new NBTTagCompound());
     }
 
     @Override
     public SPacketUpdateTileEntity getUpdatePacket()
     {
         return new SPacketUpdateTileEntity(pos, 0, getUpdateTag());
+    }
+
+    public boolean isGlowing()
+    {
+        return glowing;
+    }
+
+    @Override
+    public List<Entry> getEntries()
+    {
+        List<Entry> entries = Lists.newArrayList();
+        entries.add(new Entry("LootTable", "Loot Table", Entry.Type.TEXT_FIELD, lootTable));
+        entries.add(new Entry("Color", "Color", Entry.Type.TEXT_FIELD, color));
+        entries.add(new Entry("ChestTexture", "Chest Texture", Entry.Type.TEXT_FIELD, chestTexture));
+        entries.add(new Entry("Glowing", "Glowing", Entry.Type.TOGGLE, glowing));
+        return entries;
+    }
+
+    @Override
+    public void updateEntries(Map<String, String> entries)
+    {
+        String lootTable = entries.get("LootTable");
+        if(!Strings.isNullOrEmpty(lootTable))
+        {
+            this.lootTable = new ResourceLocation(lootTable);
+        }
+
+        String chestTexture = entries.get("ChestTexture");
+        if(!Strings.isNullOrEmpty(chestTexture))
+        {
+            this.chestTexture = new ResourceLocation(chestTexture);
+        }
+        else
+        {
+            this.chestTexture = null;
+        }
+
+        this.color = Integer.parseInt(entries.get("Color"));
+        this.glowing = Boolean.valueOf(entries.get("Glowing"));
     }
 }
