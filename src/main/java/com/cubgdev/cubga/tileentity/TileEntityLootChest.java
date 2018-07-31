@@ -21,6 +21,7 @@ import java.util.*;
  */
 public class TileEntityLootChest extends TileEntityChest implements IValueContainer
 {
+    private ResourceLocation originalLootTable;
     private int color = 16750848;
     private ResourceLocation chestTexture;
     private boolean glowing;
@@ -130,7 +131,7 @@ public class TileEntityLootChest extends TileEntityChest implements IValueContai
     public List<Entry> getEntries()
     {
         List<Entry> entries = Lists.newArrayList();
-        entries.add(new Entry("LootTable", "Loot Table", Entry.Type.TEXT_FIELD, lootTable));
+        entries.add(new Entry("LootTable", "Loot Table", Entry.Type.TEXT_FIELD, originalLootTable));
         entries.add(new Entry("Color", "Color", Entry.Type.TEXT_FIELD, color));
         entries.add(new Entry("ChestTexture", "Chest Texture", Entry.Type.TEXT_FIELD, chestTexture));
         entries.add(new Entry("Glowing", "Glowing", Entry.Type.TOGGLE, glowing));
@@ -143,7 +144,7 @@ public class TileEntityLootChest extends TileEntityChest implements IValueContai
         String lootTable = entries.get("LootTable");
         if(!Strings.isNullOrEmpty(lootTable))
         {
-            this.lootTable = new ResourceLocation(lootTable);
+            this.originalLootTable = new ResourceLocation(lootTable);
         }
 
         String chestTexture = entries.get("ChestTexture");
