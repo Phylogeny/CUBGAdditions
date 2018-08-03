@@ -10,6 +10,7 @@ import java.util.Scanner;
 import java.util.UUID;
 
 import com.cubgdev.cubga.client.CapeHandler;
+import com.cubgdev.cubga.client.GuiEvents;
 import com.cubgdev.cubga.client.RenderEvents;
 import com.cubgdev.cubga.client.particle.ParticleBrick;
 import com.cubgdev.cubga.client.particle.ParticleRenderer;
@@ -43,7 +44,10 @@ public class ClientProxy extends CommonProxy
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		super.preInit(event);
+		/* Register Render Events */
 		MinecraftForge.EVENT_BUS.register(new RenderEvents());
+		/* Register Gui Events */
+		MinecraftForge.EVENT_BUS.register(new GuiEvents());
 	}
 
 	@Override

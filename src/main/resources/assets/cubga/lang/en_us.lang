@@ -66,3 +66,8 @@ item.coffee_cup_full.info=A hot cup of coffee, pretty nice, right? Oh, and you c
 item.flag.info=The iconic symbol of the superior country, Canada.
 item.modder_nightmare.info=A modder's worst nightmare, the glitched texture.
 item.master_gauntlet.info=A gauntlet made out of the finest material. Made for the Master of Chiefs. Wait, the name on the tag is different, is this misspelled?
+
+#Menu/Gui Elements
+gui.button.discord=DISCORD
+gui.button.website=WEBSITE
+gui.button.play=PLAY

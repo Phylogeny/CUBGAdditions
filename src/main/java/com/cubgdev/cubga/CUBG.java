@@ -21,7 +21,13 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION, acceptedMinecraftVersions = Reference.MOD_COMPATIBILITY, dependencies = Reference.MOD_DEPENDS)
+@Mod(
+        modid = Reference.MOD_ID,
+        name = Reference.MOD_NAME,
+        version = Reference.MOD_VERSION,
+        acceptedMinecraftVersions = Reference.MOD_COMPATIBILITY,
+        dependencies = Reference.MOD_DEPENDS
+)
 public class CUBG
 {
     public static final CreativeTabs TAB = new CreativeTabs("tabCUBG") {
