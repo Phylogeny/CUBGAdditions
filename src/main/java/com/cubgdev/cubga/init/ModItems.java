@@ -1,13 +1,8 @@
 package com.cubgdev.cubga.init;
 
-import com.cubgdev.cubga.item.ItemBeamRod;
-import com.cubgdev.cubga.item.ItemBrick;
-import com.cubgdev.cubga.item.ItemFlag;
-import com.cubgdev.cubga.item.ItemCoffee;
-import com.cubgdev.cubga.item.ItemHeal;
-import com.cubgdev.cubga.item.ItemMasterGauntlet;
-import com.cubgdev.cubga.item.ItemModderNightmare;
+import com.cubgdev.cubga.item.*;
 
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
 
 public class ModItems
@@ -17,6 +12,7 @@ public class ModItems
 	public static final Item FIRST_AID;
 	public static final Item BANDAGE;
 	public static final Item BANDAID;
+	public static final Item PAINKILLERS;
 
 	public static final Item COFFEE_CUP_FULL;
 	public static final Item COFFEE_CUP;
@@ -33,6 +29,7 @@ public class ModItems
 		FIRST_AID = new ItemHeal("first_aid_kit", 32, 10);
 		BANDAGE = new ItemHeal("bandage", 24, 4);
 		BANDAID = new ItemHeal("bandaid", 1, 1);
+		PAINKILLERS = new ItemRegen("painkillers",16);
 
 		COFFEE_CUP_FULL = new ItemCoffee(true);
 		COFFEE_CUP = new ItemCoffee(false);
@@ -50,6 +47,7 @@ public class ModItems
 		register(FIRST_AID);
 		register(BANDAGE);
 		register(BANDAID);
+		register(PAINKILLERS);
 
 		register(COFFEE_CUP_FULL);
 		register(COFFEE_CUP);
