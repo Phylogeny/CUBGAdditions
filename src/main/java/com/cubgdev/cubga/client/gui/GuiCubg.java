@@ -4,12 +4,29 @@ import com.cubgdev.cubga.Reference;
 import com.cubgdev.cubga.client.gui.GuiUtils;
 import com.cubgdev.cubga.client.gui.api.GuiButtonCubg;
 import com.cubgdev.cubga.client.gui.api.GuiContainer;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiOptions;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.multiplayer.GuiConnecting;
+import net.minecraft.client.multiplayer.ServerData;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.util.FakePlayerFactory;
+import net.minecraftforge.fml.client.FMLClientHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Color;
 
+import java.awt.*;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 public class GuiCubg extends GuiScreen {
@@ -20,17 +37,20 @@ public class GuiCubg extends GuiScreen {
 
     public static final ResourceLocation menuBackground = new ResourceLocation(Reference.MOD_ID,"textures/gui/menu/background" + (int) (Math.random() * ((4 - 1) + 1)) + ".png");
 
-    public static int BUTTON_LINK_DISCORD = 200;
-    public static int BUTTON_LINK_WEBSITE = 201;
+    public final int BUTTON_LINK_DISCORD = 200;
+    public final int BUTTON_LINK_WEBSITE = 201;
 
-    public static int BUTTON_CUBG_BEAVER = 202;
-    public static int BUTTON_CUBG_KANGAROO = 203;
+    public final int BUTTON_CUBG_BEAVER = 202;
+    public final int BUTTON_CUBG_KANGAROO = 203;
 
-    public static int BUTTON_PLAY = 204;
+    public final int BUTTON_PLAY = 204;
 
-    public static int BUTTON_NEWS = 205;
+    public final int BUTTON_NEWS = 205;
 
-    public static int BUTTON_SETTINGS = 206;
+    public final int BUTTON_SETTINGS = 206;
+
+    @SideOnly(Side.CLIENT)
+    public FakePlayerFactory playerFactory;
 
     @Override
     public void updateScreen()
@@ -124,6 +144,101 @@ public class GuiCubg extends GuiScreen {
         String blue = pad(Integer.toHexString(color.getBlue()));
         String hex = "0x" + alpha + red + green + blue;
         return Integer.parseInt(hex, 16);
+    }
+
+    @Override
+    protected void actionPerformed(GuiButton button) throws IOException
+    {
+        super.actionPerformed(button);
+
+        switch(button.id){
+            case BUTTON_LINK_DISCORD:
+                this.openURL(Reference.LINK_DISCORD);
+                break;
+            case BUTTON_LINK_WEBSITE:
+                this.openURL(Reference.LINK_WEBSITE);
+                break;
+            case BUTTON_NEWS:
+
+                break;
+            case BUTTON_SETTINGS:
+                mc.displayGuiScreen(new GuiOptions(this,mc.gameSettings));
+                break;
+            case BUTTON_PLAY:
+
+                break;
+        }
+
+    }
+
+    /**
+     * Open URL - Opens a given URL in Default System Web Browser
+     * @param givenURL - Given URL to Open
+     */
+    public void openURL(String givenURL){
+        if (Desktop.isDesktopSupported()) {
+            try {
+                Desktop.getDesktop().browse(new URI(givenURL));
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * Join Server - Join a specific Server from given IP
+     * @param givenIP - Given Server IP
+     * @param isLan - Is Server Lan? Yes/No is lan/isn't lan
+     */
+    public void joinServer(String givenIP, boolean isLan){
+
+        if (!(Minecraft.getMinecraft().currentScreen instanceof GuiConnecting)) {
+            FMLClientHandler.instance().setupServerList();
+            FMLClientHandler.instance().connectToServer(Minecraft.getMinecraft().currentScreen, new ServerData("Server", givenIP, isLan));
+        }
+
+    }
+
+    public static void drawEntityOnScreen(int posX, int posY, int scale, float mouseX, float mouseY, EntityLivingBase ent)
+    {
+        GlStateManager.enableColorMaterial();
+        GlStateManager.pushMatrix();
+        GlStateManager.translate((float)posX, (float)posY, 50.0F);
+        GlStateManager.scale((float)(-scale), (float)scale, (float)scale);
+        GlStateManager.rotate(180.0F, 0.0F, 0.0F, 1.0F);
+        float f = ent.renderYawOffset;
+        float f1 = ent.rotationYaw;
+        float f2 = ent.rotationPitch;
+        float f3 = ent.prevRotationYawHead;
+        float f4 = ent.rotationYawHead;
+        GlStateManager.rotate(135.0F, 0.0F, 1.0F, 0.0F);
+        RenderHelper.enableStandardItemLighting();
+        GlStateManager.rotate(-135.0F, 0.0F, 1.0F, 0.0F);
+        GlStateManager.rotate(-((float)Math.atan((double)(mouseY / 40.0F))) * 20.0F, 1.0F, 0.0F, 0.0F);
+        ent.renderYawOffset = (float)Math.atan((double)(mouseX / 40.0F)) * 20.0F;
+        ent.rotationYaw = (float)Math.atan((double)(mouseX / 40.0F)) * 40.0F;
+        ent.rotationPitch = -((float)Math.atan((double)(mouseY / 40.0F))) * 20.0F;
+        ent.rotationYawHead = ent.rotationYaw;
+        ent.prevRotationYawHead = ent.rotationYaw;
+        GlStateManager.translate(0.0F, 0.0F, 0.0F);
+        RenderManager rendermanager = Minecraft.getMinecraft().getRenderManager();
+        rendermanager.setPlayerViewY(180.0F);
+        rendermanager.setRenderShadow(false);
+        rendermanager.renderEntity(ent, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F, false);
+        rendermanager.setRenderShadow(true);
+        ent.renderYawOffset = f;
+        ent.rotationYaw = f1;
+        ent.rotationPitch = f2;
+        ent.prevRotationYawHead = f3;
+        ent.rotationYawHead = f4;
+        GlStateManager.popMatrix();
+        RenderHelper.disableStandardItemLighting();
+        GlStateManager.disableRescaleNormal();
+        GlStateManager.setActiveTexture(OpenGlHelper.lightmapTexUnit);
+        GlStateManager.disableTexture2D();
+        GlStateManager.setActiveTexture(OpenGlHelper.defaultTexUnit);
     }
 
 }

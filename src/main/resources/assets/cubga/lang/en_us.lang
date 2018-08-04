@@ -71,3 +71,14 @@ item.master_gauntlet.info=A gauntlet made out of the finest material. Made for t
 gui.button.discord=DISCORD
 gui.button.website=WEBSITE
 gui.button.play=PLAY
+gui.button.settings=SETTINGS
+gui.button.news=NEWS/UPDATES
+
+gui.button.cubg.beaver=CUBG BEAVER
+gui.button.cubg.kangaroo=CUBG KANGAROO
+
+#Menu Titles
+gui.title.mainmenu=Main Menu
+
+#Menu Subtitles
+gui.subtitle.status=STATUS

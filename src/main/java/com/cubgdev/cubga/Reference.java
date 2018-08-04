@@ -11,4 +11,11 @@ public class Reference
     public static final String PROXY_CLIENT = "com.cubgdev.cubga.proxy.ClientProxy";
     public static final String PROXY = "com.cubgdev.cubga.proxy.CommonProxy";
     public static final String PROXY_SERVER = "com.cubgdev.cubga.proxy.ServerProxy";
+
+    public static final String LINK_WEBSITE = "https://mrcrayfish.com/";
+    public static final String LINK_DISCORD = "http://discord.gg/gmcMRRk";
+
+    public static final String SERVERIP_BEAVER = "cubg.mrcrayfish.com";
+    public static final String SERVERIP_KANGAROO = "cubgau.mrcrayfish.com";
+
 }

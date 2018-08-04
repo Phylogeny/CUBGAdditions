@@ -25,6 +25,8 @@ public class GuiButtonCubg extends GuiButton  {
 
     private int yOffset = 0;
 
+    private boolean isAlwaysHighlighted = false;
+
     public GuiButtonCubg(int buttonId, int x, int y, int givenWidth, int givenHeight, String buttonText) {
         super(buttonId, x, y, buttonText);
         this.width = givenWidth;
@@ -48,6 +50,11 @@ public class GuiButtonCubg extends GuiButton  {
 
     public GuiButtonCubg setYOffset(int givenYOffset){
         this.yOffset = givenYOffset;
+        return this;
+    }
+
+    public GuiButtonCubg setAlwaysHighlighted(boolean givenHighlighted){
+        this.isAlwaysHighlighted = givenHighlighted;
         return this;
     }
 
@@ -98,7 +105,7 @@ public class GuiButtonCubg extends GuiButton  {
                 GuiUtils.renderImage(x,y,this.buttonImage,this.width,this.height);
             }
 
-            if(isMouseOver()) {
+            if(isMouseOver() || isAlwaysHighlighted) {
 
                 if(this.isFirstHover){
                     this.isFirstHover = false;
