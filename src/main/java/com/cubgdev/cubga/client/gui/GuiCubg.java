@@ -1,13 +1,12 @@
 package com.cubgdev.cubga.client.gui;
 
 import com.cubgdev.cubga.Reference;
+import com.cubgdev.cubga.client.GuiEvents;
 import com.cubgdev.cubga.client.gui.GuiUtils;
 import com.cubgdev.cubga.client.gui.api.GuiButtonCubg;
 import com.cubgdev.cubga.client.gui.api.GuiContainer;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiOptions;
-import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.*;
 import net.minecraft.client.multiplayer.GuiConnecting;
 import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.client.renderer.GlStateManager;
@@ -40,14 +39,15 @@ public class GuiCubg extends GuiScreen {
     public final int BUTTON_LINK_DISCORD = 200;
     public final int BUTTON_LINK_WEBSITE = 201;
 
-    public final int BUTTON_CUBG_BEAVER = 202;
-    public final int BUTTON_CUBG_KANGAROO = 203;
+    public final int BUTTON_BEAVER = 202;
+    public final int BUTTON_KANGAROO = 203;
 
     public final int BUTTON_PLAY = 204;
 
     public final int BUTTON_NEWS = 205;
 
     public final int BUTTON_SETTINGS = 206;
+    public final int BUTTON_SINGLEPLAYER = 207;
 
     @SideOnly(Side.CLIENT)
     public FakePlayerFactory playerFactory;
@@ -78,7 +78,7 @@ public class GuiCubg extends GuiScreen {
         GuiUtils.renderRectWithOutline(0,height - 40,width,40,0x55000000,0x44000000,1);
         GuiUtils.renderImage(4,3,new ResourceLocation(Reference.MOD_ID,"textures/gui/logo.png"),110,29);
 
-        GuiUtils.renderCenteredTextScaled("Battlegrounds v" + Reference.MOD_VERSION + " " + this.uiTitle,58,34,0xFFFFFF,0.5);
+        GuiUtils.renderCenteredTextScaled("Battlegrounds v" + Reference.MOD_VERSION,58,34,0xFFFFFF,0.5);
 
         GL11.glPopMatrix();
 
@@ -144,31 +144,6 @@ public class GuiCubg extends GuiScreen {
         String blue = pad(Integer.toHexString(color.getBlue()));
         String hex = "0x" + alpha + red + green + blue;
         return Integer.parseInt(hex, 16);
-    }
-
-    @Override
-    protected void actionPerformed(GuiButton button) throws IOException
-    {
-        super.actionPerformed(button);
-
-        switch(button.id){
-            case BUTTON_LINK_DISCORD:
-                this.openURL(Reference.LINK_DISCORD);
-                break;
-            case BUTTON_LINK_WEBSITE:
-                this.openURL(Reference.LINK_WEBSITE);
-                break;
-            case BUTTON_NEWS:
-
-                break;
-            case BUTTON_SETTINGS:
-                mc.displayGuiScreen(new GuiOptions(this,mc.gameSettings));
-                break;
-            case BUTTON_PLAY:
-
-                break;
-        }
-
     }
 
     /**

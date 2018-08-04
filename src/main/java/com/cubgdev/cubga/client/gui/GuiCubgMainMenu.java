@@ -3,7 +3,9 @@ package com.cubgdev.cubga.client.gui;
 import com.cubgdev.cubga.Reference;
 import com.cubgdev.cubga.client.gui.api.GuiButtonCubg;
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.client.gui.GuiOptions;
+import net.minecraft.client.gui.GuiWorldSelection;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
@@ -48,11 +50,11 @@ public class GuiCubgMainMenu extends GuiCubg {
             case BUTTON_LINK_WEBSITE:
                 this.openURL(Reference.LINK_WEBSITE);
                 break;
-            case BUTTON_CUBG_BEAVER:
+            case BUTTON_BEAVER:
                 designatedServerIP = Reference.SERVERIP_BEAVER;
                 mc.displayGuiScreen(new GuiCubgMainMenu());
                 break;
-            case BUTTON_CUBG_KANGAROO:
+            case BUTTON_KANGAROO:
                 designatedServerIP = Reference.SERVERIP_KANGAROO;
                 mc.displayGuiScreen(new GuiCubgMainMenu());
                 break;
@@ -65,6 +67,9 @@ public class GuiCubgMainMenu extends GuiCubg {
             case BUTTON_PLAY:
                 this.joinServer(designatedServerIP,false);
                 break;
+            case BUTTON_SINGLEPLAYER:
+                mc.displayGuiScreen(new GuiWorldSelection(this));
+                break;
         }
 
     }
@@ -75,7 +80,7 @@ public class GuiCubgMainMenu extends GuiCubg {
     public void initGui() {
 
         this.buttonList.add(new GuiButtonCubg(BUTTON_LINK_DISCORD,this.width - 83,3,80,15,I18n.format("gui.button.discord")));
-        this.buttonList.add(new GuiButtonCubg(BUTTON_LINK_DISCORD,this.width - 83,22,80,15,I18n.format("gui.button.website")));
+        this.buttonList.add(new GuiButtonCubg(BUTTON_LINK_WEBSITE,this.width - 83,22,80,15,I18n.format("gui.button.website")));
 
         this.buttonList.add(new GuiButtonCubg(BUTTON_NEWS,this.width - 83,height - 18,80,15,I18n.format("gui.button.news")));
         this.buttonList.add(new GuiButtonCubg(BUTTON_SETTINGS,this.width - 83,height - 37,80,15,I18n.format("gui.button.settings")));
@@ -85,10 +90,11 @@ public class GuiCubgMainMenu extends GuiCubg {
                 .setYOffset(-3)
                 .setImage(new ResourceLocation(Reference.MOD_ID,"textures/gui/menu/play.png")));
 
-        this.buttonList.add(new GuiButtonCubg(BUTTON_CUBG_BEAVER,5,height - 80,120,15,I18n.format("gui.button.cubg.beaver"))
+        this.buttonList.add(new GuiButtonCubg(BUTTON_BEAVER,5,height - 80,120,15,I18n.format("gui.button.beaver"))
         .setAlwaysHighlighted(designatedServerIP.equalsIgnoreCase(Reference.SERVERIP_BEAVER)));
-        this.buttonList.add(new GuiButtonCubg(BUTTON_CUBG_KANGAROO,5,height - 60,120,15,I18n.format("gui.button.cubg.kangaroo"))
+        this.buttonList.add(new GuiButtonCubg(BUTTON_KANGAROO,5,height - 60,120,15,I18n.format("gui.button.kangaroo"))
                 .setAlwaysHighlighted(designatedServerIP.equalsIgnoreCase(Reference.SERVERIP_KANGAROO)));
+        this.buttonList.add(new GuiButtonCubg(BUTTON_SINGLEPLAYER,5,height - 100,120,15,I18n.format("gui.button.singleplayer")));
 
     }
 
