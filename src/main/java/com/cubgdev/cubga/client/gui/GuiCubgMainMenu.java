@@ -64,6 +64,9 @@ public class GuiCubgMainMenu extends GuiCubg {
             case BUTTON_SETTINGS:
                 mc.displayGuiScreen(new GuiOptions(this,mc.gameSettings));
                 break;
+            case BUTTON_QUIT:
+                mc.shutdown();
+                break;
             case BUTTON_PLAY:
                 this.joinServer(designatedServerIP,false);
                 break;
@@ -80,10 +83,13 @@ public class GuiCubgMainMenu extends GuiCubg {
     public void initGui() {
 
         this.buttonList.add(new GuiButtonCubg(BUTTON_LINK_DISCORD,this.width - 83,3,80,15,I18n.format("gui.button.discord")));
-        this.buttonList.add(new GuiButtonCubg(BUTTON_LINK_WEBSITE,this.width - 83,22,80,15,I18n.format("gui.button.website")));
+        this.buttonList.add(new GuiButtonCubg(BUTTON_LINK_WEBSITE,this.width - 83,22,80,15,I18n.format("gui.button.website"))
+                .setDisabled(true));
 
-        this.buttonList.add(new GuiButtonCubg(BUTTON_NEWS,this.width - 83,height - 18,80,15,I18n.format("gui.button.news")));
+        this.buttonList.add(new GuiButtonCubg(BUTTON_NEWS,this.width - 83,height - 18,80,15,I18n.format("gui.button.news"))
+                .setDisabled(true));
         this.buttonList.add(new GuiButtonCubg(BUTTON_SETTINGS,this.width - 83,height - 37,80,15,I18n.format("gui.button.settings")));
+        this.buttonList.add(new GuiButtonCubg(BUTTON_QUIT,this.width - 83,height - 58,80,15,I18n.format("gui.button.quit")));
 
         this.buttonList.add(new GuiButtonCubg(BUTTON_PLAY,5,this.height - 35,120,30,I18n.format("gui.button.play"))
                 .setScale(2)
@@ -91,7 +97,7 @@ public class GuiCubgMainMenu extends GuiCubg {
                 .setImage(new ResourceLocation(Reference.MOD_ID,"textures/gui/menu/play.png")));
 
         this.buttonList.add(new GuiButtonCubg(BUTTON_BEAVER,5,height - 80,120,15,I18n.format("gui.button.beaver"))
-        .setAlwaysHighlighted(designatedServerIP.equalsIgnoreCase(Reference.SERVERIP_BEAVER)));
+                .setAlwaysHighlighted(designatedServerIP.equalsIgnoreCase(Reference.SERVERIP_BEAVER)));
         this.buttonList.add(new GuiButtonCubg(BUTTON_KANGAROO,5,height - 60,120,15,I18n.format("gui.button.kangaroo"))
                 .setAlwaysHighlighted(designatedServerIP.equalsIgnoreCase(Reference.SERVERIP_KANGAROO)));
         this.buttonList.add(new GuiButtonCubg(BUTTON_SINGLEPLAYER,5,height - 100,120,15,I18n.format("gui.button.singleplayer")));

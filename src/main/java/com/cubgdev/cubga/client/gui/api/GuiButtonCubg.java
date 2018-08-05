@@ -26,6 +26,7 @@ public class GuiButtonCubg extends GuiButton  {
     private int yOffset = 0;
 
     private boolean isAlwaysHighlighted = false;
+    private boolean isDisabled = false;
 
     public GuiButtonCubg(int buttonId, int x, int y, int givenWidth, int givenHeight, String buttonText) {
         super(buttonId, x, y, buttonText);
@@ -55,6 +56,11 @@ public class GuiButtonCubg extends GuiButton  {
 
     public GuiButtonCubg setAlwaysHighlighted(boolean givenHighlighted){
         this.isAlwaysHighlighted = givenHighlighted;
+        return this;
+    }
+
+    public GuiButtonCubg setDisabled(boolean isDisabled){
+        this.isDisabled = isDisabled;
         return this;
     }
 
@@ -102,6 +108,10 @@ public class GuiButtonCubg extends GuiButton  {
             else if (this.isAlwaysHighlighted)
             {
                 j = 16777120;
+            }
+            if (this.isDisabled)
+            {
+                this.enabled = false;
             }
 
             if(this.buttonImage != null){

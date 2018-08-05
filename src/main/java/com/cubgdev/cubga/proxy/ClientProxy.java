@@ -21,6 +21,7 @@ import com.cubgdev.cubga.tileentity.TileEntityCrystalContainer;
 import com.cubgdev.cubga.tileentity.TileEntityPlayerPlush;
 import com.cubgdev.cubga.tileentity.render.TileEntityCrystalContainerRenderer;
 import com.cubgdev.cubga.tileentity.render.TileEntityRendererPlayerPlush;
+import com.cubgdev.cubga.utils.DiscordHandler;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -46,8 +47,12 @@ public class ClientProxy extends CommonProxy
 		super.preInit(event);
 		/* Register Render Events */
 		MinecraftForge.EVENT_BUS.register(new RenderEvents());
+
 		/* Register Gui Events */
 		MinecraftForge.EVENT_BUS.register(new GuiEvents());
+
+		/* Register DiscordHandler */
+		DiscordHandler.getInstance().setup();
 	}
 
 	@Override

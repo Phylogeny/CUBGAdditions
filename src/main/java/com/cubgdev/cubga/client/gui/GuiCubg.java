@@ -48,6 +48,7 @@ public class GuiCubg extends GuiScreen {
 
     public final int BUTTON_SETTINGS = 206;
     public final int BUTTON_SINGLEPLAYER = 207;
+    public final int BUTTON_QUIT = 208;
 
     @SideOnly(Side.CLIENT)
     public FakePlayerFactory playerFactory;
