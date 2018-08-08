@@ -72,6 +72,7 @@ gui.button.discord=DISCORD
 gui.button.website=WEBSITE
 gui.button.play=PLAY
 gui.button.singleplayer=SINGLEPLAYER
+gui.button.mutliplayer=MULTIPLAYER
 gui.button.settings=SETTINGS
 gui.button.quit=QUIT
 gui.button.news=NEWS/UPDATES

@@ -2,12 +2,10 @@ package com.cubgdev.cubga.client.gui;
 
 import com.cubgdev.cubga.Reference;
 import com.cubgdev.cubga.client.gui.api.GuiButtonCubg;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiMainMenu;
-import net.minecraft.client.gui.GuiOptions;
-import net.minecraft.client.gui.GuiWorldSelection;
+import net.minecraft.client.gui.*;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.launchwrapper.Launch;
 import net.minecraft.util.ResourceLocation;
 
 import java.io.IOException;
@@ -73,6 +71,9 @@ public class GuiCubgMainMenu extends GuiCubg {
             case BUTTON_SINGLEPLAYER:
                 mc.displayGuiScreen(new GuiWorldSelection(this));
                 break;
+            case BUTTON_MULTIPLAYER:
+                mc.displayGuiScreen(new GuiMultiplayer(this));
+                break;
         }
 
     }
@@ -101,6 +102,10 @@ public class GuiCubgMainMenu extends GuiCubg {
         this.buttonList.add(new GuiButtonCubg(BUTTON_KANGAROO,5,height - 60,120,15,I18n.format("gui.button.kangaroo"))
                 .setAlwaysHighlighted(designatedServerIP.equalsIgnoreCase(Reference.SERVERIP_KANGAROO)));
         this.buttonList.add(new GuiButtonCubg(BUTTON_SINGLEPLAYER,5,height - 100,120,15,I18n.format("gui.button.singleplayer")));
+
+        if((Boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment")) {
+        this.buttonList.add(new GuiButtonCubg(BUTTON_MULTIPLAYER,5,height - 120,120,15,I18n.format("gui.button.singleplayer")));
+        }
 
     }
 

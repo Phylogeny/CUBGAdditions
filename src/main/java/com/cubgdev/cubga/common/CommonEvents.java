@@ -18,7 +18,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.Sys;
 
 /**
- * Author: MrCrayfish
+ * Author: MrCrayfish & MastefChief
  */
 public class CommonEvents {
 
