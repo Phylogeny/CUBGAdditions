@@ -104,7 +104,7 @@ public class GuiCubgMainMenu extends GuiCubg {
         this.buttonList.add(new GuiButtonCubg(BUTTON_SINGLEPLAYER,5,height - 100,120,15,I18n.format("gui.button.singleplayer")));
 
         if((Boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment")) {
-        this.buttonList.add(new GuiButtonCubg(BUTTON_MULTIPLAYER,5,height - 120,120,15,I18n.format("gui.button.singleplayer")));
+        this.buttonList.add(new GuiButtonCubg(BUTTON_MULTIPLAYER,5,height - 120,120,15,I18n.format("gui.button.mutliplayer")));
         }
 
     }
