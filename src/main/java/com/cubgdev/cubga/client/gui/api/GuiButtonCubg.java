@@ -1,15 +1,12 @@
 package com.cubgdev.cubga.client.gui.api;
 
-import com.cubgdev.cubga.client.gui.GuiUtils;
+import com.cubgdev.cubga.client.gui.utilities.CUBGRenderHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.ResourceLocation;
-
-import java.awt.*;
 
 public class GuiButtonCubg extends GuiButton  {
 
@@ -82,7 +79,7 @@ public class GuiButtonCubg extends GuiButton  {
         {
             FontRenderer fontrenderer = mc.fontRenderer;
 
-            GuiUtils.renderRectWithOutline(this.x,this.y,this.width,this.height,color,color,1);
+            CUBGRenderHelper.renderRectWithOutline(this.x,this.y,this.width,this.height,color,color,1);
 
             this.mouseDragged(mc, mouseX, mouseY);
             int j = 14737632;
@@ -102,7 +99,7 @@ public class GuiButtonCubg extends GuiButton  {
             }
 
             if(this.buttonImage != null){
-                GuiUtils.renderImage(x,y,this.buttonImage,this.width,this.height);
+                CUBGRenderHelper.renderImage(x,y,this.buttonImage,this.width,this.height);
             }
 
             if(isMouseOver() || isAlwaysHighlighted) {
@@ -112,13 +109,13 @@ public class GuiButtonCubg extends GuiButton  {
                     mc.getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.UI_BUTTON_CLICK, 2.0F));
                 }
 
-                GuiUtils.renderRect(this.x, this.y, this.width, this.height, 0x33FFFFFF);
+                CUBGRenderHelper.renderRect(this.x, this.y, this.width, this.height, 0x33FFFFFF);
 
             } else {
                 this.isFirstHover = true;
             }
 
-            GuiUtils.renderCenteredTextScaledWithShadow(this.displayString, this.x + this.width / 2, (this.y + (this.height - 8) / 2) + this.yOffset, j, this.scale);
+            CUBGRenderHelper.renderCenteredTextScaledWithShadow(this.displayString, this.x + this.width / 2, (this.y + (this.height - 8) / 2) + this.yOffset, j, this.scale);
         }
     }
 

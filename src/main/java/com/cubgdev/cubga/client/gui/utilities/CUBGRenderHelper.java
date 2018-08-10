@@ -1,6 +1,7 @@
-package com.cubgdev.cubga.client.gui;
+package com.cubgdev.cubga.client.gui.utilities;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -17,7 +18,13 @@ import org.lwjgl.opengl.GL11;
  * <p>
  * Created by ScottehBoeh
  */
-public class GuiUtils {
+public class CUBGRenderHelper {
+
+    /* Used for Gui Animation */
+    public static float swing = 0;
+
+    /* The Player Renderer, used to render fake players on the UI */
+    public static final FakePlayerRendering PLAYER_RENDERER = new FakePlayerRendering(Minecraft.getMinecraft().getSession().getProfile());
 
     /**
      * Render Text
@@ -398,6 +405,35 @@ public class GuiUtils {
 
         GL11.glDisable(GL11.GL_BLEND);
         GL11.glDisable(GL11.GL_POINT_SMOOTH);
+    }
+
+    /**
+     * Render Player - Render the Player Model
+     * @param givenPlayer - The given player to render
+     * @param x - X position of Render
+     * @param y - Y position of Render
+     */
+    public static void renderOtherPlayer(AbstractClientPlayer givenPlayer, int x, int y, float givenScale, float givenRotation){
+
+        GL11.glPushMatrix();
+
+        PLAYER_RENDERER.renderOtherPlayerModel(givenPlayer,x, y, givenScale, givenRotation);
+        GL11.glPopMatrix();
+
+    }
+
+    /**
+     * Render Player - Render the Player Model
+     * @param x - X position of Render
+     * @param y - Y position of Render
+     */
+    public static void renderPlayer(int x, int y, float givenScale, float givenRotation){
+
+        GL11.glPushMatrix();
+
+        PLAYER_RENDERER.renderPlayerModel(x, y, givenScale, givenRotation);
+        GL11.glPopMatrix();
+
     }
 
 }
