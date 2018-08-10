@@ -2,14 +2,19 @@ package com.cubgdev.cubga.client.gui;
 
 import com.cubgdev.cubga.Reference;
 import com.cubgdev.cubga.client.gui.api.GuiButtonCubg;
+import com.cubgdev.cubga.client.gui.utilities.ScissorState;
 import net.minecraft.client.gui.*;
-import net.minecraft.client.gui.inventory.GuiInventory;
+import com.cubgdev.cubga.client.gui.utilities.CUBGRenderHelper;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiOptions;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraft.util.ResourceLocation;
 
 import java.io.IOException;
-import java.util.ArrayList;
+
+import static net.minecraft.client.renderer.GlStateManager.pushMatrix;
 
 public class GuiCubgMainMenu extends GuiCubg {
 
@@ -30,10 +35,16 @@ public class GuiCubgMainMenu extends GuiCubg {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         super.drawScreen(mouseX,mouseY,partialTicks);
 
-        GuiUtils.renderRectWithOutline(width / 2 - 75,3,150,34,0x22FFFFFF,0x22FFFFFF,1);
+        CUBGRenderHelper.renderRectWithOutline(width / 2 - 75,3,150,34,0x22FFFFFF,0x22FFFFFF,1);
 
-        GuiUtils.renderCenteredTextWithShadow(I18n.format("gui.subtitle.status"),width / 2,5,0xFFFFFF);
+        CUBGRenderHelper.renderCenteredTextWithShadow(I18n.format("gui.subtitle.status"),width / 2,5,0xFFFFFF);
 
+        GlStateManager.pushMatrix();
+        ScissorState.scissor(30, 0, width, height, true);
+        float val = (float) (Math.sin(CUBGRenderHelper.swing / 55) * 70);
+        CUBGRenderHelper.renderPlayer(width / 2,height / 2 + 155,150,val);
+        ScissorState.endScissor();
+        GlStateManager.popMatrix();
     }
 
     @Override
@@ -75,7 +86,6 @@ public class GuiCubgMainMenu extends GuiCubg {
                 mc.displayGuiScreen(new GuiMultiplayer(this));
                 break;
         }
-
     }
 
     /**
@@ -101,7 +111,6 @@ public class GuiCubgMainMenu extends GuiCubg {
                 .setAlwaysHighlighted(designatedServerIP.equalsIgnoreCase(Reference.SERVERIP_BEAVER)));
         this.buttonList.add(new GuiButtonCubg(BUTTON_KANGAROO,5,height - 60,120,15,I18n.format("gui.button.kangaroo"))
                 .setAlwaysHighlighted(designatedServerIP.equalsIgnoreCase(Reference.SERVERIP_KANGAROO)));
-        this.buttonList.add(new GuiButtonCubg(BUTTON_SINGLEPLAYER,5,height - 100,120,15,I18n.format("gui.button.singleplayer")));
 
         if((Boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment")) {
         this.buttonList.add(new GuiButtonCubg(BUTTON_MULTIPLAYER,5,height - 120,120,15,I18n.format("gui.button.mutliplayer")));

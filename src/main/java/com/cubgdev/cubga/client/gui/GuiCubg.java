@@ -1,12 +1,13 @@
 package com.cubgdev.cubga.client.gui;
 
 import com.cubgdev.cubga.Reference;
-import com.cubgdev.cubga.client.GuiEvents;
-import com.cubgdev.cubga.client.gui.GuiUtils;
 import com.cubgdev.cubga.client.gui.api.GuiButtonCubg;
 import com.cubgdev.cubga.client.gui.api.GuiContainer;
+import com.cubgdev.cubga.client.gui.utilities.CUBGRenderHelper;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.*;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiOptions;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.multiplayer.GuiConnecting;
 import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.client.renderer.GlStateManager;
@@ -47,12 +48,10 @@ public class GuiCubg extends GuiScreen {
     public final int BUTTON_NEWS = 205;
 
     public final int BUTTON_SETTINGS = 206;
+
     public final int BUTTON_SINGLEPLAYER = 207;
     public final int BUTTON_MULTIPLAYER = 208;
     public final int BUTTON_QUIT = 209;
-
-    @SideOnly(Side.CLIENT)
-    public FakePlayerFactory playerFactory;
 
     @Override
     public void updateScreen()
@@ -75,12 +74,12 @@ public class GuiCubg extends GuiScreen {
     public void drawScreen(int mouseX, int mouseY, float partialTicks){
 
         GL11.glPushMatrix();
-        GuiUtils.renderImage(0,0,menuBackground,width,height);
-        GuiUtils.renderRectWithOutline(0,0,width,40,0x55000000,0x44000000,1);
-        GuiUtils.renderRectWithOutline(0,height - 40,width,40,0x55000000,0x44000000,1);
-        GuiUtils.renderImage(4,3,new ResourceLocation(Reference.MOD_ID,"textures/gui/logo.png"),110,29);
+        CUBGRenderHelper.renderImage(0,0,menuBackground,width,height);
+        CUBGRenderHelper.renderRectWithOutline(0,0,width,40,0x55000000,0x44000000,1);
+        CUBGRenderHelper.renderRectWithOutline(0,height - 40,width,40,0x55000000,0x44000000,1);
+        CUBGRenderHelper.renderImage(4,3,new ResourceLocation(Reference.MOD_ID,"textures/gui/logo.png"),110,29);
 
-        GuiUtils.renderCenteredTextScaled("Battlegrounds v" + Reference.MOD_VERSION,58,34,0xFFFFFF,0.5);
+        CUBGRenderHelper.renderCenteredTextScaled("Battlegrounds v" + Reference.MOD_VERSION,58,34,0xFFFFFF,0.5);
 
         GL11.glPopMatrix();
 
@@ -177,45 +176,4 @@ public class GuiCubg extends GuiScreen {
         }
 
     }
-
-    public static void drawEntityOnScreen(int posX, int posY, int scale, float mouseX, float mouseY, EntityLivingBase ent)
-    {
-        GlStateManager.enableColorMaterial();
-        GlStateManager.pushMatrix();
-        GlStateManager.translate((float)posX, (float)posY, 50.0F);
-        GlStateManager.scale((float)(-scale), (float)scale, (float)scale);
-        GlStateManager.rotate(180.0F, 0.0F, 0.0F, 1.0F);
-        float f = ent.renderYawOffset;
-        float f1 = ent.rotationYaw;
-        float f2 = ent.rotationPitch;
-        float f3 = ent.prevRotationYawHead;
-        float f4 = ent.rotationYawHead;
-        GlStateManager.rotate(135.0F, 0.0F, 1.0F, 0.0F);
-        RenderHelper.enableStandardItemLighting();
-        GlStateManager.rotate(-135.0F, 0.0F, 1.0F, 0.0F);
-        GlStateManager.rotate(-((float)Math.atan((double)(mouseY / 40.0F))) * 20.0F, 1.0F, 0.0F, 0.0F);
-        ent.renderYawOffset = (float)Math.atan((double)(mouseX / 40.0F)) * 20.0F;
-        ent.rotationYaw = (float)Math.atan((double)(mouseX / 40.0F)) * 40.0F;
-        ent.rotationPitch = -((float)Math.atan((double)(mouseY / 40.0F))) * 20.0F;
-        ent.rotationYawHead = ent.rotationYaw;
-        ent.prevRotationYawHead = ent.rotationYaw;
-        GlStateManager.translate(0.0F, 0.0F, 0.0F);
-        RenderManager rendermanager = Minecraft.getMinecraft().getRenderManager();
-        rendermanager.setPlayerViewY(180.0F);
-        rendermanager.setRenderShadow(false);
-        rendermanager.renderEntity(ent, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F, false);
-        rendermanager.setRenderShadow(true);
-        ent.renderYawOffset = f;
-        ent.rotationYaw = f1;
-        ent.rotationPitch = f2;
-        ent.prevRotationYawHead = f3;
-        ent.rotationYawHead = f4;
-        GlStateManager.popMatrix();
-        RenderHelper.disableStandardItemLighting();
-        GlStateManager.disableRescaleNormal();
-        GlStateManager.setActiveTexture(OpenGlHelper.lightmapTexUnit);
-        GlStateManager.disableTexture2D();
-        GlStateManager.setActiveTexture(OpenGlHelper.defaultTexUnit);
-    }
-
 }
