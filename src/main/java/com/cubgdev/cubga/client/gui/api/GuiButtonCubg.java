@@ -55,9 +55,9 @@ public class GuiButtonCubg extends GuiButton  {
         return this;
     }
 
-    public void updateButton(){
-
-        if(isMouseOver()) {
+    public void updateButton()
+    {
+        if (isMouseOver()) {
             if (fade <= 0) {
                 fade = 0;
             } else {
@@ -66,7 +66,6 @@ public class GuiButtonCubg extends GuiButton  {
         } else {
             fade = 90;
         }
-
     }
 
     @Override
@@ -94,6 +93,10 @@ public class GuiButtonCubg extends GuiButton  {
                 j = 10526880;
             }
             else if (this.hovered)
+            {
+                j = 16777120;
+            }
+            else if (this.isAlwaysHighlighted)
             {
                 j = 16777120;
             }

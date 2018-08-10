@@ -2,15 +2,14 @@ package com.cubgdev.cubga.client.gui;
 
 import com.cubgdev.cubga.Reference;
 import com.cubgdev.cubga.client.gui.api.GuiButtonCubg;
-import com.cubgdev.cubga.client.gui.utilities.CUBGRenderHelper;
-import com.cubgdev.cubga.client.gui.utilities.ScissorState;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiOptions;
-import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class GuiCubgMainMenu extends GuiCubg {
 
@@ -31,20 +30,9 @@ public class GuiCubgMainMenu extends GuiCubg {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         super.drawScreen(mouseX,mouseY,partialTicks);
 
-        CUBGRenderHelper.renderRectWithOutline(width / 2 - 75,3,150,34,0x22FFFFFF,0x22FFFFFF,1);
+        GuiUtils.renderRectWithOutline(width / 2 - 75,3,150,34,0x22FFFFFF,0x22FFFFFF,1);
 
-        CUBGRenderHelper.renderCenteredTextWithShadow(I18n.format("gui.subtitle.status"),width / 2,5,0xFFFFFF);
-
-        GlStateManager.pushMatrix();
-
-        ScissorState.scissor(30, 0, width, height, true);
-
-        float val = (float) (Math.sin(CUBGRenderHelper.swing / 55) * 70);
-        CUBGRenderHelper.renderPlayer(width / 2,height / 2 + 155,150,val);
-
-        ScissorState.endScissor();
-
-        GlStateManager.popMatrix();
+        GuiUtils.renderCenteredTextWithShadow(I18n.format("gui.subtitle.status"),width / 2,5,0xFFFFFF);
 
     }
 
