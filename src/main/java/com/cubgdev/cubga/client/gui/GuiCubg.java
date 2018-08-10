@@ -1,9 +1,9 @@
 package com.cubgdev.cubga.client.gui;
 
 import com.cubgdev.cubga.Reference;
-import com.cubgdev.cubga.client.gui.GuiUtils;
 import com.cubgdev.cubga.client.gui.api.GuiButtonCubg;
 import com.cubgdev.cubga.client.gui.api.GuiContainer;
+import com.cubgdev.cubga.client.gui.utilities.CUBGRenderHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiOptions;
@@ -73,12 +73,12 @@ public class GuiCubg extends GuiScreen {
     public void drawScreen(int mouseX, int mouseY, float partialTicks){
 
         GL11.glPushMatrix();
-        GuiUtils.renderImage(0,0,menuBackground,width,height);
-        GuiUtils.renderRectWithOutline(0,0,width,40,0x55000000,0x44000000,1);
-        GuiUtils.renderRectWithOutline(0,height - 40,width,40,0x55000000,0x44000000,1);
-        GuiUtils.renderImage(4,3,new ResourceLocation(Reference.MOD_ID,"textures/gui/logo.png"),110,29);
+        CUBGRenderHelper.renderImage(0,0,menuBackground,width,height);
+        CUBGRenderHelper.renderRectWithOutline(0,0,width,40,0x55000000,0x44000000,1);
+        CUBGRenderHelper.renderRectWithOutline(0,height - 40,width,40,0x55000000,0x44000000,1);
+        CUBGRenderHelper.renderImage(4,3,new ResourceLocation(Reference.MOD_ID,"textures/gui/logo.png"),110,29);
 
-        GuiUtils.renderCenteredTextScaled("Battlegrounds v" + Reference.MOD_VERSION + " " + this.uiTitle,58,34,0xFFFFFF,0.5);
+        CUBGRenderHelper.renderCenteredTextScaled("Battlegrounds v" + Reference.MOD_VERSION + " " + this.uiTitle,58,34,0xFFFFFF,0.5);
 
         GL11.glPopMatrix();
 

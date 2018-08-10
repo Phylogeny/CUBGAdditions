@@ -2,6 +2,7 @@ package com.cubgdev.cubga.client.gui;
 
 import com.cubgdev.cubga.Reference;
 import com.cubgdev.cubga.client.gui.api.GuiButtonCubg;
+import com.cubgdev.cubga.client.gui.utilities.CUBGRenderHelper;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiOptions;
 import net.minecraft.client.gui.inventory.GuiInventory;
@@ -30,9 +31,9 @@ public class GuiCubgMainMenu extends GuiCubg {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         super.drawScreen(mouseX,mouseY,partialTicks);
 
-        GuiUtils.renderRectWithOutline(width / 2 - 75,3,150,34,0x22FFFFFF,0x22FFFFFF,1);
+        CUBGRenderHelper.renderRectWithOutline(width / 2 - 75,3,150,34,0x22FFFFFF,0x22FFFFFF,1);
 
-        GuiUtils.renderCenteredTextWithShadow(I18n.format("gui.subtitle.status"),width / 2,5,0xFFFFFF);
+        CUBGRenderHelper.renderCenteredTextWithShadow(I18n.format("gui.subtitle.status"),width / 2,5,0xFFFFFF);
 
     }
 
