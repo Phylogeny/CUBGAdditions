@@ -8,6 +8,8 @@ import com.cubgdev.cubga.utils.TextureUtils;
 import com.google.common.collect.Maps;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelEnderCrystal;
 import net.minecraft.client.renderer.GlStateManager;
@@ -17,19 +19,22 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.RenderTickEvent;
 
-public class RenderEvents
-{
+public class RenderEvents {
 
-	private static final ResourceLocation ENDER_CRYSTAL_TEXTURES = new ResourceLocation(Reference.MOD_ID,"textures/models/crystal.png");
+	private static final ResourceLocation ENDER_CRYSTAL_TEXTURES = new ResourceLocation(Reference.MOD_ID, "textures/models/crystal.png");
 	private static final ModelBase ENDER_CRYSTAL_MODEL = new ModelEnderCrystal(0.0F, false);
 	private static final Map<BlockPos, TileEntity> NEARBY_TILE_ENTITIES = Maps.<BlockPos, TileEntity>newHashMap();
 
+	private static final ResourceLocation BARS = new ResourceLocation(Reference.MOD_ID, "textures/gui/bars.png");
+
 	@SubscribeEvent
-	public void onRenderWorldEvent(RenderWorldLastEvent event)
-	{
+	public void onRenderWorldEvent(RenderWorldLastEvent event) {
 		GlStateManager.pushMatrix();
 
 		EntityPlayer player = Minecraft.getMinecraft().player;
@@ -49,25 +54,20 @@ public class RenderEvents
 		GlStateManager.popMatrix();
 	}
 
-	private void renderCrystalContainers(EntityPlayer player, World world, float partialTicks)
-	{
+	private void renderCrystalContainers(EntityPlayer player, World world, float partialTicks) {
 		int chunkSize = 8;
 
-		for (int i = 0; i < chunkSize * chunkSize; i++)
-		{
+		for (int i = 0; i < chunkSize * chunkSize; i++) {
 			int x = (i % chunkSize) - chunkSize / 2;
 			int z = (i / chunkSize) - chunkSize / 2;
 			NEARBY_TILE_ENTITIES.putAll(world.getChunkFromBlockCoords(player.getPosition().add(x * 16, 0, z * 16)).getTileEntityMap());
 		}
 
-		for (BlockPos position : NEARBY_TILE_ENTITIES.keySet())
-		{
-			if (NEARBY_TILE_ENTITIES.get(position) instanceof TileEntityCrystalContainer)
-			{
+		for (BlockPos position : NEARBY_TILE_ENTITIES.keySet()) {
+			if (NEARBY_TILE_ENTITIES.get(position) instanceof TileEntityCrystalContainer) {
 				TileEntityCrystalContainer te = (TileEntityCrystalContainer) NEARBY_TILE_ENTITIES.get(position);
 				BlockPos fromPos = te.getPos();
-				if (Minecraft.getMinecraft().player.getPosition().getDistance(fromPos.getX(), fromPos.getY(), fromPos.getZ()) < 128D)
-				{
+				if (Minecraft.getMinecraft().player.getPosition().getDistance(fromPos.getX(), fromPos.getY(), fromPos.getZ()) < 128D) {
 					te.updateRotation();
 					double innerRotation = te.getInnerRotation();
 					double innerRotationSin = Math.sin(innerRotation * 0.2F) / 2.0F + 0.45F;
@@ -88,13 +88,10 @@ public class RenderEvents
 					GlStateManager.popMatrix();
 
 					BlockPos[] beamPositions = te.getBeamPositions();
-					if (beamPositions != null)
-					{
-						for (int i = 0; i < beamPositions.length; i++)
-						{
+					if (beamPositions != null) {
+						for (int i = 0; i < beamPositions.length; i++) {
 							BlockPos toPos = beamPositions[i];
-							if (toPos != null)
-							{
+							if (toPos != null) {
 								GlStateManager.pushMatrix();
 								GlStateManager.translate(0.5 * (1 / te.getScale()), -0.1 * te.getScale(), 0.5 * (1 / te.getScale()));
 								GlStateManager.scale(scale, scale, scale);
@@ -114,5 +111,27 @@ public class RenderEvents
 			}
 		}
 		NEARBY_TILE_ENTITIES.clear();
+	}
+	
+	@SubscribeEvent
+	public void onRenderHudEvent(RenderGameOverlayEvent.Pre event) {
+		Minecraft mc = Minecraft.getMinecraft();
+		ScaledResolution scaledRes = new ScaledResolution(mc);
+		EntityPlayer player = mc.player;
+
+		if (event.getType() == ElementType.HEALTH && mc.playerController.shouldDrawHUD()) {
+			mc.getTextureManager().bindTexture(BARS);
+			int x = scaledRes.getScaledWidth() / 2 - 91;
+
+			int j = 182;
+			int k = (int) ( mc.player.getHealth() / mc.player.getMaxHealth() * 184.0F);
+			int l = scaledRes.getScaledHeight() - 32 + 3;
+			Gui.drawScaledCustomSizeModalRect(x, l, 1, 1, 184, 5, 184, 5, 256, 256);
+
+			if (k > 0) {
+				Gui.drawScaledCustomSizeModalRect(x, l, 1, 6, k, 5, k, 5, 256, 256);
+			}
+		}
+		event.setCanceled(event.getType() == ElementType.HEALTH || event.getType() == ElementType.FOOD || event.getType() == ElementType.EXPERIENCE || event.getType() == ElementType.ARMOR);
 	}
 }
