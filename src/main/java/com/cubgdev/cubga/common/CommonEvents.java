@@ -22,7 +22,7 @@ public class CommonEvents {
 
 	public static boolean replaceBricks = false;
 
-	public static boolean timerStarted = false;
+	//public static boolean timerStarted = false;
 
 	DiscordHandler discordHandler = DiscordHandler.getInstance();
 
@@ -50,17 +50,17 @@ public class CommonEvents {
 						if (scoreplayerteam.getDisplayName().equals("Lobby")) {
 							discordHandler.getDiscordRichPresence().state = "Waiting For Players";
 							//discordHandler.getDiscordRichPresence().startTimestamp=0L;
-							if(timerStarted) {
+							/*if(timerStarted) {
 								timerStarted = false;
 								discordHandler.getDiscordRichPresence().startTimestamp = System.currentTimeMillis() / 1000L;
-							}
+							}*/
 							discordHandler.updateRichPresence();
 						} else if (scoreplayerteam.getDisplayName().equals("inGame")) {
 							discordHandler.getDiscordRichPresence().state = "Playing - Alive";
-							if(!timerStarted) {
+							/*if(!timerStarted) {
 								timerStarted = true;
 								discordHandler.getDiscordRichPresence().startTimestamp = System.currentTimeMillis() / 1000L;
-							}
+							}*/
 							discordHandler.updateRichPresence();
 						} else if (scoreplayerteam.getDisplayName().equals("Spectator")) {
 							discordHandler.getDiscordRichPresence().state = "Playing - Dead";
