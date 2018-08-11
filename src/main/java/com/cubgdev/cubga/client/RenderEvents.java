@@ -3,27 +3,40 @@ package com.cubgdev.cubga.client;
 import java.util.Map;
 
 import com.cubgdev.cubga.Reference;
+import com.cubgdev.cubga.client.render.entity.RenderCustomPlayer;
 import com.cubgdev.cubga.tileentity.TileEntityCrystalContainer;
 import com.cubgdev.cubga.utils.TextureUtils;
+import com.cubgdev.cubga.utils.cape.Capes;
 import com.google.common.collect.Maps;
+import com.mrcrayfish.obfuscate.client.event.ModelPlayerEvent;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelEnderCrystal;
+import net.minecraft.client.model.ModelPlayer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderDragon;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EnumPlayerModelParts;
+import net.minecraft.init.Items;
+import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
+import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.RenderTickEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class RenderEvents {
 
@@ -32,7 +45,12 @@ public class RenderEvents {
 	private static final Map<BlockPos, TileEntity> NEARBY_TILE_ENTITIES = Maps.<BlockPos, TileEntity>newHashMap();
 
 	private static final ResourceLocation BARS = new ResourceLocation(Reference.MOD_ID, "textures/gui/bars.png");
-
+	
+	@SubscribeEvent
+	public void onRenderPlayerEvent(RenderPlayerEvent.Post event) {
+		Capes.update();
+	}
+	
 	@SubscribeEvent
 	public void onRenderWorldEvent(RenderWorldLastEvent event) {
 		GlStateManager.pushMatrix();
@@ -46,8 +64,6 @@ public class RenderEvents {
 		double posZ = player.lastTickPosZ + (player.posZ - player.lastTickPosZ) * partialTicks;
 
 		GlStateManager.translate(-posX, -posY, -posZ);
-
-		TextureUtils.bindTexture(ENDER_CRYSTAL_TEXTURES);
 
 		this.renderCrystalContainers(player, world, partialTicks);
 
@@ -112,7 +128,7 @@ public class RenderEvents {
 		}
 		NEARBY_TILE_ENTITIES.clear();
 	}
-	
+
 	@SubscribeEvent
 	public void onRenderHudEvent(RenderGameOverlayEvent.Pre event) {
 		Minecraft mc = Minecraft.getMinecraft();
@@ -124,7 +140,7 @@ public class RenderEvents {
 			int x = scaledRes.getScaledWidth() / 2 - 91;
 
 			int j = 182;
-			int k = (int) ( mc.player.getHealth() / mc.player.getMaxHealth() * 184.0F);
+			int k = (int) (mc.player.getHealth() / mc.player.getMaxHealth() * 184.0F);
 			int l = scaledRes.getScaledHeight() - 32 + 3;
 			Gui.drawScaledCustomSizeModalRect(x, l, 1, 1, 184, 5, 184, 5, 256, 256);
 
