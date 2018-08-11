@@ -40,14 +40,17 @@ public class GuiCubg extends GuiScreen {
     public final int BUTTON_LINK_DISCORD = 200;
     public final int BUTTON_LINK_WEBSITE = 201;
 
-    public final int BUTTON_CUBG_BEAVER = 202;
-    public final int BUTTON_CUBG_KANGAROO = 203;
+    public final int BUTTON_BEAVER = 202;
+    public final int BUTTON_KANGAROO = 203;
 
     public final int BUTTON_PLAY = 204;
 
     public final int BUTTON_NEWS = 205;
 
     public final int BUTTON_SETTINGS = 206;
+
+    public final int BUTTON_SINGLEPLAYER = 207;
+    public final int BUTTON_MULTIPLAYER = 208;
 
     @SideOnly(Side.CLIENT)
     public FakePlayerFactory playerFactory;
@@ -144,31 +147,6 @@ public class GuiCubg extends GuiScreen {
         String blue = pad(Integer.toHexString(color.getBlue()));
         String hex = "0x" + alpha + red + green + blue;
         return Integer.parseInt(hex, 16);
-    }
-
-    @Override
-    protected void actionPerformed(GuiButton button) throws IOException
-    {
-        super.actionPerformed(button);
-
-        switch(button.id){
-            case BUTTON_LINK_DISCORD:
-                this.openURL(Reference.LINK_DISCORD);
-                break;
-            case BUTTON_LINK_WEBSITE:
-                this.openURL(Reference.LINK_WEBSITE);
-                break;
-            case BUTTON_NEWS:
-
-                break;
-            case BUTTON_SETTINGS:
-                mc.displayGuiScreen(new GuiOptions(this,mc.gameSettings));
-                break;
-            case BUTTON_PLAY:
-
-                break;
-        }
-
     }
 
     /**
