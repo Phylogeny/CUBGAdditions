@@ -71,7 +71,8 @@ item.master_gauntlet.info=A gauntlet made out of the finest material. Made for t
 gui.button.discord=DISCORD
 gui.button.website=WEBSITE
 gui.button.play=PLAY
-gui.button.singleplayer=SINGLEPLAYER
+gui.button.singleplayer=SINGLE-PLAYER
+gui.button.multiplayer=MULTI-PLAYER
 gui.button.settings=SETTINGS
 gui.button.news=NEWS/UPDATES
 
