@@ -2,7 +2,9 @@ package com.cubgdev.cubga.client;
 
 import java.util.Map;
 
+import com.cubgdev.cubga.CUBGConfig;
 import com.cubgdev.cubga.Reference;
+import com.cubgdev.cubga.client.gui.utilities.CUBGRenderHelper;
 import com.cubgdev.cubga.client.render.entity.RenderCustomPlayer;
 import com.cubgdev.cubga.tileentity.TileEntityCrystalContainer;
 import com.cubgdev.cubga.utils.TextureUtils;
@@ -12,6 +14,7 @@ import com.mrcrayfish.obfuscate.client.event.ModelPlayerEvent;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.model.ModelBase;
@@ -44,13 +47,14 @@ public class RenderEvents {
 	private static final ModelBase ENDER_CRYSTAL_MODEL = new ModelEnderCrystal(0.0F, false);
 	private static final Map<BlockPos, TileEntity> NEARBY_TILE_ENTITIES = Maps.<BlockPos, TileEntity>newHashMap();
 
-	private static final ResourceLocation BARS = new ResourceLocation(Reference.MOD_ID, "textures/gui/bars.png");
-	
+	private static final ResourceLocation BARS_BOSS = new ResourceLocation(Reference.MOD_ID, "textures/gui/bars_boss.png");
+	private static final ResourceLocation BARS_XP = new ResourceLocation(Reference.MOD_ID, "textures/gui/bars_xp.png");
+
 	@SubscribeEvent
 	public void onRenderPlayerEvent(RenderPlayerEvent.Post event) {
 		Capes.update();
 	}
-	
+
 	@SubscribeEvent
 	public void onRenderWorldEvent(RenderWorldLastEvent event) {
 		GlStateManager.pushMatrix();
@@ -131,23 +135,56 @@ public class RenderEvents {
 
 	@SubscribeEvent
 	public void onRenderHudEvent(RenderGameOverlayEvent.Pre event) {
-		Minecraft mc = Minecraft.getMinecraft();
-		ScaledResolution scaledRes = new ScaledResolution(mc);
-		EntityPlayer player = mc.player;
+		if (CUBGConfig.CLIENT.ui.uiEnabled) {
+			Minecraft mc = Minecraft.getMinecraft();
+			ScaledResolution scaledRes = new ScaledResolution(mc);
+			EntityPlayer player = mc.player;
+			float red = 1F / 255;
+			float green = 1F / 255;
+			float blue = 1F / 255;
 
-		if (event.getType() == ElementType.HEALTH && mc.playerController.shouldDrawHUD()) {
-			mc.getTextureManager().bindTexture(BARS);
-			int x = scaledRes.getScaledWidth() / 2 - 91;
+			if (event.getType() == ElementType.HEALTH && mc.playerController.shouldDrawHUD()) {
+				GlStateManager.color(red * CUBGConfig.CLIENT.ui.health.healthColor.Red, green * CUBGConfig.CLIENT.ui.health.healthColor.Green, blue * CUBGConfig.CLIENT.ui.health.healthColor.Blue);
 
-			int j = 182;
-			int k = (int) (mc.player.getHealth() / mc.player.getMaxHealth() * 184.0F);
-			int l = scaledRes.getScaledHeight() - 32 + 3;
-			Gui.drawScaledCustomSizeModalRect(x, l, 1, 1, 184, 5, 184, 5, 256, 256);
+				if (CUBGConfig.CLIENT.ui.health.xpbarEnabled) {
+					mc.getTextureManager().bindTexture(BARS_XP);
+				} else {
+					mc.getTextureManager().bindTexture(BARS_BOSS);
 
-			if (k > 0) {
-				Gui.drawScaledCustomSizeModalRect(x, l, 1, 6, k, 5, k, 5, 256, 256);
+				}
+
+				int x = scaledRes.getScaledWidth() / 2 - 91;
+				GlStateManager.enableAlpha();
+				int j = 182;
+				int k = (int) (player.getHealth() / player.getMaxHealth() * 184.0F);
+				int l = scaledRes.getScaledHeight() - 32 + 3;
+				Gui.drawScaledCustomSizeModalRect(x, l, 1, 1, 184, 5, 184, 5, 256, 256);
+
+				if (k > 0) {
+					Gui.drawScaledCustomSizeModalRect(x, l, 1, 6, k, 5, k, 5, 256, 256);
+				}
+
+				boolean flag1 = false;
+				int color = flag1 ? 16777215 : 8453920;
+				String text = null;
+				if (CUBGConfig.CLIENT.ui.health.percentagesEnabled) {
+					text = (int)(player.getHealth()) * 5 + "%";
+				} else {
+					text = player.getHealth() / 2 + "/" + player.getMaxHealth();
+				}
+				GlStateManager.pushMatrix();
+				GlStateManager.translate(scaledRes.getScaledWidth() / 2, scaledRes.getScaledHeight() - 34, 0);
+				GlStateManager.scale(1, 1, 1);
+				CUBGRenderHelper.renderTextWithShadow(text, -Minecraft.getMinecraft().fontRenderer.getStringWidth(text) / 2, -Minecraft.getMinecraft().fontRenderer.FONT_HEIGHT / 2, color);
+				GlStateManager.popMatrix();
+
+			/*GlStateManager.pushMatrix();
+			GlStateManager.translate(scaledRes.getScaledWidth() / 2, scaledRes.getScaledHeight() - 26.25, 0);
+			GlStateManager.scale(0.5, 0.5, 0.5);
+			CUBGRenderHelper.renderText(text, - Minecraft.getMinecraft().fontRenderer.getStringWidth(text) / 2, - Minecraft.getMinecraft().fontRenderer.FONT_HEIGHT / 2, color);
+			GlStateManager.popMatrix();*/
 			}
+			event.setCanceled(event.getType() == ElementType.HEALTH || event.getType() == ElementType.FOOD || event.getType() == ElementType.EXPERIENCE || event.getType() == ElementType.ARMOR || event.getType() == ElementType.AIR);
 		}
-		event.setCanceled(event.getType() == ElementType.HEALTH || event.getType() == ElementType.FOOD || event.getType() == ElementType.EXPERIENCE || event.getType() == ElementType.ARMOR);
 	}
 }

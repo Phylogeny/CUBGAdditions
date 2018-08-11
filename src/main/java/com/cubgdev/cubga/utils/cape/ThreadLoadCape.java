@@ -28,7 +28,7 @@ public class ThreadLoadCape extends Thread {
 
 	@Override
 	public void run() {
-		String url = "https://raw.githubusercontent.com/JacksonPlayz/CuBG-Resources/master/capes/" + this.cape.getName();
+		String url = "https://raw.githubusercontent.com/JacksonPlayz/CuBG-Resources/master/accessories/" + this.cape.getName();
 		try {
 			URL texture = new URL(url);
 			BufferedImage image = ImageIO.read(texture.openStream());
