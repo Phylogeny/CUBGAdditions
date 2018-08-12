@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 @Mod.EventBusSubscriber(modid = Reference.MOD_ID)
 public class CUBGConfig
 {
-    private static final String PREFIX = Reference.MOD_ID + ".config.";
+    private static final String PREFIX = "config." + Reference.MOD_ID;
 
     @Config.Name("Client")
     @Config.Comment("Client-only configs.")
@@ -40,17 +40,17 @@ public class CUBGConfig
     }
 
     public static class Health {
-        @Config.Name("XP Bar")
-        @Config.Comment("Determines whether the health bar will use the XP bar texture or the boss bar texture.")
+        @Config.Name("Enable XP Health Bar")
+        @Config.Comment("Determines whether or not the health bar will have the XP bar texture (Colorable)")
         @Config.LangKey(PREFIX + "client.ui.health.xpbar")
         public boolean xpbarEnabled = false; // Default: Boss Bar
 
         @Config.Name("Percentages")
-        @Config.Comment("Determines whether the health bar will use percentages instead of HEALTH/HEALTH.")
+        @Config.Comment("Determines whether the health bar will use percentages")
         @Config.LangKey(PREFIX + "client.ui.health.percentages")
         public boolean percentagesEnabled = false; // Default: HEALTH/HEALTH
 
-        @Config.Name("Colors")
+        @Config.Name("Health Bar Colors")
         @Config.Comment("Determines what color will be used on the health bar.")
         @Config.LangKey(PREFIX + "client.ui.health.color")
         public HealthColor healthColor = new HealthColor();
@@ -58,16 +58,19 @@ public class CUBGConfig
 
     public static class HealthColor {
         @Config.Name("Blue")
-        @Config.Comment("Blue value of the health bar color.")
+        @Config.Comment("Blue value of the health bar RGB.")
         @Config.LangKey(PREFIX + "client.ui.health.color.blue")
+        @Config.RangeInt(min = 0, max = 255)
         public int Blue = 85; // Default: 85
         @Config.Name("Green")
-        @Config.Comment("Green value of the health bar color.")
+        @Config.Comment("Green value of the health bar RGB.")
         @Config.LangKey(PREFIX + "client.ui.health.color.green")
+        @Config.RangeInt(min = 0, max = 255)
         public int Green = 85; // Default: 85
         @Config.Name("Red")
-        @Config.Comment("Red value of the health bar color.")
+        @Config.Comment("Red value of the health bar RGB.")
         @Config.LangKey(PREFIX + "client.ui.health.color.red")
+        @Config.RangeInt(min = 0, max = 255)
         public int Red = 255; // Default: 255
     }
 
