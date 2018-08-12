@@ -164,19 +164,21 @@ public class RenderEvents {
 					Gui.drawScaledCustomSizeModalRect(x, l, 1, 6, k, 5, k, 5, 256, 256);
 				}
 
-				boolean flag1 = false;
-				int color = flag1 ? 16777215 : 8453920;
-				String text = null;
-				if (CUBGConfig.CLIENT.ui.health.percentagesEnabled) {
-					text = (int)(player.getHealth()) * 5 + "%";
-				} else {
-					text = player.getHealth() / 2 + "/" + (int)(player.getMaxHealth()) / 2;
+				if(CUBGConfig.CLIENT.ui.health.numbersEnabled) {
+					boolean flag1 = false;
+					int color = flag1 ? 16777215 : 8453920;
+					String text = null;
+					if (CUBGConfig.CLIENT.ui.health.percentagesEnabled) {
+						text = (int) (player.getHealth()) * 5 + "%";
+					} else {
+						text = player.getHealth() / 2 + "/" + (int) (player.getMaxHealth()) / 2;
+					}
+					GlStateManager.pushMatrix();
+					GlStateManager.translate(scaledRes.getScaledWidth() / 2, scaledRes.getScaledHeight() - 34, 0);
+					GlStateManager.scale(1, 1, 1);
+					CUBGRenderHelper.renderTextWithShadow(text, -Minecraft.getMinecraft().fontRenderer.getStringWidth(text) / 2, -Minecraft.getMinecraft().fontRenderer.FONT_HEIGHT / 2, color);
+					GlStateManager.popMatrix();
 				}
-				GlStateManager.pushMatrix();
-				GlStateManager.translate(scaledRes.getScaledWidth() / 2, scaledRes.getScaledHeight() - 34, 0);
-				GlStateManager.scale(1, 1, 1);
-				CUBGRenderHelper.renderTextWithShadow(text, -Minecraft.getMinecraft().fontRenderer.getStringWidth(text) / 2, -Minecraft.getMinecraft().fontRenderer.FONT_HEIGHT / 2, color);
-				GlStateManager.popMatrix();
 
 			/*GlStateManager.pushMatrix();
 			GlStateManager.translate(scaledRes.getScaledWidth() / 2, scaledRes.getScaledHeight() - 26.25, 0);

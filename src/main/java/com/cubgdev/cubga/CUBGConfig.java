@@ -48,7 +48,12 @@ public class CUBGConfig
         @Config.Name("Percentages")
         @Config.Comment("Determines whether the health bar will use percentages")
         @Config.LangKey(PREFIX + "client.ui.health.percentages")
-        public boolean percentagesEnabled = false; // Default: HEALTH/HEALTH
+        public boolean percentagesEnabled = false; // Default: False
+
+        @Config.Name("Enable Health Numbers")
+        @Config.Comment("Determines whether the numbers above the health bar will show.")
+        @Config.LangKey(PREFIX + "client.ui.health.numbers")
+        public boolean numbersEnabled = true; // Default: True
 
         @Config.Name("Health Bar Colors")
         @Config.Comment("Determines what color will be used on the health bar.")
