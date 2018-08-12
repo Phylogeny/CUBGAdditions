@@ -51,6 +51,7 @@ public class GuiCubg extends GuiScreen {
 
     public final int BUTTON_SINGLEPLAYER = 207;
     public final int BUTTON_MULTIPLAYER = 208;
+
     public final int BUTTON_QUIT = 209;
 
     @Override
@@ -74,7 +75,9 @@ public class GuiCubg extends GuiScreen {
     public void drawScreen(int mouseX, int mouseY, float partialTicks){
 
         GL11.glPushMatrix();
-        CUBGRenderHelper.renderImage(0,0,menuBackground,width,height);
+
+        CUBGRenderHelper.renderImageCentered(width / 2,0,menuBackground,width,height);
+
         CUBGRenderHelper.renderRectWithOutline(0,0,width,40,0x55000000,0x44000000,1);
         CUBGRenderHelper.renderRectWithOutline(0,height - 40,width,40,0x55000000,0x44000000,1);
         CUBGRenderHelper.renderImage(4,3,new ResourceLocation(Reference.MOD_ID,"textures/gui/logo.png"),110,29);

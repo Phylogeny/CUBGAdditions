@@ -381,6 +381,24 @@ public class CUBGRenderHelper {
 
     }
 
+    public static void renderImageCenteredScaled(double givenX, double givenY, ResourceLocation givenTexture, double givenWidth, double givenHeight, double givenScale) {
+
+        GL11.glPushMatrix();
+        GL11.glTranslated(givenX, givenY, 0);
+        GL11.glScaled(givenScale, givenScale, givenScale);
+        renderImageCentered(givenX - (givenWidth / 2),givenY,givenTexture,givenWidth,givenHeight);
+        GL11.glPopMatrix();
+
+    }
+
+    public static void renderImageCentered(double givenX, double givenY, ResourceLocation givenTexture, double givenWidth, double givenHeight) {
+
+        GL11.glPushMatrix();
+        renderImage(givenX - (givenWidth / 2),givenY,givenTexture,givenWidth,givenHeight);
+        GL11.glPopMatrix();
+
+    }
+
     public static void renderImage(double x, double y, ResourceLocation image, double width, double height) {
 
         GL11.glColor3f(1, 1, 1);
