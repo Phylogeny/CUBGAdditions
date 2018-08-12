@@ -68,8 +68,8 @@ public class CUBG {
 
 	@Mod.EventHandler
 	public void onServerStarting(FMLServerStartingEvent event) {
-		Capes.load();
 		event.registerServerCommand(new CommandResetBrittleBricks());
+		Capes.load();
 	}
 
 	public static Logger logger() {

@@ -1,19 +1,21 @@
 package com.cubgdev.cubga.common;
 
+import java.util.HashMap;
+import java.util.UUID;
+
 import com.cubgdev.cubga.network.PacketHandler;
+import com.cubgdev.cubga.network.message.MessageUpdateCapes;
 import com.cubgdev.cubga.utils.DiscordHandler;
+import com.cubgdev.cubga.utils.cape.Capes;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.scoreboard.ScorePlayerTeam;
 import net.minecraft.scoreboard.Scoreboard;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.network.FMLNetworkEvent;
-
-import java.util.HashMap;
-import java.util.UUID;
 
 /**
  * Author: MrCrayfish
@@ -21,16 +23,18 @@ import java.util.UUID;
 public class CommonEvents {
 
 	public static boolean replaceBricks = false;
-
-	//public static boolean timerStarted = false;
-
-	DiscordHandler discordHandler = DiscordHandler.getInstance();
-
+	// public static boolean timerStarted = false;
 	private static int ticks = 0;
-
+	private static DiscordHandler discordHandler = DiscordHandler.getInstance();
 
 	private static final HashMap<UUID, String> STATUS_MAP = new HashMap<>();
 
+	@SubscribeEvent
+	public void onPlayerLoggedIn(PlayerLoggedInEvent event) {
+		if (event.player instanceof EntityPlayerMP) {
+			PacketHandler.INSTANCE.sendTo(new MessageUpdateCapes(Capes.getCapes()), (EntityPlayerMP) event.player);
+		}
+	}
 
 	@SubscribeEvent
 	public void onServerTick(TickEvent.ServerTickEvent event) {
@@ -49,18 +53,16 @@ public class CommonEvents {
 					if (scoreplayerteam != null) {
 						if (scoreplayerteam.getDisplayName().equals("Lobby")) {
 							discordHandler.getDiscordRichPresence().state = "Waiting For Players";
-							//discordHandler.getDiscordRichPresence().startTimestamp=0L;
-							/*if(timerStarted) {
-								timerStarted = false;
-								discordHandler.getDiscordRichPresence().startTimestamp = System.currentTimeMillis() / 1000L;
-							}*/
+							// discordHandler.getDiscordRichPresence().startTimestamp=0L;
+							/*
+							 * if(timerStarted) { timerStarted = false; discordHandler.getDiscordRichPresence().startTimestamp = System.currentTimeMillis() / 1000L; }
+							 */
 							discordHandler.updateRichPresence();
 						} else if (scoreplayerteam.getDisplayName().equals("inGame")) {
 							discordHandler.getDiscordRichPresence().state = "Playing - Alive";
-							/*if(!timerStarted) {
-								timerStarted = true;
-								discordHandler.getDiscordRichPresence().startTimestamp = System.currentTimeMillis() / 1000L;
-							}*/
+							/*
+							 * if(!timerStarted) { timerStarted = true; discordHandler.getDiscordRichPresence().startTimestamp = System.currentTimeMillis() / 1000L; }
+							 */
 							discordHandler.updateRichPresence();
 						} else if (scoreplayerteam.getDisplayName().equals("Spectator")) {
 							discordHandler.getDiscordRichPresence().state = "Playing - Dead";
