@@ -5,41 +5,28 @@ import java.util.Map;
 import com.cubgdev.cubga.CUBGConfig;
 import com.cubgdev.cubga.Reference;
 import com.cubgdev.cubga.client.gui.utilities.CUBGRenderHelper;
-import com.cubgdev.cubga.client.render.entity.RenderCustomPlayer;
 import com.cubgdev.cubga.tileentity.TileEntityCrystalContainer;
 import com.cubgdev.cubga.utils.TextureUtils;
 import com.cubgdev.cubga.utils.cape.Capes;
 import com.google.common.collect.Maps;
-import com.mrcrayfish.obfuscate.client.event.ModelPlayerEvent;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.AbstractClientPlayer;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelEnderCrystal;
-import net.minecraft.client.model.ModelPlayer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderDragon;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EnumPlayerModelParts;
-import net.minecraft.init.Items;
-import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent.RenderTickEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class RenderEvents {
 
@@ -164,14 +151,17 @@ public class RenderEvents {
 					Gui.drawScaledCustomSizeModalRect(x, l, 1, 6, k, 5, k, 5, 256, 256);
 				}
 
-				if(CUBGConfig.CLIENT.ui.health.numbersEnabled) {
+				if (CUBGConfig.CLIENT.ui.health.numbersEnabled) {
 					boolean flag1 = false;
 					int color = flag1 ? 16777215 : 8453920;
 					String text = null;
+
+					int health = (int) player.getHealth();
+
 					if (CUBGConfig.CLIENT.ui.health.percentagesEnabled) {
-						text = (int) (player.getHealth()) * 5 + "%";
+						text = ((int) Math.round(player.getHealth() / player.getMaxHealth() * 200f) / 2) + "%";
 					} else {
-						text = player.getHealth() / 2 + "/" + (int) (player.getMaxHealth()) / 2;
+						text = Float.toString((float) health / 2f) + "/" + (player.getMaxHealth() / 2f);
 					}
 					GlStateManager.pushMatrix();
 					GlStateManager.translate(scaledRes.getScaledWidth() / 2, scaledRes.getScaledHeight() - 34, 0);
@@ -180,11 +170,9 @@ public class RenderEvents {
 					GlStateManager.popMatrix();
 				}
 
-			/*GlStateManager.pushMatrix();
-			GlStateManager.translate(scaledRes.getScaledWidth() / 2, scaledRes.getScaledHeight() - 26.25, 0);
-			GlStateManager.scale(0.5, 0.5, 0.5);
-			CUBGRenderHelper.renderText(text, - Minecraft.getMinecraft().fontRenderer.getStringWidth(text) / 2, - Minecraft.getMinecraft().fontRenderer.FONT_HEIGHT / 2, color);
-			GlStateManager.popMatrix();*/
+				/*
+				 * GlStateManager.pushMatrix(); GlStateManager.translate(scaledRes.getScaledWidth() / 2, scaledRes.getScaledHeight() - 26.25, 0); GlStateManager.scale(0.5, 0.5, 0.5); CUBGRenderHelper.renderText(text, - Minecraft.getMinecraft().fontRenderer.getStringWidth(text) / 2, - Minecraft.getMinecraft().fontRenderer.FONT_HEIGHT / 2, color); GlStateManager.popMatrix();
+				 */
 			}
 			event.setCanceled(event.getType() == ElementType.HEALTH || event.getType() == ElementType.FOOD || event.getType() == ElementType.EXPERIENCE || event.getType() == ElementType.ARMOR || event.getType() == ElementType.AIR);
 		}
