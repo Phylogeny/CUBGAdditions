@@ -2,15 +2,17 @@ package com.cubgdev.cubga.item;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Enchantments;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-public class ItemModderNightmare extends ItemBase
+public class ItemSharp extends ItemBase
 {
 
-	public ItemModderNightmare()
+	public ItemSharp(String id)
 	{
-		super("modder_nightmare");
+		super(id);
 	}
 
 	@Override
@@ -20,6 +22,16 @@ public class ItemModderNightmare extends ItemBase
 		{
 			itemstack.addEnchantment(Enchantments.SHARPNESS, 2);
 		}
+	}
+
+	@Override
+	public EntityEquipmentSlot getEquipmentSlot(ItemStack stack) {
+		return EntityEquipmentSlot.HEAD;
+	}
+
+	@Override
+	public double getDurabilityForDisplay(ItemStack stack){
+		return (double)stack.getItemDamage() / (double)stack.getMaxDamage();
 	}
 
 	@Override

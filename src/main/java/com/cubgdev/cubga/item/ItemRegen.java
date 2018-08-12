@@ -17,13 +17,12 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
-public class ItemRegen extends Item {
+public class ItemRegen extends ItemBase {
 
     private int useTime;
 
     public ItemRegen(String id, int useTime) {
-        this.setUnlocalizedName(id);
-        this.setRegistryName(id);
+        super(id);
         this.setCreativeTab(CUBG.TAB);
         this.useTime = useTime;
     }

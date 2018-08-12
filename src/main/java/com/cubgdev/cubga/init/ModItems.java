@@ -2,7 +2,6 @@ package com.cubgdev.cubga.init;
 
 import com.cubgdev.cubga.item.*;
 
-import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
 
 public class ModItems
@@ -18,6 +17,7 @@ public class ModItems
 	public static final Item COFFEE_CUP;
 	public static final Item MODDER_NIGHTMARE;
 	public static final Item MASTER_GAUNTLET;
+	public static final Item CRAYFISH_CLAW;
 
 	public static final Item BRICK;
 
@@ -33,8 +33,9 @@ public class ModItems
 
 		COFFEE_CUP_FULL = new ItemCoffee(true);
 		COFFEE_CUP = new ItemCoffee(false);
-		MODDER_NIGHTMARE = new ItemModderNightmare();
+		MODDER_NIGHTMARE = new ItemSharp("modder_nightmare");
 		MASTER_GAUNTLET = new ItemMasterGauntlet();
+		CRAYFISH_CLAW = new ItemSharp("crayfish_claw");
 
 		BRICK = new ItemBrick("brick");
 
@@ -53,6 +54,7 @@ public class ModItems
 		register(COFFEE_CUP);
 		register(MODDER_NIGHTMARE);
 		register(MASTER_GAUNTLET);
+		register(CRAYFISH_CLAW);
 
 		register(BRICK);
 		

@@ -3,10 +3,11 @@ itemGroup.tabCUBG=CUBG Additions
 item.show_info=Hold %s for Info
 
 #Items
-item.medkit.name=§a§lMedkit
-item.first_aid_kit.name=§c§lFirst Aid Kit
-item.bandage.name=§lBandage
-item.bandaid.name=§lBand-Aid
+item.medkit.name=Medkit
+item.first_aid_kit.name=First Aid Kit
+item.bandage.name=Bandage
+item.bandaid.name=Band-Aid
+item.painkillers.name=Painkillers
 
 item.beam_rod.name=Beam Rod
 item.beam_rod.position=Crystal Position: %s
@@ -39,6 +40,7 @@ item.coffee_cup_full.name=§6§lCoffee Cup
 item.canadian_flag.name=§c§lDoodler’s Patriocy
 item.modder_nightmare.name=§d§lModder's §8§lNightmare
 item.master_gauntlet.name=§a§lMaster §7§lGauntlet
+item.crayfish_claw.name=§c§lCrayfish Claw
 
 #Plushes
 tile.player_plush.name=Player Plush
@@ -59,6 +61,7 @@ item.medkit.info=Military grade first aid. Restores 100%s of the player's health
 item.first_aid_kit.info=Civilian grade first aid. Restores 50%s of the player's health (5 hearts).
 item.bandage.info=A simple piece of cloth that covers wounds. Restores 10%s of the player's health (2 hearts).
 item.bandaid.info=An adhesive piece of fabric that covers small cuts. Restores 2.5%s of the player's health (1/2 heart).
+item.painkillers.info=A bottle of pills that will slowly take the pain away. Effects player with regen.
 
 #Easter Egg Descriptions
 item.coffee_cup.info=An empty coffee cup. Oh, and you can wear it on your head.
@@ -66,13 +69,14 @@ item.coffee_cup_full.info=A hot cup of coffee, pretty nice, right? Oh, and you c
 item.flag.info=The iconic symbol of the superior country, Canada.
 item.modder_nightmare.info=A modder's worst nightmare, the glitched texture.
 item.master_gauntlet.info=A gauntlet made out of the finest material. Made for the Master of Chiefs. Wait, the name on the tag is different, is this misspelled?
+item.crayfish_claw.info=A claw taken from the crayfish himself. You can put the claw on your head, but it might hurt.
 
 #Menu/Gui Elements
 gui.button.discord=DISCORD
 gui.button.website=WEBSITE
 gui.button.play=PLAY
-gui.button.singleplayer=SINGLEPLAYER
-gui.button.mutliplayer=MULTIPLAYER
+gui.button.singleplayer=SINGLE-PLAYER
+gui.button.multiplayer=MULTI-PLAYER
 gui.button.settings=SETTINGS
 gui.button.quit=QUIT
 gui.button.news=NEWS/UPDATES
@@ -85,3 +89,26 @@ gui.title.mainmenu=Main Menu
 
 #Menu Subtitles
 gui.subtitle.status=STATUS
+
+#Config
+config.cubga.title=CUBG Additions Config
+config.cubga.client=Client
+config.cubga.client.tooltip=Client-only configs.
+config.cubga.ui=UI
+config.cubga.tooltip=UI settings / customization.
+config.cubga.enabled=Enable UI
+config.cubga.enabled.tooltip=Determines whether or not the custom UI will show.
+config.cubga.ui.health=Health Bar
+config.cubga.ui.health.tooltip=Health bar settings / customization.
+config.cubga.ui.health.xpbar=Enable XP Health Bar
+config.cubga.ui.health.xpbar.tooltip=Determines whether or not the health bar will have the XP bar texture (Colorable).
+config.cubga.ui.health.percentages=Enable Percentages
+config.cubga.ui.health.percentages.tooltip=Determines whether the health bar will use percentages.
+config.cubga.ui.health.color=Health Bar Colors
+config.cubga.ui.health.color.tooltip=Determines what color will be used on the health bar.
+config.cubga.ui.health.color.red=Red
+config.cubga.ui.health.color.red.tooltip=Red value of the health bar RGB.
+config.cubga.ui.health.color.green=Green
+config.cubga.ui.health.color.green.tooltip=Green value of the health bar RGB.
+config.cubga.ui.health.color.blue=Blue
+config.cubga.ui.health.color.blue.tooltip=Blue value of the health bar RGB.
