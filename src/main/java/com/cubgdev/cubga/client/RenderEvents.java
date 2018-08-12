@@ -170,7 +170,7 @@ public class RenderEvents {
 				if (CUBGConfig.CLIENT.ui.health.percentagesEnabled) {
 					text = (int)(player.getHealth()) * 5 + "%";
 				} else {
-					text = player.getHealth() / 2 + "/" + player.getMaxHealth();
+					text = player.getHealth() / 2 + "/" + (int)(player.getMaxHealth()) / 2;
 				}
 				GlStateManager.pushMatrix();
 				GlStateManager.translate(scaledRes.getScaledWidth() / 2, scaledRes.getScaledHeight() - 34, 0);
