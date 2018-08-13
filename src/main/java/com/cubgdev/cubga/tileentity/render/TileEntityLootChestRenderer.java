@@ -1,14 +1,21 @@
 package com.cubgdev.cubga.tileentity.render;
 
 import com.cubgdev.cubga.Reference;
+import com.cubgdev.cubga.item.ItemValueContainerEditor;
 import com.cubgdev.cubga.tileentity.TileEntityLootChest;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelChest;
 import net.minecraft.client.model.ModelLargeChest;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
+
+import java.awt.*;
 
 /**
  * Author: MrCrayfish
@@ -20,6 +27,8 @@ public class TileEntityLootChestRenderer extends TileEntitySpecialRenderer<TileE
 
     private final ModelChest SMALL_CHEST = new ModelChest();
     private final ModelChest LARGE_CHEST = new ModelLargeChest();
+
+    public static boolean renderOutlines = false;
 
     @Override
     public void render(TileEntityLootChest te, double x, double y, double z, float partialTicks, int destroyStage, float alpha)
@@ -177,11 +186,40 @@ public class TileEntityLootChestRenderer extends TileEntitySpecialRenderer<TileE
             f = 1.0F - f * f * f;
             modelChest.chestLid.rotateAngleX = -(f * ((float)Math.PI / 2F));
             modelChest.chestKnob.rotateAngleX = modelChest.chestLid.rotateAngleX;
-            modelChest.chestLid.render(0.0625F);
+
+            boolean renderOutlines = Minecraft.getMinecraft().player.getHeldItemMainhand().getItem() instanceof ItemValueContainerEditor && Minecraft.getMinecraft().player.getPermissionLevel() >= 4;
+            if(renderOutlines)
+            {
+                GlStateManager.disableDepth();
+                setLightmapDisabled(true);
+
+                GlStateManager.pushMatrix();
+                {
+                    GlStateManager.translate(0.5, 0.5, 0.5);
+                    GlStateManager.scale(1.2, 1.2, 1.2);
+                    GlStateManager.translate(-0.5, -0.5, -0.5);
+
+                    GlStateManager.enableOutlineMode(Color.WHITE.getRGB());
+
+                    modelChest.chestLid.render(0.0625F);
+                    modelChest.chestBelow.render(0.0625F);
+                    modelChest.chestKnob.render(0.0625F);
+
+                    GlStateManager.disableOutlineMode();
+                }
+                GlStateManager.popMatrix();
+            }
+
             modelChest.chestBelow.render(0.0625F);
+            modelChest.chestLid.render(0.0625F);
 
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
             modelChest.chestKnob.render(0.0625F);
+
+            if(renderOutlines)
+            {
+                GlStateManager.enableDepth();
+            }
 
             GlStateManager.disableRescaleNormal();
             GlStateManager.popMatrix();
