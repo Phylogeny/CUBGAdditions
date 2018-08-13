@@ -31,10 +31,10 @@ public class BlockLootChest extends BlockChest
 {
     private static final int[] BLANK = new int[]{50, 50, 50};
     private static final LootTableEntry[] STANDARD_TYPES = {
-            new LootTableEntry(75, 83, 32, new ResourceLocation("minecraft", "crayfishunknown/chests/nonstandard"), false),
-            new LootTableEntry(114, 137, 218, new ResourceLocation("minecraft", "crayfishunknown/chests/attachments"), false),
-            new LootTableEntry(128, 128, 128, new ResourceLocation("minecraft", "crayfishunknown/chests/standard"), false),
-            new LootTableEntry(218, 165, 32, new ResourceLocation("minecraft", "crayfishunknown/chests/rare"), true)
+            new LootTableEntry(75, 83, 32, new ResourceLocation("minecraft", "crayfishunknown/chests/nonstandard"), false, 0.9F),
+            new LootTableEntry(114, 137, 218, new ResourceLocation("minecraft", "crayfishunknown/chests/attachments"), false, 0.75F),
+            new LootTableEntry(128, 128, 128, new ResourceLocation("minecraft", "crayfishunknown/chests/standard"), false, 0.8F),
+            new LootTableEntry(218, 165, 32, new ResourceLocation("minecraft", "crayfishunknown/chests/rare"), true, 0.5F)
     };
 
     public BlockLootChest()
@@ -70,6 +70,7 @@ public class BlockLootChest extends BlockChest
             lootChest.setIntArray("Color", lootTableEntries.getColor());
             lootChest.setBoolean("Glowing", lootTableEntries.isGlowing());
             lootChest.setString("LootTable", String.valueOf(lootTableEntries.getLootTable()));
+            lootChest.setFloat("Chance", lootTableEntries.getChance());
             blockEntityTag.setTag("LootChest", lootChest);
             itemTag.setTag("BlockEntityTag", blockEntityTag);
             ItemStack stack = new ItemStack(this);
@@ -179,12 +180,14 @@ public class BlockLootChest extends BlockChest
         private int[] color;
         private ResourceLocation lootTable;
         private boolean glowing;
+        private float chance;
 
-        public LootTableEntry(int r, int g, int b, ResourceLocation resource, boolean glowing)
+        public LootTableEntry(int r, int g, int b, ResourceLocation resource, boolean glowing, float chance)
         {
             this.color = new int[] { r, g, b };
             this.lootTable = resource;
             this.glowing = glowing;
+            this.chance = chance;
         }
 
         public int[] getColor()
@@ -200,6 +203,11 @@ public class BlockLootChest extends BlockChest
         public boolean isGlowing()
         {
             return glowing;
+        }
+
+        public float getChance()
+        {
+            return chance;
         }
     }
 }

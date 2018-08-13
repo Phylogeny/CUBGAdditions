@@ -14,6 +14,7 @@ import net.minecraft.world.storage.WorldSavedData;
 import net.minecraftforge.common.util.Constants;
 
 import java.util.Map;
+import java.util.Random;
 
 /**
  * Author: MrCrayfish
@@ -48,12 +49,18 @@ public final class LootChestManager extends WorldSavedData
 
     public void generateChests(World world)
     {
+        Random rand = new Random(System.currentTimeMillis());
         LOOT_CHESTS.forEach((pos, lootChest) ->
         {
-            world.setBlockState(pos, ModBlocks.LOOT_CHEST.getDefaultState().withProperty(BlockChest.FACING, lootChest.getFacing()), 3);
-            TileEntityLootChest tileEntityLootChest = new TileEntityLootChest(lootChest);
-            tileEntityLootChest.resetLootTable();
-            world.setTileEntity(pos, tileEntityLootChest);
+            world.setBlockToAir(pos);
+            float f = rand.nextFloat();
+            if(f < lootChest.getChance())
+            {
+                world.setBlockState(pos, ModBlocks.LOOT_CHEST.getDefaultState().withProperty(BlockChest.FACING, lootChest.getFacing()), 3);
+                TileEntityLootChest tileEntityLootChest = new TileEntityLootChest(lootChest);
+                tileEntityLootChest.resetLootTable();
+                world.setTileEntity(pos, tileEntityLootChest);
+            }
         });
     }
 

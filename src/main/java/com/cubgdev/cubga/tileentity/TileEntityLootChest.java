@@ -105,6 +105,7 @@ public class TileEntityLootChest extends TileEntityChest implements IValueContai
         entries.add(new Entry("Color", "Color", Entry.Type.TEXT_FIELD, lootChest.getColor()));
         entries.add(new Entry("ChestTexture", "Chest Texture", Entry.Type.TEXT_FIELD, lootChest.getChestTexture()));
         entries.add(new Entry("Glowing", "Glowing", Entry.Type.TOGGLE, lootChest.isGlowing()));
+        entries.add(new Entry("Chance", "Chance of Spawning", Entry.Type.TEXT_FIELD, 100 * lootChest.getChance()));
         return entries;
     }
 
@@ -129,6 +130,9 @@ public class TileEntityLootChest extends TileEntityChest implements IValueContai
 
         lootChest.setColor(Integer.parseInt(entries.get("Color")));
         lootChest.setGlowing(Boolean.valueOf(entries.get("Glowing")));
+
+        float chance = Math.max(0F, Math.min(100F, Float.parseFloat(entries.get("Chance"))));
+        lootChest.setChance(chance / 100F);
     }
 
     public void resetLootTable()

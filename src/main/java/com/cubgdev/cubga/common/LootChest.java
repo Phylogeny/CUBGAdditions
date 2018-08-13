@@ -16,18 +16,10 @@ public class LootChest
     private int color = 16750848;
     private ResourceLocation chestTexture;
     private boolean glowing;
+    private float chance = 1.0F;
     private EnumFacing facing = EnumFacing.NORTH;
 
     public LootChest() {}
-
-    public LootChest(ResourceLocation lootTable, int color, ResourceLocation chestTexture, boolean glowing, EnumFacing facing)
-    {
-        this.lootTable = lootTable;
-        this.color = color;
-        this.chestTexture = chestTexture;
-        this.glowing = glowing;
-        this.facing = facing;
-    }
 
     public LootChest(NBTTagCompound tagCompound)
     {
@@ -99,6 +91,16 @@ public class LootChest
         this.facing = facing;
     }
 
+    public float getChance()
+    {
+        return chance;
+    }
+
+    public void setChance(float chance)
+    {
+        this.chance = chance;
+    }
+
     public NBTTagCompound toTag()
     {
         NBTTagCompound tagCompound = new NBTTagCompound();
@@ -116,6 +118,7 @@ public class LootChest
         {
             tagCompound.setInteger("Facing", facing.getHorizontalIndex());
         }
+        tagCompound.setFloat("Chance", chance);
         return tagCompound;
     }
 
@@ -141,6 +144,10 @@ public class LootChest
         if(tagCompound.hasKey("Facing", Constants.NBT.TAG_INT))
         {
             facing = EnumFacing.getHorizontal(tagCompound.getInteger("Facing"));
+        }
+        if(tagCompound.hasKey("Chance", Constants.NBT.TAG_FLOAT))
+        {
+            chance = tagCompound.getFloat("Chance");
         }
     }
 }
