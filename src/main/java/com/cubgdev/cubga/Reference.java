@@ -4,7 +4,7 @@ public class Reference
 {
     public static final String MOD_ID = "cubga";
     public static final String MOD_NAME = "CUBG Additions";
-    public static final String MOD_VERSION = "1.6.0";
+    public static final String MOD_VERSION = "1.6.1";
     public static final String MOD_COMPATIBILITY = "[1.12.2]";
     public static final String MOD_DEPENDS = "required-after:obfuscate@[0.2.5,);required-after:cgm@[0.4.3,)";
 
