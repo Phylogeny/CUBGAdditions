@@ -56,11 +56,11 @@ public class TileEntityLootChest extends TileEntityChest implements IValueContai
     public void readFromNBT(NBTTagCompound compound)
     {
         super.readFromNBT(compound);
-        needLightingUpdate = true;
         if(compound.hasKey("LootChest", Constants.NBT.TAG_COMPOUND))
         {
             lootChest = new LootChest(compound.getCompoundTag("LootChest"));
         }
+        needLightingUpdate = true;
     }
 
     @Override
@@ -134,5 +134,10 @@ public class TileEntityLootChest extends TileEntityChest implements IValueContai
     public void resetLootTable()
     {
         this.lootTable = lootChest.getLootTable();
+    }
+
+    public void setLootChest(LootChest lootChest)
+    {
+        this.lootChest = lootChest;
     }
 }

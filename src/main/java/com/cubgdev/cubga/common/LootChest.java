@@ -62,7 +62,10 @@ public class LootChest
 
     public void setColor(int[] color)
     {
-        this.color = ((color[0] & 0xFF) << 16) | ((color[1] & 0xFF) << 8) | ((color[2] & 0xFF));
+        if(color.length == 3)
+        {
+            this.color = ((color[0] & 0xFF) << 16) | ((color[1] & 0xFF) << 8) | ((color[2] & 0xFF));
+        }
     }
 
     @Nullable
@@ -122,7 +125,14 @@ public class LootChest
         {
             lootTable = new ResourceLocation(tagCompound.getString("LootTable"));
         }
-        color = tagCompound.getInteger("Color");
+        if(tagCompound.hasKey("Color", Constants.NBT.TAG_INT_ARRAY))
+        {
+            this.setColor(tagCompound.getIntArray("Color"));
+        }
+        else
+        {
+            this.color = tagCompound.getInteger("Color");
+        }
         if(tagCompound.hasKey("ChestTexture", Constants.NBT.TAG_STRING))
         {
             chestTexture = new ResourceLocation(tagCompound.getString("ChestTexture"));

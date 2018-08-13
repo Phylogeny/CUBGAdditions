@@ -1,9 +1,11 @@
 package com.cubgdev.cubga.blocks;
 
 import com.cubgdev.cubga.CUBG;
+import com.cubgdev.cubga.common.LootChest;
 import com.cubgdev.cubga.common.LootChestManager;
 import com.cubgdev.cubga.init.ModBlocks;
 import com.cubgdev.cubga.tileentity.TileEntityLootChest;
+import jdk.nashorn.internal.ir.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -27,9 +29,13 @@ import javax.annotation.Nullable;
  */
 public class BlockLootChest extends BlockChest
 {
-
     private static final int[] BLANK = new int[]{50, 50, 50};
-    private static final int[][] STANDARD_TYPES = {new int[]{114, 137, 0}, new int[]{114, 137, 218}, new int[]{255, 232, 0}};
+    private static final LootTableEntry[] STANDARD_TYPES = {
+            new LootTableEntry(75, 83, 32, new ResourceLocation("minecraft", "crayfishunknown/chests/nonstandard"), false),
+            new LootTableEntry(114, 137, 218, new ResourceLocation("minecraft", "crayfishunknown/chests/attachments"), false),
+            new LootTableEntry(128, 128, 128, new ResourceLocation("minecraft", "crayfishunknown/chests/standard"), false),
+            new LootTableEntry(218, 165, 32, new ResourceLocation("minecraft", "crayfishunknown/chests/rare"), true)
+    };
 
     public BlockLootChest()
     {
@@ -56,11 +62,15 @@ public class BlockLootChest extends BlockChest
     @Override
     public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items)
     {
-        for(int[] array : STANDARD_TYPES)
+        for(LootTableEntry lootTableEntries : STANDARD_TYPES)
         {
             NBTTagCompound itemTag = new NBTTagCompound();
             NBTTagCompound blockEntityTag = new NBTTagCompound();
-            blockEntityTag.setIntArray("Color", array);
+            NBTTagCompound lootChest = new NBTTagCompound();
+            lootChest.setIntArray("Color", lootTableEntries.getColor());
+            lootChest.setBoolean("Glowing", lootTableEntries.isGlowing());
+            lootChest.setString("LootTable", String.valueOf(lootTableEntries.getLootTable()));
+            blockEntityTag.setTag("LootChest", lootChest);
             itemTag.setTag("BlockEntityTag", blockEntityTag);
             ItemStack stack = new ItemStack(this);
             stack.setTagCompound(itemTag);
@@ -79,9 +89,10 @@ public class BlockLootChest extends BlockChest
                 NBTTagCompound blockEntityTag = itemTag.getCompoundTag("BlockEntityTag");
                 if(!blockEntityTag.hasNoTags())
                 {
-                    if(blockEntityTag.hasKey("ChestTexture", Constants.NBT.TAG_STRING))
+                    NBTTagCompound lootChest = blockEntityTag.getCompoundTag("LootChest");
+                    if(!lootChest.hasNoTags() && lootChest.hasKey("ChestTexture", Constants.NBT.TAG_STRING))
                     {
-                        return new ResourceLocation(blockEntityTag.getString("ChestTexture"));
+                        return new ResourceLocation(lootChest.getString("ChestTexture"));
                     }
                 }
             }
@@ -99,14 +110,33 @@ public class BlockLootChest extends BlockChest
                 NBTTagCompound blockEntityTag = itemTag.getCompoundTag("BlockEntityTag");
                 if(!blockEntityTag.hasNoTags())
                 {
-                    if(blockEntityTag.hasKey("Color", Constants.NBT.TAG_INT_ARRAY))
+                    NBTTagCompound lootChest = blockEntityTag.getCompoundTag("LootChest");
+                    if(!lootChest.hasNoTags() && lootChest.hasKey("Color", Constants.NBT.TAG_INT_ARRAY))
                     {
-                        return blockEntityTag.getIntArray("Color");
+                        return lootChest.getIntArray("Color");
                     }
                 }
             }
         }
         return BLANK;
+    }
+
+    public static LootChest getLootChest(ItemStack stack)
+    {
+        if(!stack.isEmpty() && stack.getItem() == Item.getItemFromBlock(ModBlocks.LOOT_CHEST))
+        {
+            NBTTagCompound itemTag = stack.getTagCompound();
+            if(itemTag != null)
+            {
+                NBTTagCompound blockEntityTag = itemTag.getCompoundTag("BlockEntityTag");
+                if(!blockEntityTag.hasNoTags())
+                {
+                    NBTTagCompound lootChest = blockEntityTag.getCompoundTag("LootChest");
+                    return new LootChest(lootChest);
+                }
+            }
+        }
+        return new LootChest();
     }
 
     @Nullable
@@ -123,10 +153,10 @@ public class BlockLootChest extends BlockChest
         TileEntity tileEntity = worldIn.getTileEntity(pos);
         if(tileEntity instanceof TileEntityLootChest)
         {
-            int[] color = BlockLootChest.getChestColor(stack);
             TileEntityLootChest tileEntityLootChest = (TileEntityLootChest) tileEntity;
-            tileEntityLootChest.getLootChest().setColor(color);
+            tileEntityLootChest.setLootChest(BlockLootChest.getLootChest(stack));
             tileEntityLootChest.getLootChest().setFacing(placer.getHorizontalFacing().getOpposite());
+            tileEntityLootChest.markDirty();
 
             if(!worldIn.isRemote && placer instanceof EntityPlayer && ((EntityPlayer) placer).dimension == 0)
             {
@@ -141,6 +171,35 @@ public class BlockLootChest extends BlockChest
         if(!worldIn.isRemote && worldIn.provider.getDimension() == 0)
         {
             LootChestManager.get(worldIn).remove(pos);
+        }
+    }
+
+    private static class LootTableEntry
+    {
+        private int[] color;
+        private ResourceLocation lootTable;
+        private boolean glowing;
+
+        public LootTableEntry(int r, int g, int b, ResourceLocation resource, boolean glowing)
+        {
+            this.color = new int[] { r, g, b };
+            this.lootTable = resource;
+            this.glowing = glowing;
+        }
+
+        public int[] getColor()
+        {
+            return color;
+        }
+
+        public ResourceLocation getLootTable()
+        {
+            return lootTable;
+        }
+
+        public boolean isGlowing()
+        {
+            return glowing;
         }
     }
 }
