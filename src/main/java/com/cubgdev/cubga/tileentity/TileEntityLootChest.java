@@ -1,33 +1,38 @@
 package com.cubgdev.cubga.tileentity;
 
+import com.cubgdev.cubga.common.LootChest;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.ITickable;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraftforge.common.util.Constants;
 
-import javax.annotation.Resource;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 /**
  * Author: MrCrayfish
  */
 public class TileEntityLootChest extends TileEntityChest implements IValueContainer
 {
-    private ResourceLocation originalLootTable;
-    private int color = 16750848;
-    private ResourceLocation chestTexture;
-    private boolean glowing;
+    private static final Random RAND = new Random(System.currentTimeMillis());
+
+    private LootChest lootChest = new LootChest();
     private boolean needLightingUpdate = false;
 
-    private static final Random RAND = new Random(System.currentTimeMillis());
+    public TileEntityLootChest() {}
+
+    public TileEntityLootChest(LootChest lootChest)
+    {
+        this.lootChest = lootChest;
+        this.needLightingUpdate = true;
+    }
 
     @Override
     public void update()
@@ -38,7 +43,7 @@ public class TileEntityLootChest extends TileEntityChest implements IValueContai
             world.checkLightFor(EnumSkyBlock.BLOCK, pos);
             needLightingUpdate = false;
         }
-        if(glowing)
+        if(lootChest.isGlowing())
         {
             double posX = pos.getX() - 0.5 + RAND.nextDouble() * 2.0;
             double posY = pos.getY() + RAND.nextDouble() * 1.5;
@@ -52,22 +57,9 @@ public class TileEntityLootChest extends TileEntityChest implements IValueContai
     {
         super.readFromNBT(compound);
         needLightingUpdate = true;
-        chestTexture = null;
-        if(compound.hasKey("ChestTexture", Constants.NBT.TAG_STRING))
+        if(compound.hasKey("LootChest", Constants.NBT.TAG_COMPOUND))
         {
-            chestTexture = new ResourceLocation(compound.getString("ChestTexture"));
-        }
-        if(compound.hasKey("Color", Constants.NBT.TAG_INT_ARRAY))
-        {
-            int[] c = compound.getIntArray("Color");
-            if(c.length == 3)
-            {
-                color = ((c[0] & 0xFF) << 16) | ((c[1] & 0xFF) << 8) | ((c[2] & 0xFF));
-            }
-        }
-        if(compound.hasKey("Glowing", Constants.NBT.TAG_BYTE))
-        {
-            glowing = compound.getBoolean("Glowing");
+            lootChest = new LootChest(compound.getCompoundTag("LootChest"));
         }
     }
 
@@ -75,33 +67,16 @@ public class TileEntityLootChest extends TileEntityChest implements IValueContai
     public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
         super.writeToNBT(compound);
-        if(chestTexture != null)
+        if(lootChest != null)
         {
-            compound.setString("ChestTexture", chestTexture.toString());
+            compound.setTag("LootChest", lootChest.toTag());
         }
-        compound.setIntArray("Color", this.getColor());
-        compound.setBoolean("Glowing", glowing);
         return compound;
     }
 
-    public ResourceLocation getChestTexture()
+    public LootChest getLootChest()
     {
-        return chestTexture;
-    }
-
-    public void setChestTexture(ResourceLocation chestTexture)
-    {
-        this.chestTexture = chestTexture;
-    }
-
-    public void setColor(int[] color)
-    {
-        this.color = ((color[0] & 0xFF) << 16) | ((color[1] & 0xFF) << 8) | ((color[2] & 0xFF));
-    }
-
-    public int[] getColor()
-    {
-        return new int[]{ (color >> 16) & 0xFF, (color >> 8) & 0xFF, color & 0xFF };
+        return lootChest;
     }
 
     @Override
@@ -122,19 +97,14 @@ public class TileEntityLootChest extends TileEntityChest implements IValueContai
         return new SPacketUpdateTileEntity(pos, 0, getUpdateTag());
     }
 
-    public boolean isGlowing()
-    {
-        return glowing;
-    }
-
     @Override
     public List<Entry> getEntries()
     {
         List<Entry> entries = Lists.newArrayList();
-        entries.add(new Entry("LootTable", "Loot Table", Entry.Type.TEXT_FIELD, originalLootTable));
-        entries.add(new Entry("Color", "Color", Entry.Type.TEXT_FIELD, color));
-        entries.add(new Entry("ChestTexture", "Chest Texture", Entry.Type.TEXT_FIELD, chestTexture));
-        entries.add(new Entry("Glowing", "Glowing", Entry.Type.TOGGLE, glowing));
+        entries.add(new Entry("LootTable", "Loot Table", Entry.Type.TEXT_FIELD, lootChest.getLootTable()));
+        entries.add(new Entry("Color", "Color", Entry.Type.TEXT_FIELD, lootChest.getColor()));
+        entries.add(new Entry("ChestTexture", "Chest Texture", Entry.Type.TEXT_FIELD, lootChest.getChestTexture()));
+        entries.add(new Entry("Glowing", "Glowing", Entry.Type.TOGGLE, lootChest.isGlowing()));
         return entries;
     }
 
@@ -144,20 +114,25 @@ public class TileEntityLootChest extends TileEntityChest implements IValueContai
         String lootTable = entries.get("LootTable");
         if(!Strings.isNullOrEmpty(lootTable))
         {
-            this.originalLootTable = new ResourceLocation(lootTable);
+            lootChest.setLootTable(new ResourceLocation(lootTable));
         }
 
         String chestTexture = entries.get("ChestTexture");
         if(!Strings.isNullOrEmpty(chestTexture))
         {
-            this.chestTexture = new ResourceLocation(chestTexture);
+            lootChest.setChestTexture(new ResourceLocation(chestTexture));
         }
         else
         {
-            this.chestTexture = null;
+            lootChest.setChestTexture(null);
         }
 
-        this.color = Integer.parseInt(entries.get("Color"));
-        this.glowing = Boolean.valueOf(entries.get("Glowing"));
+        lootChest.setColor(Integer.parseInt(entries.get("Color")));
+        lootChest.setGlowing(Boolean.valueOf(entries.get("Glowing")));
+    }
+
+    public void resetLootTable()
+    {
+        this.lootTable = lootChest.getLootTable();
     }
 }

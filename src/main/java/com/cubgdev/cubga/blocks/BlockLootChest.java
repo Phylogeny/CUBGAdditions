@@ -1,19 +1,18 @@
 package com.cubgdev.cubga.blocks;
 
 import com.cubgdev.cubga.CUBG;
-import com.cubgdev.cubga.Reference;
+import com.cubgdev.cubga.common.LootChestManager;
 import com.cubgdev.cubga.init.ModBlocks;
 import com.cubgdev.cubga.tileentity.TileEntityLootChest;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -26,16 +25,14 @@ import javax.annotation.Nullable;
 /**
  * Author: MrCrayfish
  */
-public class BlockLootChest extends BlockChest {
+public class BlockLootChest extends BlockChest
+{
 
-    private static final int[] BLANK = new int[] { 50, 50, 50 };
-    private static final int[][] STANDARD_TYPES = {
-            new int[] { 114, 137, 0   },
-            new int[] { 114, 137, 218 },
-            new int[] { 255, 232, 0   }
-    };
+    private static final int[] BLANK = new int[]{50, 50, 50};
+    private static final int[][] STANDARD_TYPES = {new int[]{114, 137, 0}, new int[]{114, 137, 218}, new int[]{255, 232, 0}};
 
-    public BlockLootChest() {
+    public BlockLootChest()
+    {
         super(Type.BASIC);
         this.setUnlocalizedName("loot_chest");
         this.setRegistryName("loot_chest");
@@ -43,10 +40,13 @@ public class BlockLootChest extends BlockChest {
     }
 
     @Override
-    public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
+    public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos)
+    {
         TileEntity tileEntity = world.getTileEntity(pos);
-        if(tileEntity instanceof TileEntityLootChest) {
-            if(((TileEntityLootChest) tileEntity).isGlowing()) {
+        if(tileEntity instanceof TileEntityLootChest)
+        {
+            if(((TileEntityLootChest) tileEntity).getLootChest().isGlowing())
+            {
                 return 12;
             }
         }
@@ -54,8 +54,10 @@ public class BlockLootChest extends BlockChest {
     }
 
     @Override
-    public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items) {
-        for(int[] array : STANDARD_TYPES) {
+    public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items)
+    {
+        for(int[] array : STANDARD_TYPES)
+        {
             NBTTagCompound itemTag = new NBTTagCompound();
             NBTTagCompound blockEntityTag = new NBTTagCompound();
             blockEntityTag.setIntArray("Color", array);
@@ -119,10 +121,26 @@ public class BlockLootChest extends BlockChest {
     {
         super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
         TileEntity tileEntity = worldIn.getTileEntity(pos);
-        if (tileEntity instanceof TileEntityLootChest)
+        if(tileEntity instanceof TileEntityLootChest)
         {
             int[] color = BlockLootChest.getChestColor(stack);
-            ((TileEntityLootChest) tileEntity).setColor(color);
+            TileEntityLootChest tileEntityLootChest = (TileEntityLootChest) tileEntity;
+            tileEntityLootChest.getLootChest().setColor(color);
+            tileEntityLootChest.getLootChest().setFacing(placer.getHorizontalFacing().getOpposite());
+
+            if(!worldIn.isRemote && placer instanceof EntityPlayer && ((EntityPlayer) placer).dimension == 0)
+            {
+                LootChestManager.get(worldIn).add(pos, tileEntityLootChest.getLootChest());
+            }
+        }
+    }
+
+    @Override
+    public void onBlockDestroyedByPlayer(World worldIn, BlockPos pos, IBlockState state)
+    {
+        if(!worldIn.isRemote && worldIn.provider.getDimension() == 0)
+        {
+            LootChestManager.get(worldIn).remove(pos);
         }
     }
 }

@@ -1,6 +1,8 @@
 package com.cubgdev.cubga;
 
-import com.cubgdev.cubga.common.CommandResetBrittleBricks;
+import com.cubgdev.cubga.common.commands.CommandEditLootChests;
+import com.cubgdev.cubga.common.commands.CommandGenerateLootChests;
+import com.cubgdev.cubga.common.commands.CommandResetBrittleBricks;
 import com.cubgdev.cubga.common.CommonEvents;
 import com.cubgdev.cubga.init.ModItems;
 import com.cubgdev.cubga.init.RegistrationHandler;
@@ -17,8 +19,6 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-
-import java.sql.Ref;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION, acceptedMinecraftVersions = Reference.MOD_COMPATIBILITY, dependencies = Reference.MOD_DEPENDS)
 public class CUBG
@@ -62,5 +62,7 @@ public class CUBG
     public void onServerStarting(FMLServerStartingEvent event)
     {
         event.registerServerCommand(new CommandResetBrittleBricks());
+        event.registerServerCommand(new CommandEditLootChests());
+        event.registerServerCommand(new CommandGenerateLootChests());
     }
 }

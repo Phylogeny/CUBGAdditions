@@ -178,8 +178,8 @@ public class RenderEvents
 			ItemCameraTransforms.applyTransformSide(itemTransform, leftHanded);
 			GlStateManager.translate(-0.5, -0.5, -0.5);
 
-			LOOT_CHEST_ENTITY.setChestTexture(BlockLootChest.getChestTexture(stack));
-			LOOT_CHEST_ENTITY.setColor(BlockLootChest.getChestColor(stack));
+			LOOT_CHEST_ENTITY.getLootChest().setChestTexture(BlockLootChest.getChestTexture(stack));
+			LOOT_CHEST_ENTITY.getLootChest().setColor(BlockLootChest.getChestColor(stack));
 			TileEntityRendererDispatcher.instance.render(LOOT_CHEST_ENTITY, 0.0D, 0.0D, 0.0D, partialTicks);
 		}
 	}

@@ -27,6 +27,7 @@ public class TileEntityLootChestRenderer extends TileEntitySpecialRenderer<TileE
         GlStateManager.enableDepth();
         GlStateManager.depthFunc(515);
         GlStateManager.depthMask(true);
+
         int i;
 
         if (te.hasWorld())
@@ -66,7 +67,7 @@ public class TileEntityLootChestRenderer extends TileEntitySpecialRenderer<TileE
                 }
                 else
                 {
-                    ResourceLocation chestTexture = te.getChestTexture();
+                    ResourceLocation chestTexture = te.getLootChest().getChestTexture();
                     if(chestTexture != null)
                     {
                         this.bindTexture(chestTexture);
@@ -92,7 +93,7 @@ public class TileEntityLootChestRenderer extends TileEntitySpecialRenderer<TileE
                 }
                 else
                 {
-                    ResourceLocation chestTexture = te.getChestTexture();
+                    ResourceLocation chestTexture = te.getLootChest().getChestTexture();
                     if(chestTexture != null)
                     {
                         this.bindTexture(chestTexture);
@@ -109,7 +110,7 @@ public class TileEntityLootChestRenderer extends TileEntitySpecialRenderer<TileE
 
             if (destroyStage < 0)
             {
-                int[] color = te.getColor();
+                int[] color = te.getLootChest().getRGBColor();
                 GlStateManager.color(color[0] / 255F, color[1] / 255F, color[2] / 255F, alpha);
             }
 
