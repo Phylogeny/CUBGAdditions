@@ -1,22 +1,26 @@
-itemGroup.tabCUBG=CUBG Additions
+﻿itemGroup.tabCUBG=CUBG Additions
 
 item.show_info=Hold %s for Info
 
-#Items
+#Health Items
 item.medkit.name=Medkit
 item.first_aid_kit.name=First Aid Kit
 item.bandage.name=Bandage
 item.bandaid.name=Band-Aid
 item.painkillers.name=Painkillers
 
+#Tools
 item.beam_rod.name=Beam Rod
 item.beam_rod.position=Crystal Position: %s
+item.value_container_editor.name=Container Editor
 
 #Blocks
 tile.brittle_brick.name=Brittle Bricks
 tile.crystal_container.name=Crystal Container
 tile.crystal.name=Crystal
+tile.loot_chest.name=Loot Chest
 
+#Flags
 tile.flag_white.name=White Canadian Flag
 tile.flag_black.name=Black Canadian Flag
 tile.flag_red.name=§c§lDoodler’s Patriocy
@@ -50,11 +54,13 @@ tile.player_plush.nbt.name=%s Plush
 tile.brittle_brick.info=Very fragile bricks, easily breakable by hand and gun.
 tile.crystal_container.info=Contains a highly explosive crystal from another dimension.
 tile.crystal.info=A highly powerful (and explosive) crystal taken from another dimension.
+tile.loot_chest.info=A colorful chest that contains goodies!
 
 #Item Descriptions
 item.brick.info=A brick that came off of a Brittle Brick. Craft a brittle brick with four bricks and hold right click to charge and throw the brick.
 item.beam_rod.info=A magical wand that allows full control over crystal containers. Simply click the container you want to add beams to and then press any other block to make a beam go to that position.
 tile.player_plush.info=A cute little plush of a Minecraft player.
+item.value_container_editor.info=A tool that can be used to change NBT values of specific block entities.
 
 #Health Item Descriptions
 item.medkit.info=Military grade first aid. Restores 100%s of the player's health (10 hearts).
@@ -68,7 +74,7 @@ item.coffee_cup.info=An empty coffee cup. Oh, and you can wear it on your head.
 item.coffee_cup_full.info=A hot cup of coffee, pretty nice, right? Oh, and you can wear it on your head and drink it, but be careful, it's hot.
 item.flag.info=The iconic symbol of the superior country, Canada.
 item.modder_nightmare.info=A modder's worst nightmare, the glitched texture.
-item.master_gauntlet.info=A gauntlet made out of the finest material. Made for the Master of Chiefs. Wait, the name on the tag is different, is this misspelled?
+item.master_gauntlet.info=A gauntlet made out of the finest material. Made for the Master of Chiefs. Wait, no, the Mastef of Chiefs.
 item.crayfish_claw.info=A claw taken from the crayfish himself. You can put the claw on your head, but it might hurt.
 
 #Menu/Gui Elements
@@ -80,7 +86,6 @@ gui.button.multiplayer=MULTI-PLAYER
 gui.button.settings=SETTINGS
 gui.button.quit=QUIT
 gui.button.news=NEWS/UPDATES
-
 gui.button.beaver=BEAVER (CA)
 gui.button.kangaroo=KANGAROO (AU)
 

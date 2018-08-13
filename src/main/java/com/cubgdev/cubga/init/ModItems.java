@@ -22,6 +22,7 @@ public class ModItems
 	public static final Item BRICK;
 
 	public static final Item BEAM_ROD;
+	public static final Item CONTAINER_EDITOR;
 
 	static
 	{
@@ -40,6 +41,7 @@ public class ModItems
 		BRICK = new ItemBrick("brick");
 
 		BEAM_ROD = new ItemBeamRod();
+		CONTAINER_EDITOR = new ItemValueContainerEditor();
 	}
 
 	public static void register()
@@ -59,6 +61,7 @@ public class ModItems
 		register(BRICK);
 		
 		register(BEAM_ROD);
+		register(CONTAINER_EDITOR);
 	}
 
 	private static void register(Item item)
