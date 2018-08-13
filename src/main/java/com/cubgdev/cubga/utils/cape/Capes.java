@@ -1,6 +1,7 @@
 package com.cubgdev.cubga.utils.cape;
 
 import java.awt.image.BufferedImage;
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -16,6 +17,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
+import com.mojang.authlib.minecraft.MinecraftProfileTexture.Type;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
@@ -25,6 +27,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -33,34 +36,41 @@ public class Capes {
 	private static final List<Cape> CAPES = Lists.<Cape>newArrayList();
 	private static final Map<Cape, BufferedImage> REQUESTED_IMAGES = Maps.newHashMap();
 
+	private static final Field PLAYER_INFO = ReflectionHelper.findField(AbstractClientPlayer.class, "playerInfo", "field_175157_a");
+	private static final Field PLAYER_TEXTURES = ReflectionHelper.findField(NetworkPlayerInfo.class, "playerTextures", "field_187107_a");
+
 	public static void clear() {
 		CAPES.clear();
 		REQUESTED_IMAGES.clear();
 	}
 
 	public static void update() {
-		if (Minecraft.getMinecraft().world != null) {
-			for (Cape cape : REQUESTED_IMAGES.keySet()) {
-				BufferedImage image = REQUESTED_IMAGES.get(cape);
-				ResourceLocation location = TextureUtils.createBufferedImageTexture(image);
+		try {
+			if (Minecraft.getMinecraft().world != null) {
+				for (Cape cape : REQUESTED_IMAGES.keySet()) {
+					BufferedImage image = REQUESTED_IMAGES.get(cape);
+					ResourceLocation location = TextureUtils.createBufferedImageTexture(image);
 
-				for (int i = 0; i < cape.getUsers().length; i++) {
-					EntityPlayer player = Minecraft.getMinecraft().world.getPlayerEntityByUUID(cape.getUsers()[i]);
-					if (player instanceof AbstractClientPlayer) {
-						AbstractClientPlayer client = (AbstractClientPlayer) player;
-						NetworkPlayerInfo info = client.playerInfo;
-						Map<MinecraftProfileTexture.Type, ResourceLocation> textures = info.playerTextures;
-						try {
-							textures.put(MinecraftProfileTexture.Type.CAPE, location);
-							textures.put(MinecraftProfileTexture.Type.ELYTRA, location);
-						} catch (Exception e) {
-							textures.put(MinecraftProfileTexture.Type.CAPE, TextureMap.LOCATION_MISSING_TEXTURE);
-							textures.put(MinecraftProfileTexture.Type.ELYTRA, TextureMap.LOCATION_MISSING_TEXTURE);
+					for (int i = 0; i < cape.getUsers().length; i++) {
+						EntityPlayer player = Minecraft.getMinecraft().world.getPlayerEntityByUUID(cape.getUsers()[i]);
+						if (player instanceof AbstractClientPlayer) {
+							AbstractClientPlayer client = (AbstractClientPlayer) player;
+							NetworkPlayerInfo info = (NetworkPlayerInfo) PLAYER_INFO.get(client);
+							Map<MinecraftProfileTexture.Type, ResourceLocation> textures = (Map<Type, ResourceLocation>) PLAYER_TEXTURES.get(info);
+							try {
+								textures.put(MinecraftProfileTexture.Type.CAPE, location);
+								textures.put(MinecraftProfileTexture.Type.ELYTRA, location);
+							} catch (Exception e) {
+								textures.put(MinecraftProfileTexture.Type.CAPE, TextureMap.LOCATION_MISSING_TEXTURE);
+								textures.put(MinecraftProfileTexture.Type.ELYTRA, TextureMap.LOCATION_MISSING_TEXTURE);
+							}
 						}
 					}
 				}
+				REQUESTED_IMAGES.clear();
 			}
-			REQUESTED_IMAGES.clear();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
