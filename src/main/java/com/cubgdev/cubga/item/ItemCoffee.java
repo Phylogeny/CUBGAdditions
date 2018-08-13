@@ -79,7 +79,9 @@ public class ItemCoffee extends Item {
         return stack;
     }
 
-    protected void onUse(ItemStack stack, World world, EntityPlayer player) {
+    protected void onUse(ItemStack stack, World world, EntityPlayer player)
+    {
+
     }
 
     @Override
