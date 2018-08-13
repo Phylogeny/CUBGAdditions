@@ -36,14 +36,23 @@ public class Capes {
 	private static final List<Cape> CAPES = Lists.<Cape>newArrayList();
 	private static final Map<Cape, BufferedImage> REQUESTED_IMAGES = Maps.newHashMap();
 
-	private static final Field PLAYER_INFO = ReflectionHelper.findField(AbstractClientPlayer.class, "playerInfo", "field_175157_a");
-	private static final Field PLAYER_TEXTURES = ReflectionHelper.findField(NetworkPlayerInfo.class, "playerTextures", "field_187107_a");
+	@SideOnly(Side.CLIENT)
+	private static Field playerInfo;
+	@SideOnly(Side.CLIENT)
+	private static Field playerTextures;
 
 	public static void clear() {
 		CAPES.clear();
 		REQUESTED_IMAGES.clear();
 	}
+	
+	@SideOnly(Side.CLIENT)
+	public static void initClient() {
+		playerInfo = ReflectionHelper.findField(AbstractClientPlayer.class, "playerInfo", "field_175157_a");
+		playerTextures = ReflectionHelper.findField(NetworkPlayerInfo.class, "playerTextures", "field_187107_a");
+	}
 
+	@SideOnly(Side.CLIENT)
 	public static void update() {
 		try {
 			if (Minecraft.getMinecraft().world != null) {
@@ -55,8 +64,8 @@ public class Capes {
 						EntityPlayer player = Minecraft.getMinecraft().world.getPlayerEntityByUUID(cape.getUsers()[i]);
 						if (player instanceof AbstractClientPlayer) {
 							AbstractClientPlayer client = (AbstractClientPlayer) player;
-							NetworkPlayerInfo info = (NetworkPlayerInfo) PLAYER_INFO.get(client);
-							Map<MinecraftProfileTexture.Type, ResourceLocation> textures = (Map<Type, ResourceLocation>) PLAYER_TEXTURES.get(info);
+							NetworkPlayerInfo info = (NetworkPlayerInfo) playerInfo.get(client);
+							Map<MinecraftProfileTexture.Type, ResourceLocation> textures = (Map<Type, ResourceLocation>) playerTextures.get(info);
 							try {
 								textures.put(MinecraftProfileTexture.Type.CAPE, location);
 								textures.put(MinecraftProfileTexture.Type.ELYTRA, location);
