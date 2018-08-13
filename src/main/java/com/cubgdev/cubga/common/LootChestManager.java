@@ -6,10 +6,12 @@ import com.cubgdev.cubga.tileentity.TileEntityLootChest;
 import com.google.common.collect.Maps;
 import net.minecraft.block.BlockChest;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.MapStorage;
 import net.minecraft.world.storage.WorldSavedData;
+import net.minecraftforge.common.util.Constants;
 
 import java.util.Map;
 
@@ -74,22 +76,41 @@ public final class LootChestManager extends WorldSavedData
     public void add(BlockPos pos, LootChest lootChest)
     {
         LOOT_CHESTS.put(pos, lootChest);
+        this.markDirty();
     }
 
     public void remove(BlockPos pos)
     {
         LOOT_CHESTS.remove(pos);
+        this.markDirty();
     }
 
     @Override
     public void readFromNBT(NBTTagCompound nbt)
     {
-
+        LOOT_CHESTS.clear();
+        NBTTagList tagList = nbt.getTagList("LootChests", Constants.NBT.TAG_COMPOUND);
+        for(int i = 0; i < tagList.tagCount(); i++)
+        {
+            NBTTagCompound tagCompound = tagList.getCompoundTagAt(i);
+            BlockPos pos = BlockPos.fromLong(tagCompound.getLong("Pos"));
+            LootChest lootChest = new LootChest(tagCompound.getCompoundTag("Data"));
+            LOOT_CHESTS.put(pos, lootChest);
+        }
     }
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
-        return null;
+        NBTTagList tagList = new NBTTagList();
+        LOOT_CHESTS.forEach((pos, lootChest) ->
+        {
+            NBTTagCompound lootChestTag = new NBTTagCompound();
+            lootChestTag.setLong("Pos", pos.toLong());
+            lootChestTag.setTag("Data", lootChest.toTag());
+            tagList.appendTag(lootChestTag);
+        });
+        compound.setTag("LootChests", tagList);
+        return compound;
     }
 }
