@@ -1,13 +1,5 @@
 package com.cubgdev.cubga.proxy;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.HashMap;
-import java.util.Scanner;
-import java.util.UUID;
-
 import com.cubgdev.cubga.client.GuiEvents;
 import com.cubgdev.cubga.client.RenderEvents;
 import com.cubgdev.cubga.client.particle.ParticleBrick;
@@ -44,6 +36,9 @@ public class ClientProxy extends CommonProxy {
 
 		/* Register DiscordHandler */
 		DiscordHandler.getInstance().setup();
+
+		/** Get fields for the client capes */
+		Capes.initClient();
 	}
 
 	@Override
