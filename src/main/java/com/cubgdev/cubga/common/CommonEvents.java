@@ -32,7 +32,7 @@ public class CommonEvents {
 	@SubscribeEvent
 	public void onPlayerLoggedIn(PlayerLoggedInEvent event) {
 		if (event.player instanceof EntityPlayerMP) {
-			PacketHandler.INSTANCE.sendTo(new MessageUpdateCapes(Capes.getCapes()), (EntityPlayerMP) event.player);
+			PacketHandler.INSTANCE.sendToAll(new MessageUpdateCapes(Capes.getCapes()));
 		}
 	}
 
