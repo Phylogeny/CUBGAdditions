@@ -154,7 +154,7 @@ public class RenderEvents {
 			if (event.getType() == ElementType.HEALTH && mc.playerController.shouldDrawHUD()) {
 				GlStateManager.color(red * CUBGConfig.CLIENT.ui.health.healthColor.Red, green * CUBGConfig.CLIENT.ui.health.healthColor.Green, blue * CUBGConfig.CLIENT.ui.health.healthColor.Blue);
 
-				if (CUBGConfig.CLIENT.ui.health.xpbarEnabled) {
+				if (!CUBGConfig.CLIENT.ui.health.cleanBarEnabled) {
 					mc.getTextureManager().bindTexture(BARS_XP);
 				} else {
 					mc.getTextureManager().bindTexture(BARS_BOSS);
@@ -182,7 +182,7 @@ public class RenderEvents {
 					if (CUBGConfig.CLIENT.ui.health.percentagesEnabled) {
 						text = ((int) Math.round(player.getHealth() / player.getMaxHealth() * 200f) / 2) + "%";
 					} else {
-						text = Float.toString((float) health / 2f) + "/" + (player.getMaxHealth() / 2f);
+						text = Float.toString((float) (health / 2f)) + "/" + (player.getMaxHealth() / 2f);
 					}
 					GlStateManager.pushMatrix();
 					GlStateManager.translate(scaledRes.getScaledWidth() / 2, scaledRes.getScaledHeight() - 34, 0);

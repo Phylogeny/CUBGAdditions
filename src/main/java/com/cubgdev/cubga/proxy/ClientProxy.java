@@ -1,13 +1,9 @@
 package com.cubgdev.cubga.proxy;
 
 import com.cubgdev.cubga.client.GuiEvents;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
+
 import java.util.*;
 
-import com.cubgdev.cubga.client.CapeHandler;
 import com.cubgdev.cubga.client.RenderEvents;
 import com.cubgdev.cubga.client.particle.ParticleBrick;
 import com.cubgdev.cubga.client.particle.ParticleRenderer;
@@ -16,26 +12,15 @@ import com.cubgdev.cubga.common.EnumParticles;
 import com.cubgdev.cubga.entity.EntityThrowableBrick;
 import com.cubgdev.cubga.tileentity.TileEntityPlayerPlush;
 import com.cubgdev.cubga.init.ModBlocks;
-import com.cubgdev.cubga.tileentity.TileEntityCrystalContainer;
 import com.cubgdev.cubga.tileentity.TileEntityLootChest;
-import com.cubgdev.cubga.tileentity.TileEntityPlayerPlush;
-import com.cubgdev.cubga.tileentity.render.TileEntityCrystalContainerRenderer;
 import com.cubgdev.cubga.tileentity.render.TileEntityLootChestRenderer;
 import com.cubgdev.cubga.tileentity.render.TileEntityRendererPlayerPlush;
 import com.cubgdev.cubga.utils.DiscordHandler;
 import com.cubgdev.cubga.utils.cape.Capes;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
-import net.minecraft.client.renderer.block.model.ModelBakery;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.renderer.block.statemap.IStateMapper;
-import net.minecraft.client.renderer.block.statemap.StateMap;
-import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;

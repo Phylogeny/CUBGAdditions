@@ -1,6 +1,5 @@
 package com.cubgdev.cubga;
 
-import com.cubgdev.cubga.client.RenderEvents;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
@@ -40,15 +39,15 @@ public class CUBGConfig
     }
 
     public static class Health {
-        @Config.Name("Enable XP Health Bar")
-        @Config.Comment("Determines whether or not the health bar will have the XP bar texture (Colorable)")
-        @Config.LangKey(PREFIX + "client.ui.health.xpbar")
-        public boolean xpbarEnabled = false; // Default: Boss Bar
+        @Config.Name("Enable Clean Health Bar")
+        @Config.Comment("Determines whether or not the health bar will have the clean bar texture (Colorable)")
+        @Config.LangKey(PREFIX + "client.ui.health.cleanbar")
+        public boolean cleanBarEnabled = false; // Default: False
 
         @Config.Name("Percentages")
         @Config.Comment("Determines whether the health bar will use percentages")
         @Config.LangKey(PREFIX + "client.ui.health.percentages")
-        public boolean percentagesEnabled = false; // Default: False
+        public boolean percentagesEnabled = true; // Default: True
 
         @Config.Name("Enable Health Numbers")
         @Config.Comment("Determines whether the numbers above the health bar will show.")
