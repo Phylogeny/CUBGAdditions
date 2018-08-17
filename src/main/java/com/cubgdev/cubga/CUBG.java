@@ -2,10 +2,10 @@ package com.cubgdev.cubga;
 
 import org.apache.logging.log4j.Logger;
 
+import com.cubgdev.cubga.common.CommonEvents;
 import com.cubgdev.cubga.common.commands.CommandEditLootChests;
 import com.cubgdev.cubga.common.commands.CommandGenerateLootChests;
 import com.cubgdev.cubga.common.commands.CommandResetBrittleBricks;
-import com.cubgdev.cubga.common.CommonEvents;
 import com.cubgdev.cubga.init.ModItems;
 import com.cubgdev.cubga.init.RegistrationHandler;
 import com.cubgdev.cubga.network.PacketHandler;
@@ -13,8 +13,9 @@ import com.cubgdev.cubga.proxy.CommonProxy;
 import com.cubgdev.cubga.tileentity.TileEntityBrittleBrick;
 import com.cubgdev.cubga.tileentity.TileEntityCrystal;
 import com.cubgdev.cubga.tileentity.TileEntityCrystalContainer;
+import com.cubgdev.cubga.tileentity.TileEntityLootChest;
 import com.cubgdev.cubga.utils.cape.Capes;
-import com.cubgdev.cubga.tileentity.*;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -73,8 +74,8 @@ public class CUBG {
 	public void onServerStarting(FMLServerStartingEvent event) {
 		event.registerServerCommand(new CommandResetBrittleBricks());
 		Capes.load();
-	    event.registerServerCommand(new CommandEditLootChests());
-        event.registerServerCommand(new CommandGenerateLootChests());
+		event.registerServerCommand(new CommandEditLootChests());
+		event.registerServerCommand(new CommandGenerateLootChests());
 	}
 
 	public static Logger logger() {

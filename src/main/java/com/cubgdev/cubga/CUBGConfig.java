@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 @Mod.EventBusSubscriber(modid = Reference.MOD_ID)
 public class CUBGConfig
 {
-    private static final String PREFIX = "config." + Reference.MOD_ID;
+    private static final String PREFIX = "config." + Reference.MOD_ID + ".";
 
     @Config.Name("Client")
     @Config.Comment("Client-only configs.")
