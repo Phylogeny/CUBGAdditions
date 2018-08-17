@@ -15,7 +15,7 @@ public interface IValueContainer
 
     void updateEntries(Map<String, String> entries);
 
-    BlockPos getPos();
+    BlockPos getContainerPos();
 
     class Entry
     {

@@ -9,6 +9,7 @@ import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraftforge.common.util.Constants;
 
@@ -143,5 +144,11 @@ public class TileEntityLootChest extends TileEntityChest implements IValueContai
     public void setLootChest(LootChest lootChest)
     {
         this.lootChest = lootChest;
+    }
+
+    @Override
+    public BlockPos getContainerPos()
+    {
+        return pos;
     }
 }
