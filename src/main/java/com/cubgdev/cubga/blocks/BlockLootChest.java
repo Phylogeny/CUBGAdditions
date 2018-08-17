@@ -28,12 +28,12 @@ import javax.annotation.Nullable;
  */
 public class BlockLootChest extends BlockChest
 {
-    private static final int[] BLANK = new int[]{50, 50, 50};
+    private static final int[] BLANK = new int[]{ 50, 50, 50 };
     private static final LootTableEntry[] STANDARD_TYPES = {
-            new LootTableEntry(75, 83, 32, new ResourceLocation("minecraft", "crayfishunknown/chests/nonstandard"), false, 0.9F),
-            new LootTableEntry(114, 137, 218, new ResourceLocation("minecraft", "crayfishunknown/chests/attachments"), false, 0.75F),
-            new LootTableEntry(128, 128, 128, new ResourceLocation("minecraft", "crayfishunknown/chests/standard"), false, 0.8F),
-            new LootTableEntry(218, 165, 32, new ResourceLocation("minecraft", "crayfishunknown/chests/rare"), true, 0.5F)
+            new LootTableEntry(75, 83, 32, new ResourceLocation("crayfishunknown", "chests/nonstandard"), false, 0.9F),
+            new LootTableEntry(114, 137, 218, new ResourceLocation("crayfishunknown", "chests/attachments"), false, 0.75F),
+            new LootTableEntry(128, 128, 128, new ResourceLocation("crayfishunknown", "chests/standard"), false, 0.8F),
+            new LootTableEntry(218, 165, 32, new ResourceLocation("crayfishunknown", "chests/rare"), true, 0.5F)
     };
 
     public BlockLootChest()
