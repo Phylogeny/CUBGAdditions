@@ -1,9 +1,9 @@
 package com.cubgdev.cubga.item;
 
+import com.cubgdev.cubga.CUBG;
 import com.cubgdev.cubga.client.gui.GuiEditValueContainer;
 import com.cubgdev.cubga.tileentity.IValueContainer;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.inventory.GuiEditSign;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumActionResult;
@@ -30,8 +30,7 @@ public class ItemValueContainerEditor extends ItemBase
             TileEntity tileEntity = world.getTileEntity(pos);
             if(tileEntity instanceof IValueContainer)
             {
-                Minecraft mc = Minecraft.getMinecraft();
-                mc.displayGuiScreen(new GuiEditValueContainer((IValueContainer) tileEntity));
+                player.openGui(CUBG.instance, 1, world, pos.getX(), pos.getY(), pos.getZ());
             }
         }
         return EnumActionResult.SUCCESS;

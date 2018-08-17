@@ -5,7 +5,6 @@ import com.cubgdev.cubga.common.LootChest;
 import com.cubgdev.cubga.common.LootChestManager;
 import com.cubgdev.cubga.init.ModBlocks;
 import com.cubgdev.cubga.tileentity.TileEntityLootChest;
-import jdk.nashorn.internal.ir.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;

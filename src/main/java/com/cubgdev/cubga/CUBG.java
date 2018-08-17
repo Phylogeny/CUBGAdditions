@@ -1,5 +1,7 @@
 package com.cubgdev.cubga;
 
+import com.cubgdev.cubga.client.gui.GuiHandler;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import org.apache.logging.log4j.Logger;
 
 import com.cubgdev.cubga.common.CommonEvents;
@@ -52,6 +54,7 @@ public class CUBG {
 		RegistrationHandler.init();
 		MinecraftForge.EVENT_BUS.register(new CommonEvents());
 		PacketHandler.init();
+		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 	}
 
 	@Mod.EventHandler
@@ -73,9 +76,9 @@ public class CUBG {
 	@Mod.EventHandler
 	public void onServerStarting(FMLServerStartingEvent event) {
 		event.registerServerCommand(new CommandResetBrittleBricks());
-		Capes.load();
 		event.registerServerCommand(new CommandEditLootChests());
 		event.registerServerCommand(new CommandGenerateLootChests());
+		Capes.load();
 	}
 
 	public static Logger logger() {
