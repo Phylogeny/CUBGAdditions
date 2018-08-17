@@ -10,6 +10,8 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -172,6 +174,17 @@ public class BlockLootChest extends BlockChest
         {
             LootChestManager.get(worldIn).remove(pos);
         }
+    }
+
+    @Override
+    public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
+    {
+        TileEntity tileEntity = worldIn.getTileEntity(pos);
+        if (tileEntity instanceof IInventory)
+        {
+            worldIn.updateComparatorOutputLevel(pos, this);
+        }
+        worldIn.removeTileEntity(pos);
     }
 
     private static class LootTableEntry
