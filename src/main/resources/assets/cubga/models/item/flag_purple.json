@@ -1,0 +1,6 @@
+{
+  "parent": "cubga:item/flag",
+  "textures": {
+    "flag": "cubga:flag/flag_purple"
+  }
+}

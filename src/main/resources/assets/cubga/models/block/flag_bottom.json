@@ -1,0 +1,35 @@
+{
+    "__comment": "Model generated using MrCrayfish's Model Creator (http://mrcrayfish.com/modelcreator/)",
+    "textures": {
+        "base": "blocks/anvil_base",
+        "pole": "blocks/concrete_silver"
+    },
+    "elements": [
+        {
+            "name": "base",
+            "from": [ 7.0, 0.0, 7.0 ], 
+            "to": [ 9.0, 1.0, 9.0 ], 
+            "faces": {
+                "north": { "texture": "base", "uv": [ 0.0, 0.0, 4.0, 1.0 ] },
+                "east": { "texture": "base", "uv": [ 0.0, 0.0, 4.0, 1.0 ] },
+                "south": { "texture": "base", "uv": [ 0.0, 0.0, 4.0, 1.0 ] },
+                "west": { "texture": "base", "uv": [ 0.0, 0.0, 4.0, 1.0 ] },
+                "up": { "texture": "base", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+                "down": { "texture": "base", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+            }
+        },
+        {
+            "name": "pole",
+            "from": [ 7.5, 0.5, 7.5 ], 
+            "to": [ 8.5, 16.0, 8.5 ], 
+            "faces": {
+                "north": { "texture": "pole", "uv": [ 7.5, 0.0, 8.5, 15.5 ] },
+                "east": { "texture": "pole", "uv": [ 7.5, 0.0, 8.5, 15.5 ] },
+                "south": { "texture": "pole", "uv": [ 7.5, 0.0, 8.5, 15.5 ] },
+                "west": { "texture": "pole", "uv": [ 7.5, 0.0, 8.5, 15.5 ] },
+                "up": { "texture": "pole", "uv": [ 7.5, 7.5, 8.5, 8.5 ] },
+                "down": { "texture": "pole", "uv": [ 7.5, 7.5, 8.5, 8.5 ] }
+            }
+        }
+    ]
+}

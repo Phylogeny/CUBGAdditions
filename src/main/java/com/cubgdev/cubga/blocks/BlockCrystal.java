@@ -4,6 +4,7 @@ import com.cubgdev.cubga.CUBG;
 import com.cubgdev.cubga.tileentity.TileEntityCrystal;
 import com.cubgdev.cubga.tileentity.TileEntityCrystalContainer;
 
+import com.cubgdev.cubga.utils.aabb.Bounds;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -12,12 +13,15 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -28,6 +32,9 @@ import java.util.List;
  */
 
 public class BlockCrystal extends Block implements ITileEntityProvider {
+
+    // MrCrayfish! - CoffeeCat
+    private static final Bounds bounds = new Bounds(5, 5, 5, 11, 11, 11);
 
     public BlockCrystal(String name) {
         super(Material.IRON);
@@ -65,7 +72,12 @@ public class BlockCrystal extends Block implements ITileEntityProvider {
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta)
 	{
-		return new TileEntityCrystalContainer(true, 3.0f);
+		return new TileEntityCrystalContainer();
 	}
+
+    @Override
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos) {
+        return bounds.toAABB();
+    }
 }
 

@@ -3,13 +3,13 @@
   "modid": "cubga",
   "name": "CUBG Additions Mod",
   "description": "A mod that adds in various things to improve CUBG gameplay.",
-  "version": "1.4.0",
+  "version": "1.7.4",
   "mcversion": "1.12.2",
-  "url": "",
+  "url": "https://jacksonplayz.com/cubg",
   "updateUrl": "",
-  "authorList": ["JacksonPlayz"],
+  "authorList": ["JacksonPlayz", "MrCrayfish", "Ocelot5836", "CoffeeCatRailway"],
   "credits": "Thanks to MinecraftDoodler, Mastef_Chief, OstenTV, CoffeeCatRailway, HauntedCorpse, BrentTheGamer, Builderboy426, Ocelot5836, and MrCrayfish!",
-  "logoFile": "",
+  "logoFile": "assets/cubga/textures/gui/logo.png",
   "screenshots": [],
   "dependencies": []
 }

@@ -7,11 +7,11 @@ buildscript {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
     }
 }
+
 apply plugin: 'net.minecraftforge.gradle.forge'
 //Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 
-
-version = "1.4.0-1.12.2"
+version = "1.7.4-1.12.2"
 group = "com.cubgdev" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "cubga"
 
@@ -33,8 +33,32 @@ minecraft {
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 }
 
+repositories {
+    maven {
+        url 'https://jitpack.io'
+    }
+}
+
+//Add "embedded" configuration
+configurations {
+    embed
+    compile.extendsFrom(embed)
+}
+// Add dependencies
 dependencies {
-    compile files('libs/guns-0.4.1-1.12.2.jar')
+    // This dependency and its transitive deps will be embedded
+    embed 'com.github.Vatuu:discord-rpc:1.5.1'
+    // You can also depend on some jar and not embed it
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+}
+
+//Add dependencies to the JAR
+jar {
+    from configurations.embed.collect {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        it.isDirectory() ? it : zipTree(it)
+    }
 }
 
 processResources {

@@ -1,5 +1,6 @@
 package com.cubgdev.cubga.client.particle;
 
+import com.cubgdev.cubga.client.gui.utilities.CUBGRenderHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.ActiveRenderInfo;
@@ -89,6 +90,7 @@ public class ParticleRenderer {
     @SideOnly(Side.CLIENT)
     public void onClientTick(TickEvent.ClientTickEvent event) {
         if(event.phase == TickEvent.Phase.START) {
+            CUBGRenderHelper.swing+=1;
             getInstance().updateParticle();
         }
     }

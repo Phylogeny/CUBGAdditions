@@ -1,26 +1,50 @@
-itemGroup.tabCUBG=CUBG Additions
+﻿itemGroup.tabCUBG=CUBG Additions
 
 item.show_info=Hold %s for Info
 
 #Health Items
-item.medkit.name=§a§lMedkit
-item.first_aid_kit.name=§c§lFirst Aid Kit
-item.bandage.name=§lBandage
-item.bandaid.name=§lBand-Aid
+item.medkit.name=Medkit
+item.first_aid_kit.name=First Aid Kit
+item.bandage.name=Bandage
+item.bandaid.name=Band-Aid
+item.painkillers.name=Painkillers
+
+#Tools
+item.beam_rod.name=Beam Rod
+item.beam_rod.position=Crystal Position: %s
+item.value_container_editor.name=Container Editor
 
 #Blocks
 tile.brittle_brick.name=Brittle Bricks
 tile.crystal_container.name=Crystal Container
 tile.crystal.name=Crystal
-item.beam_rod.name=Beam Rod
-item.beam_rod.position=Crystal Position: %s
+tile.loot_chest.name=Loot Chest
+
+#Flags
+tile.flag_white.name=White Canadian Flag
+tile.flag_black.name=Black Canadian Flag
+tile.flag_red.name=§c§lDoodler’s Patriocy
+tile.flag_orange.name=Orange Canadian Flag
+tile.flag_magenta.name=Magenta Canadian Flag
+tile.flag_pink.name=Pink Canadian Flag
+tile.flag_purple.name=Purple Canadian Flag
+tile.flag_lime.name=Lime Canadian Flag
+tile.flag_green.name=Green Canadian Flag
+tile.flag_gray.name=Gray Canadian Flag
+tile.flag_silver.name=Silver Canadian Flag
+tile.flag_brown.name=Brown Canadian Flag
+tile.flag_cyan.name=Cyan Canadian Flag
+tile.flag_blue.name=Blue Canadian Flag
+tile.flag_light_blue.name=Light Blue Canadian Flag
+tile.flag_yellow.name=Yellow Canadian Flag
 
 #Easter Eggs
 item.coffee_cup.name=§6§lCoffee Cup
 item.coffee_cup_full.name=§6§lCoffee Cup
-item.canadian_flag.name=§c§lDoodler's Bane
+item.canadian_flag.name=§c§lDoodler’s Patriocy
 item.modder_nightmare.name=§d§lModder's §8§lNightmare
 item.master_gauntlet.name=§a§lMaster §7§lGauntlet
+item.crayfish_claw.name=§c§lCrayfish Claw
 
 #Plushes
 tile.player_plush.name=Player Plush
@@ -30,21 +54,66 @@ tile.player_plush.nbt.name=%s Plush
 tile.brittle_brick.info=Very fragile bricks, easily breakable by hand and gun.
 tile.crystal_container.info=Contains a highly explosive crystal from another dimension.
 tile.crystal.info=A highly powerful (and explosive) crystal taken from another dimension.
+tile.loot_chest.info=A colorful chest that contains goodies!
 
 #Item Descriptions
 item.brick.info=A brick that came off of a Brittle Brick. Craft a brittle brick with four bricks and hold right click to charge and throw the brick.
 item.beam_rod.info=A magical wand that allows full control over crystal containers. Simply click the container you want to add beams to and then press any other block to make a beam go to that position.
 tile.player_plush.info=A cute little plush of a Minecraft player.
+item.value_container_editor.info=A tool that can be used to change NBT values of specific block entities.
 
 #Health Item Descriptions
 item.medkit.info=Military grade first aid. Restores 100%s of the player's health (10 hearts).
 item.first_aid_kit.info=Civilian grade first aid. Restores 50%s of the player's health (5 hearts).
 item.bandage.info=A simple piece of cloth that covers wounds. Restores 10%s of the player's health (2 hearts).
 item.bandaid.info=An adhesive piece of fabric that covers small cuts. Restores 2.5%s of the player's health (1/2 heart).
+item.painkillers.info=A bottle of pills that will slowly take the pain away. Effects player with regen.
 
 #Easter Egg Descriptions
 item.coffee_cup.info=An empty coffee cup. Oh, and you can wear it on your head.
 item.coffee_cup_full.info=A hot cup of coffee, pretty nice, right? Oh, and you can wear it on your head and drink it, but be careful, it's hot.
-item.canadian_flag.info=The iconic symbol of the superior country, Canada.
+item.flag.info=The iconic symbol of the superior country, Canada.
 item.modder_nightmare.info=A modder's worst nightmare, the glitched texture.
-item.master_gauntlet.info=A gauntlet made out of the finest material. Made for the Master of Chiefs. Wait, the name on the tag is different, is this misspelled?
+item.master_gauntlet.info=A gauntlet made out of the finest material. Made for the Master of Chiefs. Wait, no, the Mastef of Chiefs.
+item.crayfish_claw.info=A claw taken from the crayfish himself. You can put the claw on your head, but it might hurt.
+
+#Menu/Gui Elements
+gui.button.discord=DISCORD
+gui.button.website=WEBSITE
+gui.button.play=PLAY
+gui.button.singleplayer=SINGLE-PLAYER
+gui.button.multiplayer=MULTI-PLAYER
+gui.button.settings=SETTINGS
+gui.button.quit=QUIT
+gui.button.news=NEWS/UPDATES
+gui.button.beaver=BEAVER (CA)
+gui.button.kangaroo=KANGAROO (AU)
+
+#Menu Titles
+gui.title.mainmenu=Main Menu
+
+#Menu Subtitles
+gui.subtitle.status=STATUS
+
+#Config
+config.cubga.title=CUBG Additions Config
+config.cubga.client=Client
+config.cubga.client.tooltip=Client-only configs.
+config.cubga.ui=UI
+config.cubga.tooltip=UI settings / customization.
+config.cubga.enabled=Enable UI
+config.cubga.enabled.tooltip=Determines whether or not the custom UI will show.
+config.cubga.ui.health=Health Bar
+config.cubga.ui.health.tooltip=Health bar settings / customization.
+config.cubga.ui.health.xpbar=Enable XP Health Bar
+config.cubga.ui.health.xpbar.tooltip=Determines whether or not the health bar will have the XP bar texture (Colorable).
+config.cubga.ui.health.percentages=Enable Percentages
+config.cubga.ui.health.percentages.tooltip=Determines whether the health bar will use percentages.
+config.cubga.ui.health.color=Health Bar Colors
+config.cubga.ui.health.color.tooltip=Determines what color will be used on the health bar.
+config.cubga.ui.health.color.red=Red
+config.cubga.ui.health.color.red.tooltip=Red value of the health bar RGB.
+config.cubga.ui.health.color.green=Green
+config.cubga.ui.health.color.green.tooltip=Green value of the health bar RGB.
+config.cubga.ui.health.color.blue=Blue
+config.cubga.ui.health.color.blue.tooltip=Blue value of the health bar RGB.

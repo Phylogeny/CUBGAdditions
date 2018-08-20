@@ -29,7 +29,7 @@ public class ItemMasterGauntlet extends ItemBase
     @Override
     public void onUpdate(ItemStack itemstack, World par2World, Entity par3Entity, int par4, boolean par5)
     {
-        if(itemstack.isItemEnchanted() == false)
+        if(!itemstack.isItemEnchanted())
         {
             itemstack.addEnchantment(Enchantments.KNOCKBACK, 2);
         }
