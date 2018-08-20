@@ -7,14 +7,17 @@ import javax.annotation.Nullable;
 
 import com.cubgdev.cubga.utils.Lib;
 
+import com.cubgdev.cubga.utils.TileEntityUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.common.util.Constants;
 
 /**
  * Author: CoffeeCatRailway
@@ -75,8 +78,8 @@ public class TileEntityCrystalContainer extends TileEntity
 		this.renderBase = nbt.getBoolean("renderBase");
 		this.speed = nbt.getFloat("speed");
 		this.scale = nbt.getFloat("scale");
-		this.beamPositions = new ArrayList<BlockPos>();
-		NBTTagList positions = nbt.getTagList("beams", 0);
+		this.beamPositions = new ArrayList<>();
+		NBTTagList positions = nbt.getTagList("beams", Constants.NBT.TAG_COMPOUND);
 		for (NBTBase tag : positions)
 		{
 			if (tag instanceof NBTTagCompound)
@@ -98,6 +101,7 @@ public class TileEntityCrystalContainer extends TileEntity
 			}
 		}
 		this.beamPositions.add(beamPosition);
+		TileEntityUtil.markTileEntityForUpdate(this);
 		return true;
 	}
 
@@ -122,6 +126,12 @@ public class TileEntityCrystalContainer extends TileEntity
 			this.beamPositions.remove(index);
 			return true;
 		}
+	}
+
+	@Override
+	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt)
+	{
+		this.readFromNBT(pkt.getNbtCompound());
 	}
 
 	@Nullable

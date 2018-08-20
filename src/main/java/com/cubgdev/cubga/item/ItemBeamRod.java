@@ -12,6 +12,7 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
@@ -72,9 +73,11 @@ public class ItemBeamRod extends ItemBase
 		if (ItemBeamRod.getCrystalPosition(heldItem) != null)
 		{
 			BlockPos crystalPosition = ItemBeamRod.getCrystalPosition(heldItem);
-			if (world.getTileEntity(crystalPosition) instanceof TileEntityCrystalContainer)
+			TileEntity tileEntity = world.getTileEntity(crystalPosition);
+			if (tileEntity instanceof TileEntityCrystalContainer)
 			{
-				TileEntityCrystalContainer te = (TileEntityCrystalContainer) world.getTileEntity(crystalPosition);
+				System.out.println(pos);
+				TileEntityCrystalContainer te = (TileEntityCrystalContainer) tileEntity;
 				return te.addBeamPosition(pos) ? EnumActionResult.SUCCESS : te.removeBeamPosition(pos) ? EnumActionResult.SUCCESS : EnumActionResult.FAIL;
 			}
 		}
