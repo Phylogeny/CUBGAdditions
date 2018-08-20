@@ -2,7 +2,6 @@ package com.cubgdev.cubga.tileentity.render;
 
 import com.cubgdev.cubga.tileentity.TileEntityCrystalContainer;
 import com.cubgdev.cubga.utils.TextureUtils;
-
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelEnderCrystal;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -15,7 +14,8 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
+
+import java.util.Set;
 
 /**
  * Author: CoffeeCatRailway
@@ -52,38 +52,24 @@ public class TileEntityCrystalContainerRenderer extends TileEntitySpecialRendere
 		GlStateManager.enableLighting();
 		GlStateManager.popMatrix();
 
-		BlockPos[] beamPositions = te.getBeamPositions();
+		Set<BlockPos> beamPositions = te.getBeamPositions();
 		if (beamPositions != null)
 		{
-			for (int i = 0; i < beamPositions.length; i++)
+			for(BlockPos beamPos : beamPositions)
 			{
-				BlockPos toPos = beamPositions[i];
-				if (toPos != null)
-				{
-					GlStateManager.pushMatrix();
-					TextureUtils.bindTexture(RenderDragon.ENDERCRYSTAL_BEAM_TEXTURES);
-					// float f2 = (float) (toPos.getX() * (1 / scale));
-					// float f3 = (float) (toPos.getY() * (1 / scale));
-					// float f4 = (float) (toPos.getZ() * (1 / scale));
-					// double d0 = (double) f2 - fromPos.getX();
-					// double d1 = (double) f3 - fromPos.getY();
-					// double d2 = (double) f4 - fromPos.getZ();
-					// RenderDragon.renderCrystalBeams((fromPos.getX() + d0)*(1/scale), (fromPos.getY() + 0.25D + d1)*(1/scale), (fromPos.getZ() + d2)*(1/scale), partialTicks, (double) f2*(1/scale), (double) f3*(1/scale), (double) f4*(1/scale), (int) innerRotation, fromPos.getX(), fromPos.getY(), fromPos.getZ());
-					// RenderDragon.renderCrystalBeams(f2, f3, f4, partialTicks, f2, f3, f4, (int)te.getInnerRotation(), f2, f3, f4);
+				GlStateManager.pushMatrix();
+				TextureUtils.bindTexture(RenderDragon.ENDERCRYSTAL_BEAM_TEXTURES);
 
-					// RenderDragon.renderCrystalBeams(toPos.getX() - fromPos.getX(), toPos.getY() - fromPos.getY() - 1, toPos.getZ() - fromPos.getZ(), partialTicks, 0, 0 - 1 - innerRotationSin * 0.25, 0, (int) te.getInnerRotation(), fromPos.getX() - toPos.getX(), fromPos.getY() - toPos.getY() + 1, fromPos.getZ() - toPos.getZ());
+				float destX = (float) beamPos.getX() + 0.5F;
+				float destY = (float) beamPos.getY();
+				float destZ = (float) beamPos.getZ() + 0.5F;
+				double deltaX = (double) destX - te.getPos().getX();
+				double deltaY = (double) destY - te.getPos().getY();
+				double deltaZ = (double) destZ - te.getPos().getZ();
 
-					float f2 = (float) toPos.getX() + 0.5F;
-					float f3 = (float) toPos.getY();
-					float f4 = (float) toPos.getZ() + 0.5F;
-					double d0 = (double) f2 - te.getPos().getX();
-					double d1 = (double) f3 - te.getPos().getY();
-					double d2 = (double) f4 - te.getPos().getZ();
+				renderCrystalBeams(x + deltaX, y + deltaY, z + deltaZ, partialTicks, destX, destY, destZ, (int) te.getInnerRotation(), te.getPos().getX() + 0.5, te.getPos().getY() - 0.5, te.getPos().getZ() + 0.5);
 
-					renderCrystalBeams(x + d0, y + d1, z + d2, partialTicks, f2, f3, f4, (int) te.getInnerRotation(), te.getPos().getX() + 0.5, te.getPos().getY() - 0.5, te.getPos().getZ() + 0.5);
-
-					GlStateManager.popMatrix();
-				}
+				GlStateManager.popMatrix();
 			}
 		}
 		GlStateManager.popMatrix();

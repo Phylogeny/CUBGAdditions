@@ -1,7 +1,9 @@
 package com.cubgdev.cubga.tileentity;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Nullable;
 
@@ -29,7 +31,7 @@ public class TileEntityCrystalContainer extends TileEntity
 	private float innerRotation;
 	private float speed;
 	private float scale;
-	private List<BlockPos> beamPositions;
+	private Set<BlockPos> beamPositions;
 
 	public TileEntityCrystalContainer()
 	{
@@ -43,7 +45,7 @@ public class TileEntityCrystalContainer extends TileEntity
 		this.innerRotation = 0.0f;
 		this.speed = 1.0f;
 		this.scale = scale;
-		this.beamPositions = new ArrayList<BlockPos>();
+		this.beamPositions = new HashSet<>();
 	}
 
 	public void updateRotation()
@@ -61,10 +63,10 @@ public class TileEntityCrystalContainer extends TileEntity
 		nbt.setFloat("scale", this.scale);
 
 		NBTTagList positions = new NBTTagList();
-		for (int i = 0; i < this.beamPositions.size(); i++)
+		for(BlockPos beamPos : beamPositions)
 		{
 			NBTTagCompound beam = new NBTTagCompound();
-			beam.setTag("position", Lib.writeBlockPos(this.beamPositions.get(i)));
+			beam.setLong("position", beamPos.toLong());
 			positions.appendTag(beam);
 		}
 		nbt.setTag("beams", positions);
@@ -78,54 +80,32 @@ public class TileEntityCrystalContainer extends TileEntity
 		this.renderBase = nbt.getBoolean("renderBase");
 		this.speed = nbt.getFloat("speed");
 		this.scale = nbt.getFloat("scale");
-		this.beamPositions = new ArrayList<>();
+		this.beamPositions = new HashSet<>();
 		NBTTagList positions = nbt.getTagList("beams", Constants.NBT.TAG_COMPOUND);
 		for (NBTBase tag : positions)
 		{
 			if (tag instanceof NBTTagCompound)
 			{
 				NBTTagCompound beam = (NBTTagCompound) tag;
-				this.beamPositions.add(Lib.readBlockPos(beam.getCompoundTag("position")));
+				this.beamPositions.add(BlockPos.fromLong(beam.getLong("position")));
 			}
 		}
 	}
 
 	public boolean addBeamPosition(BlockPos beamPosition)
 	{
-		for (int i = 0; i < this.beamPositions.size(); i++)
+		if(!beamPositions.contains(beamPosition))
 		{
-			BlockPos pos = this.beamPositions.get(i);
-			if (pos.getX() == beamPosition.getX() && pos.getY() == beamPosition.getY() && pos.getZ() == beamPosition.getZ())
-			{
-				return false;
-			}
+			this.beamPositions.add(beamPosition);
+			TileEntityUtil.markTileEntityForUpdate(this);
+			return true;
 		}
-		this.beamPositions.add(beamPosition);
-		TileEntityUtil.markTileEntityForUpdate(this);
-		return true;
+		return false;
 	}
 
 	public boolean removeBeamPosition(BlockPos beamPosition)
 	{
-		int index = -1;
-		for (int i = 0; i < this.beamPositions.size(); i++)
-		{
-			BlockPos pos = this.beamPositions.get(i);
-			if (pos.getX() == beamPosition.getX() && pos.getY() == beamPosition.getY() && pos.getZ() == beamPosition.getZ())
-			{
-				index = i;
-				break;
-			}
-		}
-		if (index == -1)
-		{
-			return false;
-		}
-		else
-		{
-			this.beamPositions.remove(index);
-			return true;
-		}
+		return this.beamPositions.remove(beamPosition);
 	}
 
 	@Override
@@ -173,8 +153,8 @@ public class TileEntityCrystalContainer extends TileEntity
 		return scale;
 	}
 
-	public BlockPos[] getBeamPositions()
+	public Set<BlockPos> getBeamPositions()
 	{
-		return this.beamPositions.toArray(new BlockPos[0]);
+		return beamPositions;
 	}
 }
