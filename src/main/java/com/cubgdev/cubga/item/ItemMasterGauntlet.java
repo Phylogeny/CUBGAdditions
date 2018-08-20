@@ -6,6 +6,7 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityFireworkRocket;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Enchantments;
@@ -52,6 +53,7 @@ public class ItemMasterGauntlet extends ItemBase
             {
                 EntityFireworkRocket entityfireworkrocket = new  EntityFireworkRocket(worldIn, itemstack, playerIn);
                 worldIn.spawnEntity(entityfireworkrocket);
+                ((EntityPlayer)playerIn).getCooldownTracker().setCooldown(this, 100);
             }
             return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
         }
@@ -59,5 +61,19 @@ public class ItemMasterGauntlet extends ItemBase
         {
             return new ActionResult<ItemStack>(EnumActionResult.PASS, playerIn.getHeldItem(handIn));
         }
+    }
+
+    @Override
+    public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving) {
+
+        ItemStack itemstack = super.onItemUseFinish(stack, worldIn, entityLiving);
+
+        if (entityLiving instanceof EntityPlayer)
+        {
+            ((EntityPlayer)entityLiving).getCooldownTracker().setCooldown(this, 100);
+        }
+
+        return itemstack;
+
     }
 }
