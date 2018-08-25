@@ -1,7 +1,6 @@
 package com.cubgdev.cubga;
 
 import com.cubgdev.cubga.client.gui.GuiHandler;
-import com.cubgdev.cubga.common.commands.CommandUpdateCapes;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import org.apache.logging.log4j.Logger;
 
@@ -79,7 +78,6 @@ public class CUBG {
 		event.registerServerCommand(new CommandResetBrittleBricks());
 		event.registerServerCommand(new CommandEditLootChests());
 		event.registerServerCommand(new CommandGenerateLootChests());
-		event.registerServerCommand(new CommandUpdateCapes());
 		Capes.load();
 	}
 
